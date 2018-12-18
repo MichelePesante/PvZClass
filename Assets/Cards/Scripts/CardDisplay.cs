@@ -12,7 +12,7 @@ public class CardDisplay : MonoBehaviour {
     public Text Cost;
     public Image Image;
 	
-    public void SetUp()
+    public void SetUp(CardController _cardController)
     {
 
     }

@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CardDisplay))]
 public class CardController : MonoBehaviour {
 
     public CardData cardData;
 
+    [HideInInspector]
+    public string CardName;
     [HideInInspector]
     public Sprite CardImage;
     [HideInInspector]
@@ -15,13 +18,22 @@ public class CardController : MonoBehaviour {
     [HideInInspector]
     public CardData.Rarity Rarity;
 
-    public void SetUP()
+    CardDisplay myDisplay;
+
+    private void Awake()
     {
+        myDisplay = GetComponent<CardDisplay>();
+    }
+
+    public void SetUp()
+    {
+        CardName = cardData.CardName;
         CardImage = cardData.CardImage;
         Rarity = cardData.CardRarity;
         Cost = cardData.Cost;
         Attack = cardData.Attack;
         Life = cardData.Life;
         IsHeroCard = cardData.IsHeroCard;
+        myDisplay.SetUp(this);
     }
 }
