@@ -26,17 +26,13 @@ namespace PvZClone.AppFlowSM {
             //        new Intro().Setup(currentContext),
             //        new Run().Setup(currentContext),
             //    };
-
             
-
-
         }
 
-        protected override void Update() {
+        protected void Update() {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 //changeState(States[0]);
                 SM.SetTrigger("GoToIntro");
-
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
@@ -44,7 +40,6 @@ namespace PvZClone.AppFlowSM {
                 SM.SetTrigger("GoToRun");
             }
 
-            base.Update();
         }
 
     }

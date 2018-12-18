@@ -28,7 +28,7 @@ namespace StateMachine.Gameplay {
             /// CALLBACK -> 
             /// 
 
-            context.InitialCardSelectionCallBack();
+            context.GenericForwardCallBack();
         }
 
         public override void Exit() {

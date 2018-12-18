@@ -16,7 +16,7 @@ namespace StateMachine.Gameplay {
 
             //Simulazione dell'"Ok" dei player
             if (Input.GetKeyDown(KeyCode.Space)) {
-                context.InitialCardSelectionCallBack();
+                context.GenericForwardCallBack();
             }
         }
 

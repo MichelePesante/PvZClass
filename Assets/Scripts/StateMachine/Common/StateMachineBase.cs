@@ -41,12 +41,6 @@ namespace StateMachine {
 
         #region lifecycle
 
-        // Update is called once per frame
-        protected virtual void Update() {
-            if (CurrentState != null)
-                CurrentState.Tick();
-        }
-
         protected void changeState(IState _nextState) {
             if (_nextState == null)
                 return;
