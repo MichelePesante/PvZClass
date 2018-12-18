@@ -17,3 +17,4 @@ MonoBehaviour:
   Attack: 0
   CardRarity: 0
   IsHeroCard: 0
+  CardImage: {fileID: 0}
