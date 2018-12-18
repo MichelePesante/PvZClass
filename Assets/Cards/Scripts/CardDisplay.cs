@@ -14,7 +14,11 @@ public class CardDisplay : MonoBehaviour {
 	
     public void SetUp(CardController _cardController)
     {
-
+        Name.text = _cardController.CardName;
+        Attack.text = _cardController.Attack.ToString();
+        Life.text = _cardController.Life.ToString();
+        Cost.text = _cardController.Cost.ToString();
+        Image.sprite = _cardController.CardImage;
     }
 
 }
