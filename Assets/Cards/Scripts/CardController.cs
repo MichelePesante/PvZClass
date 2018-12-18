@@ -23,6 +23,7 @@ public class CardController : MonoBehaviour {
     private void Awake()
     {
         myDisplay = GetComponent<CardDisplay>();
+        SetUp();
     }
 
     public void SetUp()
