@@ -1,40 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-[RequireComponent(typeof(CardDisplay))]
 public class CardController : MonoBehaviour {
 
-    public CardData cardData;
+    [Header("Data References")]
+    [SerializeField]
+    private CardData cardDataPrefab;
 
-    [HideInInspector]
-    public string CardName;
-    [HideInInspector]
-    public Sprite CardImage;
-    [HideInInspector]
-    public int Cost, Attack, Life;
-    [HideInInspector]
-    public bool IsHeroCard;
-    [HideInInspector]
-    public CardData.Rarity Rarity;
+    public Action<CardData> OnDataChanged;
 
-    CardDisplay myDisplay;
-
-    private void Awake()
-    {
-        myDisplay = GetComponent<CardDisplay>();
-        SetUp();
+    private CardData _data;
+    public CardData Data {
+        get { return _data; }
+        private set { _data = value;
+            if (OnDataChanged != null)
+                OnDataChanged(Data);
+        }
     }
 
-    public void SetUp()
-    {
-        CardName = cardData.CardName;
-        CardImage = cardData.CardImage;
-        Rarity = cardData.CardRarity;
-        Cost = cardData.Cost;
-        Attack = cardData.Attack;
-        Life = cardData.Life;
-        IsHeroCard = cardData.IsHeroCard;
-        myDisplay.SetUp(this);
+    private void Start() {
+        Setup(); 
+    }
+
+    public void Setup() {
+        Data = GameObject.Instantiate(cardDataPrefab);
+    }
+
+
+    public void ResetOriginalLife() {
+        _data.ResetOriginalLife();
+    }
+
+    public void UpdateLife(int _newlife) {
+        Data.Life = _newlife;
     }
 }
