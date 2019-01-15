@@ -21,7 +21,7 @@ public class CardController : MonoBehaviour {
     }
 
     private void Start() {
-        Setup(); 
+        Setup();
     }
 
     public void Setup() {

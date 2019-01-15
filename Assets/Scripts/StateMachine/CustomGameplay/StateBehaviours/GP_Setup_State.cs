@@ -16,6 +16,9 @@ namespace StateMachine.Gameplay {
                 uiCanvasInstance = Instantiate(canvasPrefab);
             }
 
+            CardsManager cm = new CardsManager();
+
+            DeckController xd = cm.CreateDeck();
 
             Debug.Log("Canvas = " + uiCanvasInstance);
             /// TODO:
@@ -32,7 +35,6 @@ namespace StateMachine.Gameplay {
         }
 
         public override void Exit() {
-            GameObject.Destroy(uiCanvasInstance.gameObject);
             Debug.Log("Setup done");
         }
     }

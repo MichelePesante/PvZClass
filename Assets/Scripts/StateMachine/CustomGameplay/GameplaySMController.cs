@@ -12,8 +12,11 @@ namespace StateMachine.Gameplay {
 
         protected Animator SM;
 
-        // Use this for initialization
-        void Start() {
+        private void Start() {
+            Setup();
+        }
+
+        public void Setup() {
 
             SM = GetComponent<Animator>();
 
@@ -26,8 +29,8 @@ namespace StateMachine.Gameplay {
                 OnWinnerCondChanged = onWinConditionChanged,
             };
 
-            foreach (StateMachineBehaviour smB in SM.GetBehaviours<StateMachineBehaviour>()) {
-                StateBase state = smB as StateBase;
+            foreach (StateBase smB in SM.GetBehaviours<StateBase>()) {
+                StateBase state = smB;
                 if(state)
                     state.Setup(currentContext);
             }
@@ -57,11 +60,11 @@ namespace StateMachine.Gameplay {
 
         #endregion
 
-        private void Update() {
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                GoToForward();
-            }
-        }
+        //private void Update() {
+        //    if (Input.GetKeyDown(KeyCode.Space)) {
+        //        GoToForward();
+        //    }
+        //}
 
     }
 
