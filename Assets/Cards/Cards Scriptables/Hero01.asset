@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34801ab89c73d5649beefc14102ce401, type: 3}
-  m_Name: XD
+  m_Name: Hero01
   m_EditorClassIdentifier: 
-  CardName: Card1
-  StartCost: 2
-  StartLife: 3
+  CardName: Hero 1
+  StartCost: 52
+  StartLife: 85
   StartAttack: 1
   CardRarity: 0
-  IsHeroCard: 0
+  IsHeroCard: 1
   CardImage: {fileID: 21300002, guid: 3cee0863d69e9324b8c78b61ab88b4ab, type: 3}
-  Cost: 0
-  Attack: 0
-  Life: 0
+  Cost: 2
+  Attack: 1
+  Life: 3

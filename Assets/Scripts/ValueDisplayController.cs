@@ -8,10 +8,15 @@ public class ValueDisplayController : MonoBehaviour {
     public Text Lable;
     public Image BGColorImage;
     public Image ImageEffect;
+    public Color StartColor;
 
     public bool EnableEffectOnChange;
 
     public Action<string> OnValueChanged;
+
+    private void Awake() {
+        SetColor(StartColor);
+    }
 
     #region API
 
