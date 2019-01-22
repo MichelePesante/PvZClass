@@ -8,7 +8,7 @@ public class CardData : ScriptableObject {
     [SerializeField] private int StartCost;
     [SerializeField] private int StartLife;
     [SerializeField] private int StartAttack;
-    public Faction CardFacion;
+    public Faction CardFaction;
     public Rarity CardRarity;
     public bool IsHeroCard;
     public Sprite CardImage;
