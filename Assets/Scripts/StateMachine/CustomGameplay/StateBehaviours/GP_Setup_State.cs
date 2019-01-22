@@ -18,7 +18,7 @@ namespace StateMachine.Gameplay {
 
             CardsManager cm = new CardsManager();
 
-            DeckController xd = cm.CreateDeck();
+            DeckController xd = cm.CreateDeck(100);
 
             Debug.Log("Canvas = " + uiCanvasInstance);
             /// TODO:

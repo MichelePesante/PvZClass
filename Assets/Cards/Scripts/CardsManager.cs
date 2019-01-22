@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using PvZ.Helpers;
 
 public class CardsManager
 {
@@ -10,14 +11,16 @@ public class CardsManager
 
         DeckController newDeck = new DeckController();
 
-        List<CardData> allCards = Resources.LoadAll<CardData>("Cards/CardsScriptables").ToList();
+        List<CardData> allCards = Resources.LoadAll<CardData>("CardsScriptables").ToList();
 
         for (int i = 0; i < _cardsNumber; i++) {
-            newDeck.AddCard(allCards[Random.Range(0, allCards.Count - 1)]);
+            newDeck.AddCard(allCards.GetRandomElement());
         }
 
         return newDeck;
     }
+
+
 
 
 }

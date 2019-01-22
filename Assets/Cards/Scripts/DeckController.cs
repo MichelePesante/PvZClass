@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeckController {
 
     [SerializeField]
-    private List<CardData> Cards;
+    private List<CardData> Cards = new List<CardData>();
 
     public void Shuffle()
     {
