@@ -8,6 +8,7 @@ public class CardData : ScriptableObject {
     [SerializeField] private int StartCost;
     [SerializeField] private int StartLife;
     [SerializeField] private int StartAttack;
+    public Faction CardFacion;
     public Rarity CardRarity;
     public bool IsHeroCard;
     public Sprite CardImage;
@@ -24,6 +25,8 @@ public class CardData : ScriptableObject {
     }
     
     public enum Rarity { common, uncommon, rare, legendary}
+
+    public enum Faction { Hipster, Alcool }
 
     internal void ResetOriginalLife() {
         Cost = StartCost;

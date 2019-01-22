@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class CardViewController : MonoBehaviour {
 
     [Header("UI References")]
-    public Text Name;
+    public TextMesh Name;
     public ValueDisplayController Attack;
     public ValueDisplayController Life;
     public ValueDisplayController Cost;
