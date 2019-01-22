@@ -4,15 +4,15 @@ using UnityEngine.UI;
 public class CardViewController : MonoBehaviour {
 
     [Header("UI References")]
-    public TextMesh Name;
+    public Text Name;
     public ValueDisplayController Attack;
     public ValueDisplayController Life;
     public ValueDisplayController Cost;
     public Image Image;
     public Image Frame;
 
-    private Color HeroColor = Color.green;
-    private Color StandardColor = Color.gray;
+    private Color HeroColor = Color.white;
+    private Color StandardColor = Color.white;
 
     public CardController Controller;
 
