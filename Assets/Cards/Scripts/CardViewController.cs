@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class CardViewController : MonoBehaviour {
@@ -14,8 +11,8 @@ public class CardViewController : MonoBehaviour {
     public Image Image;
     public Image Frame;
 
-    private Color HeroColor = Color.green;
-    private Color StandardColor = Color.gray;
+    private Color HeroColor = Color.white;
+    private Color StandardColor = Color.white;
 
     public CardController Controller;
 
