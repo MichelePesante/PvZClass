@@ -4,7 +4,8 @@ using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
 
-public class CardController : MonoBehaviour,IPointerDownHandler {
+public class CardController : MonoBehaviour, IPointerDownHandler
+{
 
     [Header("Data References")]
     [SerializeField]
@@ -15,9 +16,12 @@ public class CardController : MonoBehaviour,IPointerDownHandler {
 
 
     private CardData _data;
-    public CardData Data {
+    public CardData Data
+    {
         get { return _data; }
-        private set { _data = value;
+        private set
+        {
+            _data = value;
             if (OnDataChanged != null)
                 OnDataChanged(Data);
         }
@@ -39,11 +43,13 @@ public class CardController : MonoBehaviour,IPointerDownHandler {
         return Data;
     }
 
-    public void ResetOriginalLife() {
+    public void ResetOriginalLife()
+    {
         _data.ResetOriginalLife();
     }
 
-    public void UpdateLife(int _newlife) {
+    public void UpdateLife(int _newlife)
+    {
         Data.Life = _newlife;
     }
 
