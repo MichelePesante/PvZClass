@@ -12,6 +12,9 @@ namespace StateMachine.Gameplay {
 
         protected Animator SM;
 
+        [SerializeField]
+        Player playerOne, playerTwo;
+
         private void Start() {
             Setup();
         }
@@ -22,6 +25,8 @@ namespace StateMachine.Gameplay {
 
             currentContext = new GameplaySMContext() {
                 ContextName = "stringa GameplaySMContext",
+                PlayerOne = playerOne,
+                PlayerTwo = playerTwo,
                 // SM flow callback
                 GenericForwardCallBack = GoToForward,
                 GenericBackwardCallBack = GoToBack,
@@ -79,6 +84,10 @@ namespace StateMachine.Gameplay {
                     OnWinnerCondChanged(_isWinCondition);
             }
         }
+
+        public IPlayer PlayerOne, PlayerTwo;
+        public IPlayer CurrentPlayer;
+
         public Action<bool> OnWinnerCondChanged;
 
         public Canvas UICanvas;

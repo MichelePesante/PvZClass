@@ -2,20 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour , IPlayer {
+
+    DeckController deck;
+    public DeckController Deck
+    {
+        get { return deck; }
+        set { deck = value; }
+    }
+
+    DeckController hand;
+    public DeckController Hand
+    {
+        get { return hand; }
+        set { hand = value; }
+    }
 
     int life;
+    public int Life
+    {
+        get { return life; }
+        set { life = value; }
+    }
+
+    int maxEnergy;
+    public int MaxEnergy
+    {
+        get { return maxEnergy; }
+        set { maxEnergy = value; }
+    }
+
     int energy;
+    public int CurrentEnergy
+    {
+        get { return energy; }
+        set { energy = value; }
+    }
+
     int shield;
+    public int Shield
+    {
+        get { return shield; }
+        set { shield = value; }
+    }
 
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void Draw(int cards = 1)
+    {
+        Deck.Draw(Hand, cards);
+    }
 }
