@@ -17,6 +17,8 @@ public class CardData : ScriptableObject {
         get { return CardName.ToUpper(); }
     }
 
+    public Highlight Higlight { get; internal set; }
+
     [HideInInspector]
     public int Cost, Attack, Life;
 
@@ -27,6 +29,8 @@ public class CardData : ScriptableObject {
     public enum Rarity { common, uncommon, rare, legendary}
 
     public enum Faction { Hipster, Alcool }
+
+    public enum Highlight { NoHighlight, Highlighted, Lowlight }
 
     internal void ResetOriginalLife() {
         Cost = StartCost;

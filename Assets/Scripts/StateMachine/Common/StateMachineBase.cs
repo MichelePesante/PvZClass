@@ -11,6 +11,7 @@ namespace StateMachine {
 
         #region properties
 
+        protected Animator SM;
         /// <summary>
         /// Lista degli stati totali.
         /// </summary>
@@ -28,6 +29,20 @@ namespace StateMachine {
 
         #endregion
 
+        protected virtual void Setup() {
+            SM = GetComponent<Animator>();
+
+            currentContext = ContextSetup();
+
+            foreach (StateBase smB in SM.GetBehaviours<StateBase>()) {
+                StateBase state = smB;
+                if (state)
+                    state.Setup(currentContext);
+            }
+        }
+
+        protected abstract IStateMachineContext ContextSetup();
+
         #region events
 
         public delegate void StateMachineEventHandler(IState _currentState, IState _oldState);
@@ -39,23 +54,7 @@ namespace StateMachine {
 
         #endregion
 
-        #region lifecycle
 
-        protected void changeState(IState _nextState) {
-            if (_nextState == null)
-                return;
-            if (_nextState == CurrentState)
-                return;
-            IState oldState = CurrentState;
-            if (oldState != null)
-                oldState.Exit();
-            CurrentState = _nextState;
-            _nextState.Enter();
-            if (OnStateChanged != null)
-                OnStateChanged(CurrentState, oldState);
-        }
-
-        #endregion
 
     }
 }

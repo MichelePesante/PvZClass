@@ -10,6 +10,13 @@ public class CardController : MonoBehaviour, IPointerDownHandler
     [Header("Data References")]
     [SerializeField]
     private CardData cardDataPrefab;
+
+    internal void SetHiglight(CardData.Highlight _Higlight) {
+        Data.Higlight = _Higlight;
+        if (OnDataChanged != null)
+            OnDataChanged(Data);
+    }
+
     public Action<CardData> OnDataChanged;
     public Action<CardController> OnCardClicked;
 
@@ -53,8 +60,10 @@ public class CardController : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (interactable && OnCardClicked != null)
+
+        if (interactable && OnCardClicked != null) {
             OnCardClicked(this);
+        }
     }
 
     bool interactable;

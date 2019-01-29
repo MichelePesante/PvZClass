@@ -10,40 +10,13 @@ namespace StateMachine.Gameplay {
 
     public class GameplaySMController : StateMachineBase {
 
-        protected Animator SM;
+        
 
         [SerializeField]
         private GameplaySceneManager sceneManager;
 
         private void Start() {
             Setup();
-        }
-
-        public void Setup() {
-
-            SM = GetComponent<Animator>();
-
-            currentContext = new GameplaySMContext() {
-                ContextName = "stringa GameplaySMContext",
-                PlayerOne = sceneManager.player1,
-                PlayerTwo = sceneManager.player2,
-                P1mulliganCtrl = sceneManager.mulliganP1,
-                P2mulliganCtrl = sceneManager.mulliganP2,
-                BoardCtrl = sceneManager.BoardCtrl,
-                // SM flow callback
-                GenericForwardCallBack = GoToForward,
-                GenericBackwardCallBack = GoToBack,
-                // --- Reactive properties callback
-                OnWinnerCondChanged = onWinConditionChanged,
-                UICanvas = sceneManager.GlobalUI,
-            };
-
-            foreach (StateBase smB in SM.GetBehaviours<StateBase>()) {
-                StateBase state = smB;
-                if (state)
-                    state.Setup(currentContext);
-            }
-
         }
 
         #region reactive properties callback
@@ -65,6 +38,23 @@ namespace StateMachine.Gameplay {
 
         private void GoToBack() {
             SM.SetTrigger("GoToBack");
+        }
+
+        protected override IStateMachineContext ContextSetup() {
+            return new GameplaySMContext() {
+                ContextName = "stringa GameplaySMContext",
+                PlayerOne = sceneManager.player1,
+                PlayerTwo = sceneManager.player2,
+                P1mulliganCtrl = sceneManager.mulliganP1,
+                P2mulliganCtrl = sceneManager.mulliganP2,
+                BoardCtrl = sceneManager.BoardCtrl,
+                // SM flow callback
+                GenericForwardCallBack = GoToForward,
+                GenericBackwardCallBack = GoToBack,
+                // --- Reactive properties callback
+                OnWinnerCondChanged = onWinConditionChanged,
+                UICanvas = sceneManager.GlobalUI,
+            };
         }
 
         #endregion

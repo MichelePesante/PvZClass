@@ -13,7 +13,8 @@ public class CardViewController : MonoBehaviour {
     public ValueDisplayController Cost;
     public Image Image;
     public Image Frame;
-    public Image SelectedPanel; 
+    public Image HighlightPanel;
+    public Image LowlightPanel;
 
     private Color HeroColor = Color.green;
     private Color StandardColor = Color.gray;
@@ -26,18 +27,15 @@ public class CardViewController : MonoBehaviour {
 
     private void OnDisable() {
         Controller.OnDataChanged -= onDataChanged;
-        Controller.OnCardClicked -= CardClicked;
     }
 
     public void Setup(CardController _cardController) {
-        Select(false);
         Controller = _cardController;
         if (!Controller)
             Controller = GetComponent<CardController>();
         if (Controller)
         {
             Controller.OnDataChanged += onDataChanged;
-            Controller.OnCardClicked += CardClicked;
         }
     }
 
@@ -52,26 +50,22 @@ public class CardViewController : MonoBehaviour {
         }else {
             Frame.color = StandardColor;
         }
-
-        Select(false);
-    }
-
-    public void CardClicked(CardController _card)
-    {
-        if (_card != Controller)
-            return;
-
-        if (selected)
-            Select(false);
-        else
-            Select(true);
-    }
-
-    bool selected;
-    public void Select(bool _select)
-    {
-        selected = _select;
-        SelectedPanel.gameObject.SetActive(_select);
+        switch (_data.Higlight) {
+            case CardData.Highlight.NoHighlight:
+                LowlightPanel.enabled = true;
+                HighlightPanel.enabled = false;
+                break;
+            case CardData.Highlight.Highlighted:
+                LowlightPanel.enabled = false;
+                HighlightPanel.enabled = true;
+                break;
+            case CardData.Highlight.Lowlight:
+                LowlightPanel.enabled = true;
+                HighlightPanel.enabled = false;
+                break;
+            default:
+                break;
+        }
     }
 
 }

@@ -9,8 +9,8 @@ namespace PvZClone.AppFlowSM {
 
         protected Animator SM;
 
-        private void Start() {
-            currentContext = new AppFlowSMContext() {
+        protected override IStateMachineContext ContextSetup() {
+            return new AppFlowSMContext() {
                 ContextName = "App Flow",
                 StateMachine = this,
             };
