@@ -10,8 +10,6 @@ public class MulliganController : MonoBehaviour
     public Action<List<CardData>> OnMulliganEnd;
     #endregion
 
-    public List<CardData> sus;
-
     [SerializeField]
     private Button changeButton;
     [SerializeField]
@@ -22,22 +20,16 @@ public class MulliganController : MonoBehaviour
     int cardsToDisplayLastIndex;
     bool changeDone;
 
-    private void Start()
-    {
-        Init(sus);
-    }
-
-    public void Init(List<CardData> _cardsToDisplay)
-    {
+    public void Init(DeckController _hand)
+    {        
         changeButton.onClick.AddListener(ChangeButtonClicked);
         changeButton.gameObject.SetActive(true);
         continueButton.onClick.AddListener(ContinueButtonClicked);
         continueButton.gameObject.SetActive(false);
-
         cardsOnScreen = GetComponentsInChildren<CardController>().ToList();
 
         cardsToDisplayLastIndex = 0;
-        cardsToDisplay = _cardsToDisplay;
+        cardsToDisplay = _hand.GetCards();
         for (int i = 0; i < cardsOnScreen.Count; i++)
         {
             cardsOnScreen[i].Setup(cardsToDisplay[i]);
@@ -98,12 +90,13 @@ public class MulliganController : MonoBehaviour
         {
             choosenCards.Add(card.GetCardData());
         }
-
+        continueButton.gameObject.SetActive(false);
+        HandlerMulliganEnd();
         if (OnMulliganEnd != null)
             OnMulliganEnd(choosenCards);
     }
 
-    private void OnDisable()
+    private void HandlerMulliganEnd()
     {
         for (int i = 0; i < cardsOnScreen.Count; i++)
         {

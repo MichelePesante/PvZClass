@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class GameplaySceneManager : MonoBehaviour {
 
-    public Player player, player2;
+    public Player player1, player2;
+    public BoardController BoardCtrl;
     [Header("UI Elements")]
-    public Canvas GlobalUI;
-    public MulliganController MulliganP1;
-    public MulliganController MulliganP2;
-    public BoardController BoardController;
+    public UIManager GlobalUI;
+    public MulliganController mulliganP1;
+    public MulliganController mulliganP2;
 
 
     public void Setup() {
-
-        
-
-        MulliganP1.Init()
-            MulliganP2.Init()
     }
 
 }

@@ -5,7 +5,15 @@ using UnityEngine;
 public class DeckController {
 
     [SerializeField]
-    private List<CardData> Cards = new List<CardData>();
+    private List<CardData> Cards;
+
+    public DeckController() {
+        Cards = new List<CardData>();
+    }
+
+    public DeckController (List<CardData> _cards) {
+        Cards = _cards;
+    }
 
     public void Shuffle()
     {
@@ -50,4 +58,13 @@ public class DeckController {
             Cards.Remove(Cards[0]);
         }
     }
+
+    /// <summary>
+    /// Ritorna l'intera lista di carte
+    /// </summary>
+    /// <returns></returns>
+    public List<CardData> GetCards() {
+        return Cards;
+    }
+
 }

@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca6ea7b89a224264dad4b27bce83f5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boardData: {fileID: 11400000, guid: 1c48e2d86fef4524e9e3bc4ed5da8e0b, type: 2}
   canvasPrefab: {fileID: 223658674926371106, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
     type: 3}
 --- !u!114 &114777674189446094
@@ -160,6 +161,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b973454dfc37f54ba9f27ec6d889703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114997569095936760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65856e3693abf02438e939682b377338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1101 &1101095057194887440
@@ -627,7 +640,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101095057194887440}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114997569095936760}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

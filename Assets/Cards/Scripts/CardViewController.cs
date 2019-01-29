@@ -24,6 +24,11 @@ public class CardViewController : MonoBehaviour {
         Setup(Controller);
     }
 
+    private void OnDisable() {
+        Controller.OnDataChanged -= onDataChanged;
+        Controller.OnCardClicked -= CardClicked;
+    }
+
     public void Setup(CardController _cardController) {
         Select(false);
         Controller = _cardController;

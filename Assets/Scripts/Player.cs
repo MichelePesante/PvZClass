@@ -48,6 +48,8 @@ public class Player : MonoBehaviour , IPlayer {
 
     public void Draw(int cards = 1)
     {
+        if (Hand == null)
+            Hand = new DeckController();
         Deck.Draw(Hand, cards);
     }
 }

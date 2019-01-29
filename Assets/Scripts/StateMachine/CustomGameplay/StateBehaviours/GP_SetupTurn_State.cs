@@ -8,8 +8,7 @@ namespace StateMachine.Gameplay {
 
         public override void Enter()
         {
-            base.Enter();
-
+            context.UICanvas.EnableMenu(PanelType.Board);
             context.CurrentPlayer.MaxEnergy++;
             context.CurrentPlayer.CurrentEnergy = context.CurrentPlayer.MaxEnergy;
             context.CurrentPlayer.Draw();

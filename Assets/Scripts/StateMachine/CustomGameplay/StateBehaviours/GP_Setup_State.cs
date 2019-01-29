@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace StateMachine.Gameplay {
 
     public class GP_Setup_State : GP_BaseState {
-
+        public BoardData boardData;
         public Canvas canvasPrefab;
         Canvas uiCanvasInstance;
 
@@ -15,10 +15,10 @@ namespace StateMachine.Gameplay {
             if (context.UICanvas == null) {
                 uiCanvasInstance = Instantiate(canvasPrefab);
             }
-
+            context.BoardCtrl.SetUp(boardData);
+            context.UICanvas.DisableAllPanels();
             CardsManager cm = new CardsManager();
 
-            DeckController xd = cm.CreateDeck(100);
             DeckController playerOneDeck = cm.CreateDeck(20);
             DeckController playerTwoDeck = cm.CreateDeck(20);
 

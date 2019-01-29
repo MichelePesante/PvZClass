@@ -10,10 +10,8 @@ public class CardController : MonoBehaviour, IPointerDownHandler
     [Header("Data References")]
     [SerializeField]
     private CardData cardDataPrefab;
-
     public Action<CardData> OnDataChanged;
     public Action<CardController> OnCardClicked;
-
 
     private CardData _data;
     public CardData Data

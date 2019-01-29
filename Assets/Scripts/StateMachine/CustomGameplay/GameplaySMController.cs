@@ -13,7 +13,7 @@ namespace StateMachine.Gameplay {
         protected Animator SM;
 
         [SerializeField]
-        Player playerOne, playerTwo;
+        private GameplaySceneManager sceneManager;
 
         private void Start() {
             Setup();
@@ -25,18 +25,22 @@ namespace StateMachine.Gameplay {
 
             currentContext = new GameplaySMContext() {
                 ContextName = "stringa GameplaySMContext",
-                PlayerOne = playerOne,
-                PlayerTwo = playerTwo,
+                PlayerOne = sceneManager.player1,
+                PlayerTwo = sceneManager.player2,
+                P1mulliganCtrl = sceneManager.mulliganP1,
+                P2mulliganCtrl = sceneManager.mulliganP2,
+                BoardCtrl = sceneManager.BoardCtrl,
                 // SM flow callback
                 GenericForwardCallBack = GoToForward,
                 GenericBackwardCallBack = GoToBack,
                 // --- Reactive properties callback
                 OnWinnerCondChanged = onWinConditionChanged,
+                UICanvas = sceneManager.GlobalUI,
             };
 
             foreach (StateBase smB in SM.GetBehaviours<StateBase>()) {
                 StateBase state = smB;
-                if(state)
+                if (state)
                     state.Setup(currentContext);
             }
 
@@ -90,7 +94,12 @@ namespace StateMachine.Gameplay {
 
         public Action<bool> OnWinnerCondChanged;
 
-        public Canvas UICanvas;
+        public BoardController BoardCtrl;
+
+        public MulliganController P1mulliganCtrl;
+        public MulliganController P2mulliganCtrl;
+
+        public UIManager UICanvas;
         /// <summary>
         /// Callback generica per passaggio forward philosophy.
         /// </summary>
