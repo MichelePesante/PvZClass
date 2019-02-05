@@ -168,7 +168,8 @@ MonoBehaviour:
   Cost: {fileID: 3014612976543529120}
   Image: {fileID: 114466753932084056}
   Frame: {fileID: 3979370031700595345}
-  SelectedPanel: {fileID: 0}
+  HighlightPanel: {fileID: 423106856364882668}
+  LowlightPanel: {fileID: 2069791852585164458}
   Controller: {fileID: 114581939317608938}
 --- !u!114 &114581939317608938
 MonoBehaviour:
@@ -618,10 +619,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5258232313420758350}
     m_Modifications:
-    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
-      propertyPath: m_Name
-      value: Life
-      objectReference: {fileID: 0}
     - target: {fileID: 224407370496517866, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -727,6 +724,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
+      propertyPath: m_Name
+      value: Life
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
 --- !u!224 &398707664523678349 stripped
@@ -754,10 +755,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5258232313420758350}
     m_Modifications:
-    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
-      propertyPath: m_Name
-      value: Cost
-      objectReference: {fileID: 0}
     - target: {fileID: 224407370496517866, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -863,6 +860,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
+      propertyPath: m_Name
+      value: Cost
+      objectReference: {fileID: 0}
     - target: {fileID: 114812368420170552, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}
       propertyPath: StartColor.r
@@ -905,14 +906,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5258232313420758350}
     m_Modifications:
-    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
-      propertyPath: m_Name
-      value: Attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224407370496517866, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1017,6 +1010,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
+      propertyPath: m_Name
+      value: Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114812368420170552, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}
