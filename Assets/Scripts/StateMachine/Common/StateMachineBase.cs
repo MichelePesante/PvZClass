@@ -29,7 +29,7 @@ namespace StateMachine {
 
         #endregion
 
-        protected virtual void Setup() {
+        public virtual void Setup() {
             SM = GetComponent<Animator>();
 
             currentContext = ContextSetup();

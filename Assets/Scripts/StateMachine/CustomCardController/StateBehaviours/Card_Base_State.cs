@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace StateMachine.Card {
 
-    public class Card_Base_State : StateBase {
+    public abstract class Card_Base_State : StateBase {
 
         protected CardSMContext context;
 

@@ -5,33 +5,19 @@ using UnityEngine;
 
 namespace StateMachine.Gameplay {
 
-    public class GP_InitialCardSelection_State : GP_BaseState {
+    public class GP_Mulligan_State : GP_BaseState {
 
         public override void Enter() {
 
             mulliganPlayerCount = 0;
+            // Mi iscrivo all'evento di fine scelta carte per ogni mulligun del player
             context.P1mulliganCtrl.OnMulliganEnd += MulliganEndP1;
             context.P2mulliganCtrl.OnMulliganEnd += MulliganEndP2;
+            // Abilitiamo la UI del mulligan
             context.UICanvas.EnableMenu(PanelType.Mulligan);
+            // Inizializiamo il pannello del mulligan
             context.P1mulliganCtrl.Init(context.PlayerOne.Hand);
             context.P2mulliganCtrl.Init(context.PlayerTwo.Hand);
-        }
-
-        public override void Tick() {
-            base.Tick();
-
-            //Simulazione dell'"Ok" dei player
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                context.GenericForwardCallBack();
-            }
-        }
-
-        public override void Exit() {
-            context.P1mulliganCtrl.OnMulliganEnd -= MulliganEndP1;
-            context.P2mulliganCtrl.OnMulliganEnd -= MulliganEndP2;
-
-            context.UICanvas.DisableAllPanels();
-            context.BoardCtrl.InstantiateBoard();
         }
 
         int mulliganPlayerCount;
@@ -48,6 +34,15 @@ namespace StateMachine.Gameplay {
             if (mulliganPlayerCount == 2)
                 context.GenericForwardCallBack();
         }
+
+        public override void Exit() {
+            context.P1mulliganCtrl.OnMulliganEnd -= MulliganEndP1;
+            context.P2mulliganCtrl.OnMulliganEnd -= MulliganEndP2;
+
+            context.UICanvas.DisableAllPanels();
+            context.BoardCtrl.InstantiateBoard();
+        }
+
     }
 
 }
