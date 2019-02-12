@@ -57,12 +57,22 @@ namespace StateMachine.Gameplay {
             _player.Deck = _deck;
             _player.Hand = new DeckController(_player);
             _player.Draw(8);
+            _player.Lost += setWinner;
 
         }
 
-        void setWinner()
+        void setWinner(IPlayer loser)
         {
-            //context
+            if (loser.CurrentType == Player.Type.one)
+            {
+                if (context.Winner == null)
+                    context.Winner = context.PlayerTwo;
+            }
+            else
+            {
+                if (context.Winner == null)
+                    context.Winner = context.PlayerOne;
+            }
         }
     }
 

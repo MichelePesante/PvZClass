@@ -10,7 +10,7 @@ namespace StateMachine.Card
         public override void Enter()
         {
             context.cardController.SetHiglight(CardData.Highlight.NoHighlight);
-            if (context.boardCtrl.CheckCardPlayability(context.cardController.GetCardData().playableLane, Player.Type.one))
+            if (context.boardCtrl.CheckCardPlayability(context.cardController))
                 context.cardController.CurrentState = CardController.State.Playable;
             else
                 context.cardController.CurrentState = CardController.State.Unplayable;

@@ -40,19 +40,13 @@ public class Lane
         Prefab = _p;
     }
 
-    public bool HasFreeSlot(Player.Type _playerType)
+    public bool CheckCardPlayability(CardController _cardToCheck)
     {
-        switch (_playerType)
-        {
-            case Player.Type.one:
-                if (p1FreeSlots > 0)
-                    return true;
-                break;
-            case Player.Type.two:
-                if (p2FreeSlots > 0)
-                    return true;
-                break;
-        }
+        if (_cardToCheck.GetCardData().playableLane == Type) //TODO check if free slots :))))) when player reference is added to card.
+            return true;
+
         return false;
     }
+
+
 }

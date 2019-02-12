@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class BoardController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class BoardController : MonoBehaviour
     [Header("Data")]
     [SerializeField] private BoardData boardData;
 
+    List<LaneUI> laneUIs;
+
     public void SetUp(BoardData _boardData)
     {
         if (!_boardData)
@@ -16,6 +19,7 @@ public class BoardController : MonoBehaviour
             return;
         }
         boardData = _boardData;
+        laneUIs = new List<LaneUI>();
     }
 
     public void InstantiateBoard()
@@ -29,19 +33,28 @@ public class BoardController : MonoBehaviour
             l.SetPrefab(LanePrefab.gameObject);
             LaneUI instantiatedLane = Instantiate(l.Prefab, transform).GetComponent<LaneUI>();
             instantiatedLane.SetUp(l);
+            laneUIs.Add(instantiatedLane);
         }
     }
 
-    public bool CheckCardPlayability(LaneType _lanetype, Player.Type _playerType)
+    public bool CheckCardPlayability(CardController _cardToCheck)
     {
-        foreach (Lane lane in boardData.Lanes)
+        foreach (LaneUI laneUI in laneUIs)
         {
-            if(lane.Type == _lanetype && lane.HasFreeSlot(_playerType))
-            {
+            if (laneUI.MyLane.CheckCardPlayability(_cardToCheck))
                 return true;
-            }
         }
         return false;
     }
 
+    public void ToggleBoardInteractability(bool _value, CardController _cardToCheck = null)
+    {
+        foreach (LaneUI laneUI in laneUIs)
+        {
+            if(_cardToCheck)
+                laneUI.SetInteractability(_value, _cardToCheck);
+            else
+                laneUI.SetInteractability(_value);
+        }
+    }
 }

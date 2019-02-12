@@ -15,6 +15,7 @@ namespace StateMachine.Card {
             startScale = context.cardController.transform.localScale;
             context.cardController.transform.localScale *= 1.5f;
             isDragging = true;
+            context.boardCtrl.ToggleBoardInteractability(true, context.cardController);
         }
 
         private void HandleOnPointerUp(CardController obj)
@@ -34,6 +35,7 @@ namespace StateMachine.Card {
         {
             context.cardController.OnCardPointerUp -= HandleOnPointerUp;
             context.cardController.transform.localScale = startScale;
+            context.boardCtrl.ToggleBoardInteractability(false);
         }
     }
 }
