@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class MulliganController : MonoBehaviour
 {
     #region Events
-    public Action<List<CardData>> OnMulliganEnd;
+    public Action<List<CardData>, List<CardData>> OnMulliganEnd;
+    public Action OnCardChanged;
     #endregion
 
     [SerializeField]
@@ -17,24 +18,30 @@ public class MulliganController : MonoBehaviour
 
     private List<CardController> cardsOnScreen;
     private List<CardData> cardsToDisplay;
+    private List<CardData> cardNotSelected;
+    private IPlayer player;
     int cardsToDisplayLastIndex;
     bool changeDone;
 
     public void Init(DeckController _hand)
-    {        
+    {
+        player = _hand.GetPlayerOwner();
         changeButton.onClick.AddListener(ChangeButtonClicked);
         changeButton.gameObject.SetActive(true);
         continueButton.onClick.AddListener(ContinueButtonClicked);
         continueButton.gameObject.SetActive(false);
         cardsOnScreen = GetComponentsInChildren<CardController>().ToList();
-
         cardsToDisplayLastIndex = 0;
         cardsToDisplay = _hand.GetCards();
         for (int i = 0; i < cardsOnScreen.Count; i++)
         {
-            cardsOnScreen[i].Setup(cardsToDisplay[i]);
-            cardsOnScreen[i].OnCardClicked += CardCliked;
+            cardsOnScreen[i].Setup(cardsToDisplay[i], player);
             cardsToDisplayLastIndex = i;
+        }
+        cardNotSelected = new List<CardData>();
+        for (int i = cardsOnScreen.Count; i < cardsToDisplay.Count; i++)
+        {
+            cardNotSelected.Add(cardsToDisplay[i]);
         }
     }
 
@@ -42,7 +49,7 @@ public class MulliganController : MonoBehaviour
     /// Funzione che si occupa dell'evento OnCardClicked
     /// </summary>
     private List<CardController> cardsToChange = new List<CardController>();
-    private void CardCliked(CardController _card)
+    public void CardCliked(CardController _card)
     {
         if (changeDone)
             return;
@@ -56,7 +63,7 @@ public class MulliganController : MonoBehaviour
     /// <summary>
     /// Funzione che si occupa del click del pulsante Change
     /// </summary>
-    private void ChangeButtonClicked()
+    public void ChangeButtonClicked()
     {
         if (cardsToChange == null)
             return;
@@ -67,8 +74,10 @@ public class MulliganController : MonoBehaviour
             {
                 if (cardsOnScreen[i] == cardsToChange[j])
                 {
+                    cardNotSelected.Add(cardsToChange[j].Data);
                     cardsToDisplayLastIndex++;
-                    cardsOnScreen[i].Setup(cardsToDisplay[cardsToDisplayLastIndex]);
+                    cardsOnScreen[i].Setup(cardsToDisplay[cardsToDisplayLastIndex], player);
+                    cardNotSelected.Remove(cardsToDisplay[cardsToDisplayLastIndex]);
                 }
             }
 
@@ -78,12 +87,14 @@ public class MulliganController : MonoBehaviour
         changeButton.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(true);
         cardsToChange.Clear();
+        if (OnCardChanged != null)
+            OnCardChanged();
     }
 
     /// <summary>
     /// Funzione che si occupa del click del pulsante Continue
     /// </summary>
-    private void ContinueButtonClicked()
+    public void ContinueButtonClicked()
     {
         List<CardData> choosenCards = new List<CardData>();
         foreach (CardController card in cardsOnScreen)
@@ -93,16 +104,11 @@ public class MulliganController : MonoBehaviour
         continueButton.gameObject.SetActive(false);
         HandlerMulliganEnd();
         if (OnMulliganEnd != null)
-            OnMulliganEnd(choosenCards);
+            OnMulliganEnd(choosenCards, cardNotSelected);
     }
 
     private void HandlerMulliganEnd()
     {
-        for (int i = 0; i < cardsOnScreen.Count; i++)
-        {
-            cardsOnScreen[i].OnCardClicked -= CardCliked;
-        }
-
         changeButton.onClick.RemoveAllListeners();
         continueButton.onClick.RemoveAllListeners();
     }

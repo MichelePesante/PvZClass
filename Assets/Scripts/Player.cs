@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour, IPlayer
 {
 
     public enum Type { one, two }
 
+    [SerializeField]
     Type currentType;
     public Type CurrentType { get { return currentType; } set { currentType = value; } }
+
+    [SerializeField] DeckControllerUI handUI;
 
     DeckController deck;
     public DeckController Deck
@@ -19,14 +23,31 @@ public class Player : MonoBehaviour, IPlayer
     public DeckController Hand
     {
         get { return hand; }
-        set { hand = value; }
+        set
+        {
+            hand = value;
+            if (handUI)
+            {
+                handUI.Setup(hand);
+            }
+        }
     }
+
+    public event PlayerEvent.PlayerLost Lost;
 
     int life;
     public int Life
     {
         get { return life; }
-        set { life = value; }
+        set
+        {
+            life = value;
+            if (life <= 0)
+            {
+                if (Lost != null)
+                    Lost(this);
+            }
+        }
     }
 
     int maxEnergy;
@@ -44,6 +65,8 @@ public class Player : MonoBehaviour, IPlayer
     }
 
     int shield;
+
+
     public int Shield
     {
         get { return shield; }

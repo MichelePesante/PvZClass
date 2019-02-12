@@ -26,19 +26,9 @@ namespace StateMachine.Gameplay {
             if (context.PlayerOne != null && context.PlayerTwo != null)
             {
                 context.CurrentPlayer = context.PlayerOne;
-                // Player Statistic
-                context.PlayerOne.Life = 20;
-                context.PlayerOne.MaxEnergy = 0;
-                context.PlayerTwo.Life = 20;
-                context.PlayerTwo.MaxEnergy = 0;
-                // Deck Assignment
-                context.PlayerOne.Deck = playerOneDeck;
-                context.PlayerTwo.Deck = playerTwoDeck;
-                // Create Hand & Draw
-                context.PlayerOne.Hand = new DeckController();
-                context.PlayerTwo.Hand = new DeckController();
-                context.PlayerOne.Draw(8);
-                context.PlayerTwo.Draw(8);
+                // Player Setup
+                setupPlayer(context.PlayerOne, playerOneDeck);
+                setupPlayer(context.PlayerTwo, playerTwoDeck);
             }
 
             Debug.Log("Canvas = " + uiCanvasInstance);
@@ -57,6 +47,32 @@ namespace StateMachine.Gameplay {
 
         public override void Exit() {
             Debug.Log("Setup done");
+        }
+
+        void setupPlayer(IPlayer _player, DeckController _deck)
+        {
+            _player.Life = 20;
+            _player.MaxEnergy = 0;
+            _player.CurrentEnergy = 0;
+            _player.Deck = _deck;
+            _player.Hand = new DeckController(_player);
+            _player.Draw(8);
+            _player.Lost += setWinner;
+
+        }
+
+        void setWinner(IPlayer loser)
+        {
+            if (loser.CurrentType == Player.Type.one)
+            {
+                if (context.Winner == null)
+                    context.Winner = context.PlayerTwo;
+            }
+            else
+            {
+                if (context.Winner == null)
+                    context.Winner = context.PlayerOne;
+            }
         }
     }
 

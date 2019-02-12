@@ -9,6 +9,7 @@ namespace StateMachine.Card {
 
         public override IState Setup(IStateMachineContext _context) {
             context = _context as CardSMContext;
+            context.OnSetupDoneCallback();
             return this;
         }
     }

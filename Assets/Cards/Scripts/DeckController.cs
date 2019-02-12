@@ -6,12 +6,15 @@ public class DeckController {
 
     [SerializeField]
     private List<CardData> Cards;
+    private IPlayer player;
 
-    public DeckController() {
+    public DeckController(IPlayer _player = null) {
+        player = _player;
         Cards = new List<CardData>();
     }
 
-    public DeckController (List<CardData> _cards) {
+    public DeckController (List<CardData> _cards, IPlayer _player = null) {
+        player = _player;
         Cards = _cards;
     }
 
@@ -65,6 +68,15 @@ public class DeckController {
     /// <returns></returns>
     public List<CardData> GetCards() {
         return Cards;
+    }
+
+    /// <summary>
+    /// Funzione che ritorna il player
+    /// </summary>
+    /// <returns></returns>
+    public IPlayer GetPlayerOwner()
+    {
+        return player;
     }
 
 }

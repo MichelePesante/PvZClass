@@ -244,6 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf77ffd3e8e83243b982d5c4b7993a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mulliganSMPrefab: {fileID: 9100000, guid: 77dba47eda27f794f8ab7dbacf84d224, type: 2}
+  gameplaySMPrefab: {fileID: 9100000, guid: a60538d992df9434f96f98fe3819a367, type: 2}
 --- !u!95 &2439727454280184050
 Animator:
   serializedVersion: 3
@@ -297,8 +299,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 8.199997, y: 0}
-  m_SizeDelta: {x: 30, y: 44}
+  m_AnchoredPosition: {x: 9.28, y: 0}
+  m_SizeDelta: {x: 31.97, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2829908045226561907
 CanvasRenderer:
@@ -330,7 +332,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: bec1d48b93cedf84faf165f8c54ed9b1, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -354,7 +356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &56612854956407374
 RectTransform:
   m_ObjectHideFlags: 0
@@ -389,7 +391,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4116132011637740593}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -652,10 +654,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5258232313420758350}
     m_Modifications:
-    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
-      propertyPath: m_Name
-      value: Life
-      objectReference: {fileID: 0}
     - target: {fileID: 224407370496517866, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -761,6 +759,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
+      propertyPath: m_Name
+      value: Life
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
 --- !u!114 &505206828414869343 stripped
@@ -788,10 +790,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5258232313420758350}
     m_Modifications:
-    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
-      propertyPath: m_Name
-      value: Cost
-      objectReference: {fileID: 0}
     - target: {fileID: 224407370496517866, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -897,6 +895,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
+      propertyPath: m_Name
+      value: Cost
+      objectReference: {fileID: 0}
     - target: {fileID: 114812368420170552, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}
       propertyPath: StartColor.r
@@ -939,14 +941,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5258232313420758350}
     m_Modifications:
-    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
-      propertyPath: m_Name
-      value: Attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224407370496517866, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1051,6 +1045,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
+      propertyPath: m_Name
+      value: Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180015188986216, guid: bc5aae5af910bb0498f0c0af6d1fcdd3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114812368420170552, guid: bc5aae5af910bb0498f0c0af6d1fcdd3,
         type: 3}

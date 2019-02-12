@@ -9,9 +9,17 @@ namespace StateMachine.Gameplay {
         public override void Enter()
         {
             context.UICanvas.EnableMenu(PanelType.Board);
-            context.CurrentPlayer.MaxEnergy++;
-            context.CurrentPlayer.CurrentEnergy = context.CurrentPlayer.MaxEnergy;
-            context.CurrentPlayer.Draw();
+            setupTurnPlayer(context.PlayerOne);
+            setupTurnPlayer(context.PlayerTwo);
+            context.GenericForwardCallBack();
+        }
+
+        void setupTurnPlayer(IPlayer _player)
+        {
+            _player.MaxEnergy++;
+            _player.CurrentEnergy = context.CurrentPlayer.MaxEnergy;
+            Debug.Log(_player.CurrentEnergy);
+            _player.Draw();
         }
     }
 
