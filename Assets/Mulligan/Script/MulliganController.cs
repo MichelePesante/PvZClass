@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MulliganController : MonoBehaviour
 {
     #region Events
-    public Action<List<CardData>> OnMulliganEnd;
+    public Action<List<CardData>, List<CardData>> OnMulliganEnd;
     public Action OnCardChanged;
     #endregion
 
@@ -18,6 +18,7 @@ public class MulliganController : MonoBehaviour
 
     private List<CardController> cardsOnScreen;
     private List<CardData> cardsToDisplay;
+    private List<CardData> cardNotSelected;
     private IPlayer player;
     int cardsToDisplayLastIndex;
     bool changeDone;
@@ -36,6 +37,11 @@ public class MulliganController : MonoBehaviour
         {
             cardsOnScreen[i].Setup(cardsToDisplay[i], player);
             cardsToDisplayLastIndex = i;
+        }
+        cardNotSelected = new List<CardData>();
+        for (int i = cardsOnScreen.Count; i < cardsToDisplay.Count; i++)
+        {
+            cardNotSelected.Add(cardsToDisplay[i]);
         }
     }
 
@@ -68,8 +74,10 @@ public class MulliganController : MonoBehaviour
             {
                 if (cardsOnScreen[i] == cardsToChange[j])
                 {
+                    cardNotSelected.Add(cardsToChange[j].Data);
                     cardsToDisplayLastIndex++;
                     cardsOnScreen[i].Setup(cardsToDisplay[cardsToDisplayLastIndex], player);
+                    cardNotSelected.Remove(cardsToDisplay[cardsToDisplayLastIndex]);
                 }
             }
 
@@ -96,7 +104,7 @@ public class MulliganController : MonoBehaviour
         continueButton.gameObject.SetActive(false);
         HandlerMulliganEnd();
         if (OnMulliganEnd != null)
-            OnMulliganEnd(choosenCards);
+            OnMulliganEnd(choosenCards, cardNotSelected);
     }
 
     private void HandlerMulliganEnd()
