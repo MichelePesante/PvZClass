@@ -10,6 +10,8 @@ public class Player : MonoBehaviour, IPlayer
     Type currentType;
     public Type CurrentType { get { return currentType; } set { currentType = value; } }
 
+    [SerializeField] DeckControllerUI handUI;
+
     DeckController deck;
     public DeckController Deck
     {
@@ -21,7 +23,14 @@ public class Player : MonoBehaviour, IPlayer
     public DeckController Hand
     {
         get { return hand; }
-        set { hand = value; }
+        set
+        {
+            hand = value;
+            if (handUI)
+            {
+                handUI.Setup(hand);
+            }
+        }
     }
 
     public event PlayerEvent.PlayerLost Lost;
