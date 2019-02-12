@@ -6,6 +6,7 @@ public class Player : MonoBehaviour, IPlayer
 
     public enum Type { one, two }
 
+    [SerializeField]
     Type currentType;
     public Type CurrentType { get { return currentType; } set { currentType = value; } }
 
@@ -33,7 +34,10 @@ public class Player : MonoBehaviour, IPlayer
         {
             life = value;
             if (life <= 0)
-                Lost(this);
+            {
+                if (Lost != null)
+                    Lost(this);
+            }
         }
     }
 
