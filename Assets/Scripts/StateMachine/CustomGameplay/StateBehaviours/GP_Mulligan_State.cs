@@ -23,6 +23,10 @@ namespace StateMachine.Gameplay {
         int mulliganPlayerCount;
         private void MulliganEndP1(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
             context.PlayerOne.Hand = new DeckController(_chosenCards, context.PlayerOne);
+            for (int i = 0; i < _notSelectedCards.Count; i++)
+            {
+                context.PlayerOne.Deck.AddCard(_notSelectedCards[i]);
+            }
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
                 context.GenericForwardCallBack();
@@ -30,6 +34,10 @@ namespace StateMachine.Gameplay {
 
         private void MulliganEndP2(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
             context.PlayerTwo.Hand = new DeckController(_chosenCards, context.PlayerTwo);
+            for (int i = 0; i < _notSelectedCards.Count; i++)
+            {
+                context.PlayerTwo.Deck.AddCard(_notSelectedCards[i]);
+            }            
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
                 context.GenericForwardCallBack();
