@@ -17,11 +17,13 @@ public class MulliganController : MonoBehaviour
 
     private List<CardController> cardsOnScreen;
     private List<CardData> cardsToDisplay;
+    private IPlayer player;
     int cardsToDisplayLastIndex;
     bool changeDone;
 
     public void Init(DeckController _hand)
-    {        
+    {
+        player = _hand.GetPlayerOwner();
         changeButton.onClick.AddListener(ChangeButtonClicked);
         changeButton.gameObject.SetActive(true);
         continueButton.onClick.AddListener(ContinueButtonClicked);
@@ -32,8 +34,7 @@ public class MulliganController : MonoBehaviour
         cardsToDisplay = _hand.GetCards();
         for (int i = 0; i < cardsOnScreen.Count; i++)
         {
-            cardsOnScreen[i].Setup(cardsToDisplay[i]);
-            cardsOnScreen[i].OnCardClicked += CardCliked;
+            cardsOnScreen[i].Setup(cardsToDisplay[i], player);
             cardsToDisplayLastIndex = i;
         }
     }
@@ -68,7 +69,7 @@ public class MulliganController : MonoBehaviour
                 if (cardsOnScreen[i] == cardsToChange[j])
                 {
                     cardsToDisplayLastIndex++;
-                    cardsOnScreen[i].Setup(cardsToDisplay[cardsToDisplayLastIndex]);
+                    cardsOnScreen[i].Setup(cardsToDisplay[cardsToDisplayLastIndex], player);
                 }
             }
 
@@ -100,7 +101,7 @@ public class MulliganController : MonoBehaviour
     {
         for (int i = 0; i < cardsOnScreen.Count; i++)
         {
-            cardsOnScreen[i].OnCardClicked -= CardCliked;
+            cardsOnScreen[i].OnCardPointerDown -= CardCliked;
         }
 
         changeButton.onClick.RemoveAllListeners();

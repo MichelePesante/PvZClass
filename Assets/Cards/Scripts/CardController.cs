@@ -5,7 +5,7 @@ using System;
 using UnityEngine.EventSystems;
 using StateMachine.Card;
 
-public class CardController : MonoBehaviour, IPointerDownHandler
+public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
     [Header("Data References")]
@@ -25,7 +25,7 @@ public class CardController : MonoBehaviour, IPointerDownHandler
     private State currentState;
     public State CurrentState {
         get { return currentState; }
-        private set { currentState = value;
+        set { currentState = value;
             if (OnCurrentStateChanged != null) {
                 OnCurrentStateChanged(currentState);
             }
@@ -41,7 +41,8 @@ public class CardController : MonoBehaviour, IPointerDownHandler
     }
 
     public Action<CardData> OnDataChanged;
-    public Action<CardController> OnCardClicked;
+    public Action<CardController> OnCardPointerDown;
+    public Action<CardController> OnCardPointerUp;
 
     private CardData _data;
     public CardData Data
@@ -54,6 +55,7 @@ public class CardController : MonoBehaviour, IPointerDownHandler
                 OnDataChanged(Data);
         }
     }
+    private IPlayer playerOwner;
 
     public void Setup()
     {
@@ -62,9 +64,10 @@ public class CardController : MonoBehaviour, IPointerDownHandler
         cardSM = GetComponent<CardSMController>();
         cardSM.Setup();
     }
-    public void Setup(CardData _data)
+    public void Setup(CardData _data, IPlayer _player)
     {
         Data = Instantiate(_data);
+        playerOwner = _player;
         Interactable(true);
         cardSM = GetComponent<CardSMController>();
         cardSM.Setup();
@@ -87,9 +90,17 @@ public class CardController : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (interactable && OnCardPointerDown != null)
+        {
+            OnCardPointerDown(this);
+        }
+    }
 
-        if (interactable && OnCardClicked != null) {
-            OnCardClicked(this);
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (interactable && OnCardPointerUp != null)
+        {
+            OnCardPointerUp(this);
         }
     }
 
@@ -99,21 +110,11 @@ public class CardController : MonoBehaviour, IPointerDownHandler
         interactable = _intertactable;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha0)) {
-            CurrentState = State.Idle;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            CurrentState = State.Playable;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            CurrentState = State.Unplayable;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            CurrentState = State.Drag;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4)) {
-            CurrentState = State.Played;
-        }
+    /// <summary>
+    /// Funzione che ritorna il player
+    /// </summary>
+    public IPlayer GetPlayerOwner()
+    {
+        return playerOwner;
     }
 }

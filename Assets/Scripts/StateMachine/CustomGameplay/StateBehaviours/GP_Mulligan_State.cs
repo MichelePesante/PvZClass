@@ -22,14 +22,14 @@ namespace StateMachine.Gameplay {
 
         int mulliganPlayerCount;
         private void MulliganEndP1(List<CardData> _chosenCards) {
-            context.PlayerOne.Hand = new DeckController(_chosenCards);
+            context.PlayerOne.Hand = new DeckController(_chosenCards, context.PlayerOne);
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
                 context.GenericForwardCallBack();
         }
 
         private void MulliganEndP2(List<CardData> _chosenCards) {
-            context.PlayerTwo.Hand = new DeckController(_chosenCards);
+            context.PlayerTwo.Hand = new DeckController(_chosenCards, context.PlayerTwo);
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
                 context.GenericForwardCallBack();

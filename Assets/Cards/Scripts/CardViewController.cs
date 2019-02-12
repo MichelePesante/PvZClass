@@ -52,7 +52,7 @@ public class CardViewController : MonoBehaviour {
         }
         switch (_data.Higlight) {
             case CardData.Highlight.NoHighlight:
-                LowlightPanel.enabled = true;
+                LowlightPanel.enabled = false;
                 HighlightPanel.enabled = false;
                 break;
             case CardData.Highlight.Highlighted:
