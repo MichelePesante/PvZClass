@@ -8,6 +8,7 @@ public class MulliganController : MonoBehaviour
 {
     #region Events
     public Action<List<CardData>> OnMulliganEnd;
+    public Action OnCardChanged;
     #endregion
 
     [SerializeField]
@@ -29,7 +30,6 @@ public class MulliganController : MonoBehaviour
         continueButton.onClick.AddListener(ContinueButtonClicked);
         continueButton.gameObject.SetActive(false);
         cardsOnScreen = GetComponentsInChildren<CardController>().ToList();
-
         cardsToDisplayLastIndex = 0;
         cardsToDisplay = _hand.GetCards();
         for (int i = 0; i < cardsOnScreen.Count; i++)
@@ -57,7 +57,7 @@ public class MulliganController : MonoBehaviour
     /// <summary>
     /// Funzione che si occupa del click del pulsante Change
     /// </summary>
-    private void ChangeButtonClicked()
+    public void ChangeButtonClicked()
     {
         if (cardsToChange == null)
             return;
@@ -79,12 +79,14 @@ public class MulliganController : MonoBehaviour
         changeButton.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(true);
         cardsToChange.Clear();
+        if (OnCardChanged != null)
+            OnCardChanged();
     }
 
     /// <summary>
     /// Funzione che si occupa del click del pulsante Continue
     /// </summary>
-    private void ContinueButtonClicked()
+    public void ContinueButtonClicked()
     {
         List<CardData> choosenCards = new List<CardData>();
         foreach (CardController card in cardsOnScreen)

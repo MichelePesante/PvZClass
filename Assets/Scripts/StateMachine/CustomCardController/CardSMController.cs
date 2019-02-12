@@ -16,6 +16,9 @@ namespace StateMachine.Card {
                 OnSetupDoneCallback = HandleOnSetupDone,
                 cardController = GetComponent<CardController>(),
                 mulliganCtrl = GameplaySceneManager.GetMulliganController(GetComponent<CardController>().GetPlayerOwner().CurrentType),
+                OnCardMulliganSelected = HandleCardMulliganSelected,
+                OnCardMulliganDeselected = HandleCardMulliganDeselected,
+                OnCardMulliganChanged = HandleCardMulliganChanged,
                 boardCtrl = GameplaySceneManager.GetBoardController(),                
             };
             tmpContext.cardController.OnCurrentStateChanged += OnCardStateChanged;
@@ -32,6 +35,7 @@ namespace StateMachine.Card {
             SM.SetTrigger("SetupDone");
         }
 
+        #region Mulligan
         private void HandleCardMulliganSelected()
         {
             if (SM.runtimeAnimatorController == mulliganSMPrefab)
@@ -41,8 +45,15 @@ namespace StateMachine.Card {
         private void HandleCardMulliganDeselected()
         {
             if (SM.runtimeAnimatorController == mulliganSMPrefab)
-                SM.SetTrigger("Idle");
+                SM.SetTrigger("Deselected");
         }
+
+        private void HandleCardMulliganChanged()
+        {
+            if (SM.runtimeAnimatorController == mulliganSMPrefab)
+                SM.SetTrigger("Changed");
+        }
+        #endregion
         #endregion
     }
 
@@ -51,6 +62,7 @@ namespace StateMachine.Card {
         #region Mulligan
         public Action OnCardMulliganSelected;
         public Action OnCardMulliganDeselected;
+        public Action OnCardMulliganChanged;
         public MulliganController mulliganCtrl;
         #endregion
 

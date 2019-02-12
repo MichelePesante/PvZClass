@@ -6,6 +6,7 @@ public class Player : MonoBehaviour, IPlayer
 
     public enum Type { one, two }
 
+    [SerializeField]
     Type currentType;
     public Type CurrentType { get { return currentType; } set { currentType = value; } }
 

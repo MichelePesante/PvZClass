@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +9,14 @@ namespace StateMachine.Card
     {
         public override void Enter()
         {
+            context.mulliganCtrl.OnCardChanged += HandleCardChanged;
             context.cardController.OnCardPointerDown += HandleOnpointerDown;
             context.cardController.SetHiglight(CardData.Highlight.Highlighted);
+        }
+
+        private void HandleCardChanged()
+        {
+            context.OnCardMulliganChanged();
         }
 
         private void HandleOnpointerDown(CardController obj)
@@ -22,6 +29,7 @@ namespace StateMachine.Card
 
         public override void Exit()
         {
+            context.mulliganCtrl.OnCardChanged -= HandleCardChanged;
             context.cardController.OnCardPointerDown -= HandleOnpointerDown;
             context.cardController.SetHiglight(CardData.Highlight.NoHighlight);
         }
