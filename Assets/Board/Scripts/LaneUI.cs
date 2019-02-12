@@ -12,6 +12,8 @@ public class LaneUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     bool isInteractable = false;
     CardController cardToCheck;
 
+    enum Highlight { playable, unplayable, off }
+
     public void SetUp(Lane _l)
     {
         MyLane = _l;
@@ -22,9 +24,22 @@ public class LaneUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     /// Toggles playable/unplayable graphics.
     /// </summary>
     /// <param name="_value"></param>
-    public void ToggleHighlight(bool _value)
+    void ToggleHighlight(Highlight _highlight)
     {
-        HighlightImage.gameObject.SetActive(_value);
+        switch (_highlight)
+        {
+            case Highlight.playable:
+                HighlightImage.gameObject.SetActive(true);
+                HighlightImage.color = Color.green;
+                break;
+            case Highlight.unplayable:
+                HighlightImage.gameObject.SetActive(true);
+                HighlightImage.color = Color.red;
+                break;
+            case Highlight.off:
+                HighlightImage.gameObject.SetActive(false);
+                break;
+        }
     }
 
     /// <summary>
@@ -43,12 +58,19 @@ public class LaneUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (isInteractable)
         {
-            ToggleHighlight(MyLane.CheckCardPlayability(cardToCheck));
+            if (MyLane.CheckCardPlayability(cardToCheck))
+            {
+                ToggleHighlight(Highlight.playable);
+            }
+            else
+            {
+                ToggleHighlight(Highlight.unplayable);
+            }
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ToggleHighlight(false);
+        ToggleHighlight(Highlight.off);
     }
 }
