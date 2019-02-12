@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour, IPlayer
 {
@@ -22,11 +23,18 @@ public class Player : MonoBehaviour, IPlayer
         set { hand = value; }
     }
 
+    public event PlayerEvent.PlayerLost Lost;
+
     int life;
     public int Life
     {
         get { return life; }
-        set { life = value; }
+        set
+        {
+            life = value;
+            if (life <= 0)
+                Lost(this);
+        }
     }
 
     int maxEnergy;
@@ -44,6 +52,8 @@ public class Player : MonoBehaviour, IPlayer
     }
 
     int shield;
+
+
     public int Shield
     {
         get { return shield; }

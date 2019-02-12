@@ -6,7 +6,10 @@ namespace StateMachine.Gameplay {
 
         public override void Enter() {
             // Caso 1
-            context.IsWinCondition = true;
+            if (context.PlayerOne.Life <= 0 || context.PlayerTwo.Life <= 0)
+                context.IsWinCondition = true;
+            else
+                context.IsWinCondition = false;
 
             // Caso 2
             //if (context.IsWinCondition) {

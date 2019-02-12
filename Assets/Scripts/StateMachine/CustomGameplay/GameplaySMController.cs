@@ -43,8 +43,9 @@ namespace StateMachine.Gameplay {
         protected override IStateMachineContext ContextSetup() {
             return new GameplaySMContext() {
                 ContextName = "stringa GameplaySMContext",
-                PlayerOne = sceneManager.player1,
+                PlayerOne = sceneManager.player1,                
                 PlayerTwo = sceneManager.player2,
+                Winner = null,
                 P1mulliganCtrl = sceneManager.mulliganP1,
                 P2mulliganCtrl = sceneManager.mulliganP2,
                 BoardCtrl = sceneManager.BoardCtrl,
@@ -81,6 +82,7 @@ namespace StateMachine.Gameplay {
 
         public IPlayer PlayerOne, PlayerTwo;
         public IPlayer CurrentPlayer;
+        public IPlayer Winner;
 
         public Action<bool> OnWinnerCondChanged;
 
