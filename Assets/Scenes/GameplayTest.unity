@@ -747,6 +747,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6155613716769193567, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: LanePrefab
+      value: 
+      objectReference: {fileID: 2674830143898405894, guid: 37ecdd71780675c489d1a0ec439faed1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 117af4fc6efc9ff4da434863aa5cfe6d, type: 3}
 --- !u!114 &1571922069 stripped
