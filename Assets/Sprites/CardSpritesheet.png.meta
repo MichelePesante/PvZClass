@@ -6,6 +6,9 @@ TextureImporter:
     21300002: CardSpritesheet_1
     21300004: CardSpritesheet_2
     21300006: CardSpritesheet_3
+    21300008: CardSpritesheet_4
+    21300010: CardSpritesheet_5
+    21300012: CardSpritesheet_6
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -92,17 +95,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3
-        y: 3
+        y: 109
         width: 105
         height: 144
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 47, y: 74, z: 55, w: 68}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95d4805644413b64eb3853a3014805b0
+      spriteID: b9f4a80fcf94dcb47a7cd1c52329240e
       vertices: []
       indices: 
       edges: []
@@ -111,18 +114,18 @@ TextureImporter:
       name: CardSpritesheet_1
       rect:
         serializedVersion: 2
-        x: 112
-        y: 114
+        x: 157
+        y: 221
         width: 23
-        height: 23
+        height: 22
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37a6c650535c53843b272bf14fe33e12
+      spriteID: 505947f491f44e747bf94cdd23724e7c
       vertices: []
       indices: 
       edges: []
@@ -131,18 +134,18 @@ TextureImporter:
       name: CardSpritesheet_2
       rect:
         serializedVersion: 2
-        x: 112
-        y: 60
-        width: 44
-        height: 4
+        x: 186
+        y: 182
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fef57a429268ec04ebf38cc4ddd9656f
+      spriteID: 32636e6249b4374418600ff08d48589d
       vertices: []
       indices: 
       edges: []
@@ -151,18 +154,78 @@ TextureImporter:
       name: CardSpritesheet_3
       rect:
         serializedVersion: 2
-        x: 115
-        y: 28
+        x: 160
+        y: 180
         width: 17
         height: 17
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c032fec2a234e3459a7dd1499154082
+      spriteID: 7bd713d7c5997e849b2bc154e021237a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardSpritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 153
+        width: 43
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3288825acf0001c4dac078e2cbbe408d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardSpritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 9
+        width: 91
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3f4eba57a6bb674c89460f900686855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardSpritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 13
+        width: 54
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ae84a4f56824284a924ee923ae5954b
       vertices: []
       indices: 
       edges: []
