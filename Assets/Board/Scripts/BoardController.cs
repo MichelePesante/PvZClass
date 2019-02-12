@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
+﻿using UnityEngine;
 
 public class BoardController : MonoBehaviour
 {
@@ -10,15 +7,6 @@ public class BoardController : MonoBehaviour
  
     [Header("Data")]
     [SerializeField] private BoardData boardData;
-
-    //-- TESTING
-    //[ContextMenu("Create Board")]
-    //public void CreateBoard()
-    //{
-    //    SetUp(boardData);
-    //    InstantiateBoard();
-    //}
-    //-- TESTING
 
     public void SetUp(BoardData _boardData)
     {
@@ -42,6 +30,18 @@ public class BoardController : MonoBehaviour
             LaneUI instantiatedLane = Instantiate(l.Prefab, transform).GetComponent<LaneUI>();
             instantiatedLane.SetUp(l);
         }
+    }
+
+    public bool CheckCardPlayability(LaneType _lanetype, Player.Type _playerType)
+    {
+        foreach (Lane lane in boardData.Lanes)
+        {
+            if(lane.Type == _lanetype && lane.HasFreeSlot(_playerType))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

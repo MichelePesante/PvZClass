@@ -1,8 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Player : MonoBehaviour , IPlayer {
+public class Player : MonoBehaviour, IPlayer
+{
+
+    public enum Type { one, two }
+
+    Type currentType;
+    public Type CurrentType { get { return currentType; } set { currentType = value; } }
 
     DeckController deck;
     public DeckController Deck
