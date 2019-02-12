@@ -1,8 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour , IPlayer {
+
+    string id;
+    public string ID
+    {
+        get { return id; }
+        set { id = ID; }
+    }
 
     DeckController deck;
     public DeckController Deck
