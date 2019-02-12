@@ -34,7 +34,10 @@ public class Player : MonoBehaviour, IPlayer
         {
             life = value;
             if (life <= 0)
-                Lost(this);
+            {
+                if (Lost != null)
+                    Lost(this);
+            }
         }
     }
 

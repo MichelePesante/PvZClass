@@ -9,6 +9,12 @@ namespace StateMachine.Gameplay {
             base.Tick();
             if (Input.GetKeyDown(KeyCode.Space))
                 context.GenericForwardCallBack();
+
+            // Debug
+            if (Input.GetKeyDown(KeyCode.Z))
+                context.PlayerOne.Life--;
+            if (Input.GetKeyDown(KeyCode.X))
+                context.PlayerTwo.Life--;
         }
     }
 }
