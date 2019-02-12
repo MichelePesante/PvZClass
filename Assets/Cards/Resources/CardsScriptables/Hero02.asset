@@ -16,10 +16,11 @@ MonoBehaviour:
   StartCost: 18
   StartLife: 20
   StartAttack: 2
-  CardFacion: 0
+  CardFaction: 0
   CardRarity: 0
   IsHeroCard: 1
   CardImage: {fileID: 21300008, guid: e22ccab8427eb914db3cd9867cd6ac8c, type: 3}
+  playableLane: {fileID: 11400000, guid: 80b8c7b0edfa3e04582259564e2284aa, type: 2}
   Cost: 18
   Attack: 2
   Life: 20

@@ -12,6 +12,7 @@ public class CardData : ScriptableObject {
     public Rarity CardRarity;
     public bool IsHeroCard;
     public Sprite CardImage;
+    public LaneType playableLane;
 
     public string NameToShow {
         get { return CardName.ToUpper(); }
