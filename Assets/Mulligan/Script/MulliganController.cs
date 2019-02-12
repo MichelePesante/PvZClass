@@ -43,7 +43,7 @@ public class MulliganController : MonoBehaviour
     /// Funzione che si occupa dell'evento OnCardClicked
     /// </summary>
     private List<CardController> cardsToChange = new List<CardController>();
-    private void CardCliked(CardController _card)
+    public void CardCliked(CardController _card)
     {
         if (changeDone)
             return;
@@ -99,11 +99,6 @@ public class MulliganController : MonoBehaviour
 
     private void HandlerMulliganEnd()
     {
-        for (int i = 0; i < cardsOnScreen.Count; i++)
-        {
-            cardsOnScreen[i].OnCardPointerDown -= CardCliked;
-        }
-
         changeButton.onClick.RemoveAllListeners();
         continueButton.onClick.RemoveAllListeners();
     }

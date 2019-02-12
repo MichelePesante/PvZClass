@@ -11,12 +11,6 @@ namespace StateMachine.Card {
         [SerializeField]
         private RuntimeAnimatorController gameplaySMPrefab;
 
-        public override void Setup()
-        {
-            SM.runtimeAnimatorController = mulliganSMPrefab;
-            base.Setup();
-        }
-
         protected override IStateMachineContext ContextSetup() {
             CardSMContext tmpContext = new CardSMContext() {
                 OnSetupDoneCallback = HandleOnSetupDone,

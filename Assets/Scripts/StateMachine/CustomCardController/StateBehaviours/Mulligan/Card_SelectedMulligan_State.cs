@@ -14,6 +14,9 @@ namespace StateMachine.Card
 
         private void HandleOnpointerDown(CardController obj)
         {
+            if (obj != context.cardController)
+                return;
+            context.mulliganCtrl.CardCliked(obj);
             context.OnCardMulliganDeselected();
         }
 

@@ -55,7 +55,7 @@ namespace StateMachine.Gameplay {
             _player.MaxEnergy = 0;
             _player.CurrentEnergy = 0;
             _player.Deck = _deck;
-            _player.Hand = new DeckController();
+            _player.Hand = new DeckController(_player);
             _player.Draw(8);
 
         }

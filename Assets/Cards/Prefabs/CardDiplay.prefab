@@ -244,6 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf77ffd3e8e83243b982d5c4b7993a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mulliganSMPrefab: {fileID: 9100000, guid: 77dba47eda27f794f8ab7dbacf84d224, type: 2}
+  gameplaySMPrefab: {fileID: 9100000, guid: a60538d992df9434f96f98fe3819a367, type: 2}
 --- !u!95 &2439727454280184050
 Animator:
   serializedVersion: 3
