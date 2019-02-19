@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ec7375ffaf2bb4097b79d24fc3e3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WinTextPrefab: {fileID: 8149091507749562963, guid: 96733a106b19bd046a7a8b3ab1f369fa,
+    type: 3}
 --- !u!114 &114494712132053194
 MonoBehaviour:
   m_ObjectHideFlags: 1
