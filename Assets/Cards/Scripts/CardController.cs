@@ -4,8 +4,9 @@ using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
 using StateMachine.Card;
+using UnityEngine.UI;
 
-public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDetecter
 {
 
     [Header("Data References")]
@@ -56,19 +57,46 @@ public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
     }
     private IPlayer playerOwner;
+    private GraphicRaycaster graphicRaycaster;
+    private EventSystem eventSystem;
+    private Camera cam;
+    private RectTransform rectTransform;
 
     public void Setup()
     {
+        rectTransform = GetComponent<RectTransform>();
+        cam = Camera.main;
+        eventSystem = FindObjectOfType<EventSystem>();
+        if (!eventSystem) {
+            Debug.LogError(name + " has not found an event system!");
+        }
+        graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
+        if (!graphicRaycaster) {
+            Debug.LogError(name + " has not found a graphic raycaster!");
+        }
         Data = Instantiate(cardDataPrefab);
         Interactable(true);
+        detectedObjects = new List<IDetectable>();
         cardSM = GetComponent<CardSMController>();
         cardSM.Setup();
     }
+
     public void Setup(CardData _data, IPlayer _player)
     {
+        rectTransform = GetComponent<RectTransform>();
+        cam = Camera.main;
+        eventSystem = FindObjectOfType<EventSystem>();
+        if (!eventSystem) {
+            Debug.LogError(name + " has not found an event system!");
+        }
+        if (!graphicRaycaster) {
+            Debug.LogError(name + " has not found a graphic raycaster!");
+        }
+        graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
         Data = Instantiate(_data);
         playerOwner = _player;
         Interactable(true);
+        detectedObjects = new List<IDetectable>();
         cardSM = GetComponent<CardSMController>();
         cardSM.Setup();
     }
@@ -116,5 +144,41 @@ public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public IPlayer GetPlayerOwner()
     {
         return playerOwner;
+    }
+
+    private List<IDetectable> detectedObjects;
+    private PointerEventData pointerEventData;
+    public void Detect() {
+        pointerEventData = new PointerEventData(eventSystem);
+
+        pointerEventData.position = rectTransform.position;
+        List<RaycastResult> results = new List<RaycastResult>();
+        graphicRaycaster.Raycast(pointerEventData, results);
+
+        foreach (RaycastResult result in results) {
+            IDetectable _detectedObj = result.gameObject.GetComponent<IDetectable>();
+            if (_detectedObj == null)
+                continue;
+
+            if (!detectedObjects.Contains(_detectedObj)) {
+                _detectedObj.OnEnter(this);
+                detectedObjects.Add(_detectedObj);
+            }
+
+            for (int i = 0; i < detectedObjects.Count; i++) {
+                if (!detectedObjects.Contains(_detectedObj)) {
+                    detectedObjects[i].OnExit(this);
+                    detectedObjects.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        if(pointerEventData != null)
+            Gizmos.DrawSphere(pointerEventData.position, 100f);
     }
 }

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
-public class LaneUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class LaneUI : MonoBehaviour, IDetectable
 {
     public Lane MyLane { get; set; }
 
@@ -54,23 +55,22 @@ public class LaneUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             cardToCheck = _cardToCheck;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (isInteractable)
-        {
-            if (MyLane.CheckCardPlayability(cardToCheck))
-            {
+    public void OnEnter(IDetecter _detecter) {
+        CardController _card = _detecter as CardController;
+        if (_card) {
+            cardToCheck = _card;
+            if (MyLane.CheckCardPlayability(cardToCheck)) {
                 ToggleHighlight(Highlight.playable);
-            }
-            else
-            {
+            } else {
                 ToggleHighlight(Highlight.unplayable);
             }
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        ToggleHighlight(Highlight.off);
+    public void OnExit(IDetecter _detecter) {
+        CardController _card = _detecter as CardController;
+        if (_card) {
+            ToggleHighlight(Highlight.off);
+        }
     }
 }

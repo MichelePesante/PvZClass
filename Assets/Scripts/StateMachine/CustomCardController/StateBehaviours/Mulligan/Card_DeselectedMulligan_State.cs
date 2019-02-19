@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 namespace StateMachine.Card
@@ -8,9 +7,21 @@ namespace StateMachine.Card
     {
         public override void Enter()
         {
+            initMulliganController();
+
             context.mulliganCtrl.OnCardChanged += HandleCardChanged;
             context.cardController.OnCardPointerDown += HandleOnpointerDown;
             context.cardController.SetHiglight(CardData.Highlight.NoHighlight);
+        }
+
+        private void initMulliganController() {
+            MulliganController[] mulligans = FindObjectsOfType<MulliganController>();
+            for (int i = 0; i < mulligans.Length; i++) {
+                if (mulligans[i].GetPlayer() == context.cardController.GetPlayerOwner())
+                    context.mulliganCtrl = mulligans[i];
+            }
+            if (!context.mulliganCtrl)
+                throw new Exception("Unable to find mulligancontroller in scene");
         }
 
         private void HandleCardChanged()

@@ -122,10 +122,10 @@ GameObject:
   - component: {fileID: 224898376646162100}
   - component: {fileID: 114045398437010030}
   - component: {fileID: 114581939317608938}
-  - component: {fileID: 432077248052748179}
-  - component: {fileID: 3344517753278283016}
   - component: {fileID: 8366094857853004320}
   - component: {fileID: 2439727454280184050}
+  - component: {fileID: 432077248052748179}
+  - component: {fileID: 3344517753278283016}
   m_Layer: 5
   m_Name: CardDiplay
   m_TagString: Untagged
@@ -186,6 +186,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardDataPrefab: {fileID: 11400000, guid: 706e5659faea28040be4c7d53b3c43b7, type: 2}
+--- !u!114 &8366094857853004320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803594724696236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf77ffd3e8e83243b982d5c4b7993a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mulliganSMPrefab: {fileID: 9100000, guid: 77dba47eda27f794f8ab7dbacf84d224, type: 2}
+  gameplaySMPrefab: {fileID: 9100000, guid: a60538d992df9434f96f98fe3819a367, type: 2}
+--- !u!95 &2439727454280184050
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803594724696236}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a60538d992df9434f96f98fe3819a367, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &432077248052748179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,39 +265,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &8366094857853004320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803594724696236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bf77ffd3e8e83243b982d5c4b7993a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mulliganSMPrefab: {fileID: 9100000, guid: 77dba47eda27f794f8ab7dbacf84d224, type: 2}
-  gameplaySMPrefab: {fileID: 9100000, guid: a60538d992df9434f96f98fe3819a367, type: 2}
---- !u!95 &2439727454280184050
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803594724696236}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a60538d992df9434f96f98fe3819a367, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2872624781442343968
 GameObject:
   m_ObjectHideFlags: 0

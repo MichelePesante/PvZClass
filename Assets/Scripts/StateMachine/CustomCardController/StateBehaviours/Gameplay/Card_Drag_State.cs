@@ -15,7 +15,7 @@ namespace StateMachine.Card {
             startScale = context.cardController.transform.localScale;
             context.cardController.transform.localScale *= 1.5f;
             isDragging = true;
-            context.boardCtrl.ToggleBoardInteractability(true, context.cardController);
+            //context.boardCtrl.ToggleBoardInteractability(true, context.cardController);
         }
 
         private void HandleOnPointerUp(CardController obj)
@@ -25,6 +25,7 @@ namespace StateMachine.Card {
 
         public override void Tick()
         {
+            context.cardController.Detect();
             if (isDragging)
                 context.cardController.transform.position = Input.mousePosition;
             else

@@ -49,6 +49,8 @@ public class MulliganController : MonoBehaviour
     /// Funzione che si occupa dell'evento OnCardClicked
     /// </summary>
     private List<CardController> cardsToChange = new List<CardController>();
+
+
     public void CardCliked(CardController _card)
     {
         if (changeDone)
@@ -58,6 +60,21 @@ public class MulliganController : MonoBehaviour
             cardsToChange.Remove(_card);
         else
             cardsToChange.Add(_card);
+    }
+
+    private void HandlerMulliganEnd() {
+        changeButton.onClick.RemoveAllListeners();
+        continueButton.onClick.RemoveAllListeners();
+    }
+
+    #region API
+
+    /// <summary>
+    /// Return mulligan owner.
+    /// </summary>
+    /// <returns></returns>
+    public IPlayer GetPlayer() {
+        return this.player;
     }
 
     /// <summary>
@@ -107,9 +124,7 @@ public class MulliganController : MonoBehaviour
             OnMulliganEnd(choosenCards, cardNotSelected);
     }
 
-    private void HandlerMulliganEnd()
-    {
-        changeButton.onClick.RemoveAllListeners();
-        continueButton.onClick.RemoveAllListeners();
-    }
+#endregion
+
+
 }

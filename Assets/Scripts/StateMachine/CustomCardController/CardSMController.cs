@@ -12,14 +12,15 @@ namespace StateMachine.Card {
         private RuntimeAnimatorController gameplaySMPrefab;
 
         protected override IStateMachineContext ContextSetup() {
+
             CardSMContext tmpContext = new CardSMContext() {
                 OnSetupDoneCallback = HandleOnSetupDone,
                 cardController = GetComponent<CardController>(),
-                mulliganCtrl = GameplaySceneManager.GetMulliganController(GetComponent<CardController>().GetPlayerOwner().CurrentType),
+                mulliganCtrl = null,
                 OnCardMulliganSelected = HandleCardMulliganSelected,
                 OnCardMulliganDeselected = HandleCardMulliganDeselected,
                 OnCardMulliganChanged = HandleCardMulliganChanged,
-                boardCtrl = GameplaySceneManager.GetBoardController(),                
+                boardCtrl = null,                
             };
             tmpContext.cardController.OnCurrentStateChanged += OnCardStateChanged;
             return tmpContext;
@@ -54,6 +55,7 @@ namespace StateMachine.Card {
                 SM.SetTrigger("Changed");
         }
         #endregion
+
         #endregion
     }
 
