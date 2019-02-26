@@ -2,37 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeckController {
+public static class DeckController {
 
-    [SerializeField]
-    private List<CardData> Cards;
-    private IPlayer player;
-
-    public DeckController(IPlayer _player = null) {
-        player = _player;
-        Cards = new List<CardData>();
-    }
-
-    public DeckController (List<CardData> _cards, IPlayer _player = null) {
-        player = _player;
-        Cards = _cards;
-    }
-
-    public void Shuffle()
+    public static DeckData Shuffle(DeckData _deckToShuffle)
     {
-        for (int i = 0; i < (Cards.Count * 2); i++) // Mischia 20 volte
+        for (int i = 0; i < (_deckToShuffle.Cards.Count * 2); i++) // Mischia 20 volte
         {
-            int random = Random.Range(0, Cards.Count);
+            int random = Random.Range(0, _deckToShuffle.Cards.Count);
             CardData tempCard = null;
-            tempCard = Cards[i];
-            Cards[i] = Cards[random];
-            Cards[random] = tempCard;
+            tempCard = _deckToShuffle.Cards[i];
+            _deckToShuffle.Cards[i] = _deckToShuffle.Cards[random];
+            _deckToShuffle.Cards[random] = tempCard;
         }
+        return _deckToShuffle;
     }
 
-    public void AddCard(CardData cardToAdd)
+    public static DeckData AddCard(DeckData _deck, CardData _cardToAdd)
     {
-        Cards.Add(cardToAdd);
+        _deck.Cards.Add(_cardToAdd);
+        return _deck;
     }
 
     /// <summary>
@@ -40,43 +28,26 @@ public class DeckController {
     /// </summary>
     /// <param name="indexCard"></param>
     /// <returns></returns>
-    public CardData GetCard(int indexCard = 0)
+    public static CardData GetCard(DeckData _deck, int indexCard = 0)
     {
-        return Cards[indexCard];
+        return _deck.Cards[indexCard];
     }
 
-    public void RemoveCard(CardData cardToRemove)
+    public static DeckData RemoveCard(DeckData _deck ,CardData cardToRemove)
     {
-        Cards.Remove(cardToRemove);
+        _deck.Cards.Remove(cardToRemove);
+        return _deck;
     }
 
     /// <summary>
     /// Aggiunge cardsToDraw carte dal deck alla hand e la rimuove dal deck
     /// </summary>
-    public void Draw(DeckController hand, int cardsToDraw = 1)
+    public static void Draw(DeckData _deckToAddTo, DeckData _deckToRemoveFrom, int cardsToDraw = 1)
     {
         for (int i = 0; i < cardsToDraw; i++)
         {
-            hand.AddCard(Cards[0]);
-            Cards.Remove(Cards[0]);
+            AddCard(_deckToAddTo, _deckToRemoveFrom.Cards[0]);
+            RemoveCard(_deckToRemoveFrom, _deckToRemoveFrom.Cards[0]);
         }
     }
-
-    /// <summary>
-    /// Ritorna l'intera lista di carte
-    /// </summary>
-    /// <returns></returns>
-    public List<CardData> GetCards() {
-        return Cards;
-    }
-
-    /// <summary>
-    /// Funzione che ritorna il player
-    /// </summary>
-    /// <returns></returns>
-    public IPlayer GetPlayerOwner()
-    {
-        return player;
-    }
-
 }

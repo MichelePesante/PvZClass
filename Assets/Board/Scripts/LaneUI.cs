@@ -13,7 +13,7 @@ public class LaneUI : MonoBehaviour, IDetectable
     bool isInteractable = false;
     CardController cardToCheck;
 
-    enum Highlight { playable, unplayable, off }
+    public enum Highlight { playable, unplayable, off }
 
     public void SetUp(Lane _l)
     {
@@ -25,7 +25,7 @@ public class LaneUI : MonoBehaviour, IDetectable
     /// Toggles playable/unplayable graphics.
     /// </summary>
     /// <param name="_value"></param>
-    void ToggleHighlight(Highlight _highlight)
+    public void ToggleHighlight(Highlight _highlight)
     {
         switch (_highlight)
         {

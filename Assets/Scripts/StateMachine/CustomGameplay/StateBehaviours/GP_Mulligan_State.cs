@@ -22,10 +22,11 @@ namespace StateMachine.Gameplay {
 
         int mulliganPlayerCount;
         private void MulliganEndP1(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
-            context.PlayerOne.Hand = new DeckController(_chosenCards, context.PlayerOne);
+            context.PlayerOne.Hand = new DeckData(_chosenCards);
+            context.PlayerOne.Hand.Player = context.PlayerOne;
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
-                context.PlayerOne.Deck.AddCard(_notSelectedCards[i]);
+                DeckController.AddCard(context.PlayerOne.Deck, _notSelectedCards[i]);
             }
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
@@ -33,10 +34,11 @@ namespace StateMachine.Gameplay {
         }
 
         private void MulliganEndP2(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
-            context.PlayerTwo.Hand = new DeckController(_chosenCards, context.PlayerTwo);
+            context.PlayerTwo.Hand = new DeckData(_chosenCards);
+            context.PlayerTwo.Hand.Player = context.PlayerTwo;
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
-                context.PlayerTwo.Deck.AddCard(_notSelectedCards[i]);
+                DeckController.AddCard(context.PlayerTwo.Deck, _notSelectedCards[i]);
             }            
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
@@ -48,7 +50,6 @@ namespace StateMachine.Gameplay {
             context.P2mulliganCtrl.OnMulliganEnd -= MulliganEndP2;
 
             context.UICanvas.DisableAllPanels();
-            context.BoardCtrl.InstantiateBoard();
         }
 
     }

@@ -10,8 +10,6 @@ namespace StateMachine.Gameplay {
 
     public class GameplaySMController : StateMachineBase {
 
-        
-
         [SerializeField]
         private GameplaySceneManager sceneManager;
 
@@ -42,6 +40,7 @@ namespace StateMachine.Gameplay {
 
         protected override IStateMachineContext ContextSetup() {
             return new GameplaySMContext() {
+                SceneManager = sceneManager,
                 ContextName = "stringa GameplaySMContext",
                 PlayerOne = sceneManager.player1,                
                 PlayerTwo = sceneManager.player2,
@@ -79,6 +78,8 @@ namespace StateMachine.Gameplay {
                     OnWinnerCondChanged(_isWinCondition);
             }
         }
+
+        public GameplaySceneManager SceneManager;
 
         public IPlayer PlayerOne, PlayerTwo;
         public IPlayer CurrentPlayer;

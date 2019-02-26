@@ -12,6 +12,8 @@ public class GameplaySceneManager : MonoBehaviour {
     public UIManager GlobalUI;
     public MulliganController mulliganP1;
     public MulliganController mulliganP2;
+    public HandUI playerOneHandUI;
+    public HandUI playerTwoHandUI;
 
     private void Awake()
     {

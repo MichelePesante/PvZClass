@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-public class Player : MonoBehaviour, IPlayer
-{
+public class Player : MonoBehaviour, IPlayer {
 
     public enum Type { one, two }
 
@@ -10,40 +9,28 @@ public class Player : MonoBehaviour, IPlayer
     Type currentType;
     public Type CurrentType { get { return currentType; } set { currentType = value; } }
 
-    [SerializeField] DeckControllerUI handUI;
-
-    DeckController deck;
-    public DeckController Deck
-    {
-        get { return deck; }
-        set { deck = value; }
+    DeckData _deck;
+    public DeckData Deck {
+        get { return _deck; }
+        set { _deck = value; }
     }
 
-    DeckController hand;
-    public DeckController Hand
-    {
-        get { return hand; }
-        set
-        {
-            hand = value;
-            if (handUI)
-            {
-                handUI.Setup(hand);
-            }
+    DeckData _hand;
+    public DeckData Hand {
+        get { return _hand; }
+        set {
+            _hand = value;
         }
     }
 
     public event PlayerEvent.PlayerLost Lost;
 
     int life;
-    public int Life
-    {
+    public int Life {
         get { return life; }
-        set
-        {
+        set {
             life = value;
-            if (life <= 0)
-            {
+            if (life <= 0) {
                 if (Lost != null)
                     Lost(this);
             }
@@ -51,32 +38,25 @@ public class Player : MonoBehaviour, IPlayer
     }
 
     int maxEnergy;
-    public int MaxEnergy
-    {
+    public int MaxEnergy {
         get { return maxEnergy; }
         set { maxEnergy = value; }
     }
 
     int energy;
-    public int CurrentEnergy
-    {
+    public int CurrentEnergy {
         get { return energy; }
         set { energy = value; }
     }
 
     int shield;
-
-
-    public int Shield
-    {
+    public int Shield {
         get { return shield; }
         set { shield = value; }
     }
 
-    public void Draw(int cards = 1)
-    {
-        if (Hand == null)
-            Hand = new DeckController();
-        Deck.Draw(Hand, cards);
+    public void Draw(int cards = 1) {
+
+        DeckController.Draw(Hand, Deck, cards);
     }
 }

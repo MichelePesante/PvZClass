@@ -2,20 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeckControllerUI : MonoBehaviour
-{
-    [SerializeField] CardController cardPrefab;
-    [SerializeField] Player playerReference;
-    private DeckController deckController;
+public abstract class DeckControllerUI : MonoBehaviour {
 
-    public void Setup(DeckController _deckController)
-    {
-        deckController = _deckController;
-
-        foreach (CardData card in deckController.GetCards())
-        {
-            CardController instCard = Instantiate(cardPrefab, transform);
-            instCard.Setup(card, playerReference);
+    DeckData _data;
+    public DeckData Data {
+        get { return _data; }
+        protected set {
+            _data = value;
         }
+    }
+
+    public DeckControllerUI Setup(DeckData _deck) {
+        if (_deck == null)
+            return null;
+
+        Data = _deck;
+
+        LateSetup();
+
+        return this;
+    }
+
+    public virtual void LateSetup() {
+
     }
 }

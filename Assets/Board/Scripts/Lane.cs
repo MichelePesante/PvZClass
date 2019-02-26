@@ -42,7 +42,7 @@ public class Lane
 
     public bool CheckCardPlayability(CardController _cardToCheck)
     {
-        if (_cardToCheck.GetCardData().playableLane == Type) //TODO check if free slots :))))) when player reference is added to card.
+        if (_cardToCheck.Data.playableLane == Type) //TODO check if free slots :))))) when player reference is added to card.
             return true;
 
         return false;

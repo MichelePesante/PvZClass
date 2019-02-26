@@ -23,16 +23,16 @@ public class MulliganController : MonoBehaviour
     int cardsToDisplayLastIndex;
     bool changeDone;
 
-    public void Init(DeckController _hand)
+    public void Init(DeckData _hand)
     {
-        player = _hand.GetPlayerOwner();
+        player = _hand.Player;
         changeButton.onClick.AddListener(ChangeButtonClicked);
         changeButton.gameObject.SetActive(true);
         continueButton.onClick.AddListener(ContinueButtonClicked);
         continueButton.gameObject.SetActive(false);
         cardsOnScreen = GetComponentsInChildren<CardController>().ToList();
         cardsToDisplayLastIndex = 0;
-        cardsToDisplay = _hand.GetCards();
+        cardsToDisplay = _hand.Cards;
         for (int i = 0; i < cardsOnScreen.Count; i++)
         {
             cardsOnScreen[i].Setup(cardsToDisplay[i], player);
@@ -93,7 +93,7 @@ public class MulliganController : MonoBehaviour
                 {
                     cardNotSelected.Add(cardsToChange[j].Data);
                     cardsToDisplayLastIndex++;
-                    cardsOnScreen[i].Setup(cardsToDisplay[cardsToDisplayLastIndex], player);
+                    cardsOnScreen[i].Data = cardsToDisplay[cardsToDisplayLastIndex];
                     cardNotSelected.Remove(cardsToDisplay[cardsToDisplayLastIndex]);
                 }
             }
@@ -116,7 +116,7 @@ public class MulliganController : MonoBehaviour
         List<CardData> choosenCards = new List<CardData>();
         foreach (CardController card in cardsOnScreen)
         {
-            choosenCards.Add(card.GetCardData());
+            choosenCards.Add(card.Data);
         }
         continueButton.gameObject.SetActive(false);
         HandlerMulliganEnd();

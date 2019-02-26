@@ -7,16 +7,14 @@ using PvZ.Helpers;
 public class CardsManager
 {
 
-    public DeckController CreateDeck(int _cardsNumber = 1) {
-
-        DeckController newDeck = new DeckController();
+    public DeckData CreateDeck(int _cardsNumber = 1) {
 
         List<CardData> allCards = Resources.LoadAll<CardData>("CardsScriptables").ToList();
+        DeckData newDeck = new DeckData();
 
         for (int i = 0; i < _cardsNumber; i++) {
-            newDeck.AddCard(allCards.GetRandomElement());
+            newDeck.Cards.Add(allCards.GetRandomElement());
         }
-
         return newDeck;
     }
 

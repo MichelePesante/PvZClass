@@ -19,8 +19,8 @@ namespace StateMachine.Gameplay {
             context.UICanvas.DisableAllPanels();
             CardsManager cm = new CardsManager();
 
-            DeckController playerOneDeck = cm.CreateDeck(20);
-            DeckController playerTwoDeck = cm.CreateDeck(20);
+            DeckData playerOneDeck = cm.CreateDeck(20);
+            DeckData playerTwoDeck = cm.CreateDeck(20);
 
             
             if (context.PlayerOne != null && context.PlayerTwo != null)
@@ -49,13 +49,15 @@ namespace StateMachine.Gameplay {
             Debug.Log("Setup done");
         }
 
-        void setupPlayer(IPlayer _player, DeckController _deck)
+        void setupPlayer(IPlayer _player, DeckData _deck)
         {
             _player.Life = 20;
             _player.MaxEnergy = 0;
             _player.CurrentEnergy = 0;
             _player.Deck = _deck;
-            _player.Hand = new DeckController(_player);
+            _player.Deck.Player = _player;
+            _player.Hand = new DeckData();
+            _player.Hand.Player = _player;
             _player.Draw(8);
             _player.Lost += setWinner;
 

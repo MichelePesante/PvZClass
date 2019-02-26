@@ -15,6 +15,8 @@ namespace StateMachine.Card
         }
 
         private void initMulliganController() {
+            if (context.mulliganCtrl != null)
+                return;
             MulliganController[] mulligans = FindObjectsOfType<MulliganController>();
             for (int i = 0; i < mulligans.Length; i++) {
                 if (mulligans[i].GetPlayer() == context.cardController.GetPlayerOwner())
