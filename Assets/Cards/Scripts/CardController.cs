@@ -13,7 +13,8 @@ public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField]
     private CardData cardDataPrefab;
 
-    public enum State {
+    public enum State
+    {
         Idle = 0,
         Playable = 1,
         Unplayable = 2,
@@ -24,10 +25,14 @@ public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public Action<State> OnCurrentStateChanged;
 
     private State currentState;
-    public State CurrentState {
+    public State CurrentState
+    {
         get { return currentState; }
-        set { currentState = value;
-            if (OnCurrentStateChanged != null) {
+        set
+        {
+            currentState = value;
+            if (OnCurrentStateChanged != null)
+            {
                 OnCurrentStateChanged(currentState);
             }
         }
@@ -35,7 +40,8 @@ public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private CardSMController cardSM;
 
-    internal void SetHiglight(CardData.Highlight _Higlight) {
+    internal void SetHiglight(CardData.Highlight _Higlight)
+    {
         Data.Higlight = _Higlight;
         if (OnDataChanged != null)
             OnDataChanged(Data);
@@ -67,11 +73,13 @@ public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         rectTransform = GetComponent<RectTransform>();
         cam = Camera.main;
         eventSystem = FindObjectOfType<EventSystem>();
-        if (!eventSystem) {
+        if (!eventSystem)
+        {
             Debug.LogError(name + " has not found an event system!");
         }
         graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
-        if (!graphicRaycaster) {
+        if (!graphicRaycaster)
+        {
             Debug.LogError(name + " has not found a graphic raycaster!");
         }
         Data = Instantiate(cardDataPrefab);
@@ -86,10 +94,12 @@ public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         rectTransform = GetComponent<RectTransform>();
         cam = Camera.main;
         eventSystem = FindObjectOfType<EventSystem>();
-        if (!eventSystem) {
+        if (!eventSystem)
+        {
             Debug.LogError(name + " has not found an event system!");
         }
-        if (!graphicRaycaster) {
+        if (!graphicRaycaster)
+        {
             Debug.LogError(name + " has not found a graphic raycaster!");
         }
         graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
@@ -148,25 +158,30 @@ public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private List<IDetectable> detectedObjects;
     private PointerEventData pointerEventData;
-    public void Detect() {
+    public void Detect()
+    {
         pointerEventData = new PointerEventData(eventSystem);
 
         pointerEventData.position = rectTransform.position;
         List<RaycastResult> results = new List<RaycastResult>();
         graphicRaycaster.Raycast(pointerEventData, results);
 
-        foreach (RaycastResult result in results) {
+        foreach (RaycastResult result in results)
+        {
             IDetectable _detectedObj = result.gameObject.GetComponent<IDetectable>();
             if (_detectedObj == null)
                 continue;
 
-            if (!detectedObjects.Contains(_detectedObj)) {
+            if (!detectedObjects.Contains(_detectedObj))
+            {
                 _detectedObj.OnEnter(this);
                 detectedObjects.Add(_detectedObj);
             }
 
-            for (int i = 0; i < detectedObjects.Count; i++) {
-                if (!detectedObjects.Contains(_detectedObj)) {
+            for (int i = 0; i < detectedObjects.Count; i++)
+            {
+                if (detectedObjects[i] != _detectedObj)
+                {
                     detectedObjects[i].OnExit(this);
                     detectedObjects.RemoveAt(i);
                     i--;
@@ -174,11 +189,5 @@ public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             }
         }
 
-    }
-
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        if(pointerEventData != null)
-            Gizmos.DrawSphere(pointerEventData.position, 100f);
     }
 }
