@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7309d7581372a3e47a2e222627f0a20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTurn: 0
 --- !u!114 &114301955529618362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b973454dfc37f54ba9f27ec6d889703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTurn: 1
 --- !u!114 &114824834553096166
 MonoBehaviour:
   m_ObjectHideFlags: 1
