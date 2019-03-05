@@ -15,7 +15,7 @@ public class ValueDisplayController : MonoBehaviour {
     public Action<string> OnValueChanged;
 
     private void Awake() {
-        SetColor(StartColor);
+        //SetColor(StartColor);
     }
 
     #region API
@@ -27,10 +27,10 @@ public class ValueDisplayController : MonoBehaviour {
             OnValueChanged(_value);
     }
 
-    public void SetColor(Color _color) {
-        if(BGColorImage)
-            BGColorImage.color = _color;
-    }
+    //public void SetColor(Color _color) {
+    //    if(BGColorImage)
+    //        BGColorImage.color = _color;
+    //}
 
     public void EnableEffect(bool enableEffect) {
         ImageEffect.enabled = enableEffect;

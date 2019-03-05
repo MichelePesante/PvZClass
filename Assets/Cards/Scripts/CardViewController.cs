@@ -22,8 +22,8 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     public Image HighlightPanel;
     public Image LowlightPanel;
 
-    private Color HeroColor = Color.green;
-    private Color StandardColor = Color.gray;
+    private Color HeroColor = Color.white;
+    private Color StandardColor = Color.white;
 
     public enum State {
         Inactive = -1,

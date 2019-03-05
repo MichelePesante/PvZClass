@@ -12,7 +12,6 @@ public class ValueDiplayTester : MonoBehaviour {
 	void Start () {
         controller = FindObjectOfType<ValueDisplayController>();
         controller.EnableEffectOnChange = EnableEffect;
-        controller.SetColor(StartColor);
         controller.SetValue("10");
 	}
 	
