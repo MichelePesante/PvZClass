@@ -168,25 +168,30 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     private List<IDetectable> detectedObjects = new List<IDetectable>();
     private PointerEventData pointerEventData;
-    public void Detect() {
+    public void Detect()
+    {
         pointerEventData = new PointerEventData(eventSystem);
 
         pointerEventData.position = rectTransform.position;
         List<RaycastResult> results = new List<RaycastResult>();
         graphicRaycaster.Raycast(pointerEventData, results);
 
-        foreach (RaycastResult result in results) {
+        foreach (RaycastResult result in results)
+        {
             IDetectable _detectedObj = result.gameObject.GetComponent<IDetectable>();
             if (_detectedObj == null)
                 continue;
 
-            if (!detectedObjects.Contains(_detectedObj)) {
+            if (!detectedObjects.Contains(_detectedObj))
+            {
                 _detectedObj.OnEnter(this);
                 detectedObjects.Add(_detectedObj);
             }
 
-            for (int i = 0; i < detectedObjects.Count; i++) {
-                if (detectedObjects[i] != _detectedObj) {
+            for (int i = 0; i < detectedObjects.Count; i++)
+            {
+                if (detectedObjects[i] != _detectedObj)
+                {
                     detectedObjects[i].OnExit(this);
                     detectedObjects.RemoveAt(i);
                     i--;
