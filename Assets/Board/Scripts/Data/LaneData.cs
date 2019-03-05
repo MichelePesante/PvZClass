@@ -6,4 +6,7 @@ using UnityEngine;
 public class LaneData : ScriptableObject
 {
     public LaneType type;
+
+    [HideInInspector] public int playerAFreeSlots;
+    [HideInInspector] public int playerBFreeSlots;
 }

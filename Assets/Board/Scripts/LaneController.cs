@@ -15,8 +15,20 @@ public static class LaneController
 
     public static bool CheckCardPlayability(LaneData _lane, CardData _card)
     {
-        if (_card.playableLane == _lane.type) //TODO check if free slots :))))).
-            return true;
+        if (_card.playableLane == _lane.type)
+        {
+            switch (TurnManager.GetActivePlayer().CurrentType)
+            {
+                case Player.Type.one:
+                    if (_lane.playerAFreeSlots > 0)
+                        return true;
+                    break;
+                case Player.Type.two:
+                    if (_lane.playerBFreeSlots > 0)
+                        return true;
+                    break;
+            }
+        }
 
         return false;
     }

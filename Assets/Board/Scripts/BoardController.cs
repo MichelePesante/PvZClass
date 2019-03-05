@@ -11,6 +11,8 @@ public class BoardController : MonoBehaviour {
     [SerializeField]
     private BoardData boardData;
 
+    public const int CardSlotsPerPlayer = 2;
+
     List<LaneViewController> laneUIs;
 
     public void SetUp(BoardData _boardData = null) {
@@ -30,7 +32,7 @@ public class BoardController : MonoBehaviour {
             Destroy(transform.GetChild(i).gameObject);
         }
         foreach (LaneData l in boardData.Lanes) {
-            LaneViewController instantiatedLane = Instantiate(LanePrefab, transform).SetUp(l);
+            LaneViewController instantiatedLane = Instantiate(LanePrefab, transform).SetUp(l, CardSlotsPerPlayer);
             laneUIs.Add(instantiatedLane);
         }
     }
