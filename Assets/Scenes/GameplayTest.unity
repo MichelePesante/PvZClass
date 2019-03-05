@@ -319,8 +319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f999e774ccaeff4aaf7d3c46583f65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 114581939317608938, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
+  cardPrefab: {fileID: 917044520009991403, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
     type: 3}
+  instantiatedCards: []
 --- !u!1 &898810969 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4529307819561145631, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
@@ -339,8 +340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f999e774ccaeff4aaf7d3c46583f65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 114581939317608938, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
+  cardPrefab: {fileID: 917044520009991403, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
     type: 3}
+  instantiatedCards: []
 --- !u!1 &1021143635
 GameObject:
   m_ObjectHideFlags: 0
