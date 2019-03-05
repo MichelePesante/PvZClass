@@ -1,27 +1,35 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System;
+using System.Collections.Generic;
 
 public class LaneViewController : MonoBehaviour, IDetectable
 {
+    #region Serialized Fields
     LaneData _data;
-    public LaneData Data {
+    public LaneData Data
+    {
         get { return _data; }
         private set { _data = value; }
     }
-
     public Image LaneColourImage;
     public Image HighlightImage;
-
-    bool isInteractable = false;
-    CardViewController cardToCheck;
+    [SerializeField] RectTransform playerAZone;
+    [SerializeField] RectTransform playerBZone;
+    #endregion
 
     public enum Highlight { playable, unplayable, off }
 
-    public LaneViewController SetUp(LaneData _data)
+    CardSlot[] playerASlots, playerBSlots;
+
+    #region API
+
+    public LaneViewController SetUp(LaneData _data, int _cardSlotsCount)
     {
         Data = _data;
+        Data.playerAFreeSlots = _cardSlotsCount;
+        Data.playerBFreeSlots = _cardSlotsCount;
+        CardSlotsSetup(playerASlots, _cardSlotsCount, 0);
+        CardSlotsSetup(playerBSlots, _cardSlotsCount, 1);
         LaneColourImage.color = Data.type.LaneColor;
         return this;
     }
@@ -48,26 +56,78 @@ public class LaneViewController : MonoBehaviour, IDetectable
         }
     }
 
-    public void PlaceCard(CardViewController _cardToPlace) {
-
+    public void PlaceCard(CardViewController _cardToPlace)
+    {
+        switch (TurnManager.GetActivePlayer().CurrentType)
+        {
+            case Player.Type.one:
+                for (int i = 0; i < playerASlots.Length; i++)
+                {
+                    if (!playerASlots[i].card)
+                    {
+                        playerASlots[i].card = _cardToPlace;
+                        _cardToPlace.transform.position = playerASlots[i].slot.position;
+                        Data.playerAFreeSlots--;
+                    }
+                }
+                break;
+            case Player.Type.two:
+                for (int i = 0; i < playerBSlots.Length; i++)
+                {
+                    if (!playerBSlots[i].card)
+                    {
+                        playerBSlots[i].card = _cardToPlace;
+                        _cardToPlace.transform.position = playerBSlots[i].slot.position;
+                        Data.playerBFreeSlots--;
+                    }
+                }
+                break;
+        }
     }
 
-    public void OnEnter(IDetecter _detecter) {
+    public void OnEnter(IDetecter _detecter)
+    {
         CardViewController _card = _detecter as CardViewController;
-        if (_card) {
-            cardToCheck = _card;
-            if (LaneController.CheckCardPlayability(Data, _card.Data)) {
+        if (_card)
+        {
+            if (LaneController.CheckCardPlayability(Data, _card.Data))
+            {
                 ToggleHighlight(Highlight.playable);
-            } else {
+            }
+            else
+            {
                 ToggleHighlight(Highlight.unplayable);
             }
         }
     }
 
-    public void OnExit(IDetecter _detecter) {
+    public void OnExit(IDetecter _detecter)
+    {
         CardViewController _card = _detecter as CardViewController;
-        if (_card) {
+        if (_card)
+        {
             ToggleHighlight(Highlight.off);
         }
+    }
+
+    #endregion
+
+    void CardSlotsSetup(CardSlot[] _slotsToSetup, int _slotCount, int _player)
+    {
+        _slotsToSetup = new CardSlot[_slotCount];
+
+        RectTransform slotsParent = _player == 0 ? playerAZone : playerBZone;
+
+        for (int i = 0; i < _slotsToSetup.Length; i++)
+        {
+            RectTransform t = Instantiate(new RectTransform(), slotsParent);
+            _slotsToSetup[i].slot = t;
+        }
+    }
+
+    struct CardSlot
+    {
+        public CardViewController card;
+        public RectTransform slot;
     }
 }
