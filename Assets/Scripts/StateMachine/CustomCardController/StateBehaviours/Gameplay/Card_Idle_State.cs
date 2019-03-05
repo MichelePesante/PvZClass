@@ -11,9 +11,9 @@ namespace StateMachine.Card
 
             context.cardController.SetHiglight(CardData.Highlight.NoHighlight);
             if (context.boardCtrl.CheckCardPlayability(context.cardController))
-                context.cardController.CurrentState = CardController.State.Playable;
+                context.cardController.CurrentState = CardViewController.State.Playable;
             else
-                context.cardController.CurrentState = CardController.State.Unplayable;
+                context.cardController.CurrentState = CardViewController.State.Unplayable;
         }
 
         private void initBoardController() {

@@ -15,20 +15,25 @@ namespace StateMachine.Card {
             startScale = context.cardController.transform.localScale;
             context.cardController.transform.localScale *= 1.5f;
             isDragging = true;
-            //context.boardCtrl.ToggleBoardInteractability(true, context.cardController);
         }
 
-        private void HandleOnPointerUp(CardController _cardCtrl) {
+        /// <summary>
+        /// Handles card drag release.
+        /// </summary>
+        /// <param name="_cardCtrl"></param>
+        private void HandleOnPointerUp(CardViewController _cardCtrl) {
             List<IDetectable> detectedObjects = _cardCtrl.GetDetectedObjects();
-            LaneUI lane = null;
+            LaneViewController lane = null;
             for (int i = 0; i < detectedObjects.Count; i++) {
-                lane = detectedObjects[i] as LaneUI;
+                lane = detectedObjects[i] as LaneViewController;
                 if (lane) {
-                    lane.ToggleHighlight(LaneUI.Highlight.off);
-                    if (lane.MyLane.CheckCardPlayability(_cardCtrl)) {
-                        context.cardController.CurrentState = CardController.State.Played;
+                    lane.ToggleHighlight(LaneViewController.Highlight.off);
+                    if (LaneController.CheckCardPlayability(lane.Data, _cardCtrl.Data)) {
+                        context.cardController.CurrentState = CardViewController.State.Played;
+                        //lane.PlaceCard();
                     } else {
                         context.cardController.transform.position = startPosition;
+                        context.cardController.CurrentState = CardViewController.State.Idle;
                     }
                 }
             }
@@ -40,14 +45,12 @@ namespace StateMachine.Card {
             if (isDragging) {
                 context.cardController.Detect();
                 context.cardController.transform.position = Input.mousePosition;
-            } else
-                context.cardController.CurrentState = CardController.State.Idle;
+            }
         }
 
         public override void Exit() {
             context.cardController.OnCardPointerUp -= HandleOnPointerUp;
             context.cardController.transform.localScale = startScale;
-            context.boardCtrl.ToggleBoardInteractability(false);
         }
     }
 }

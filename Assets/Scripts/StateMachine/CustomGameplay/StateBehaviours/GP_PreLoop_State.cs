@@ -14,8 +14,8 @@ namespace StateMachine.Gameplay {
         }
 
         public override void Exit() {
-            foreach (CardController card in context.SceneManager.playerOneHandUI.instantiatedCards) {
-                card.CurrentState = CardController.State.Idle; //TODO: refactoring cardcontrollersz.
+            foreach (CardViewController card in context.SceneManager.playerOneHandUI.instantiatedCards) {
+                card.CurrentState = CardViewController.State.Idle; //TODO: refactoring cardcontrollersz.
             }
         }
 

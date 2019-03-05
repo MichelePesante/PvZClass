@@ -6,5 +6,5 @@ using UnityEngine;
 public class BoardData : ScriptableObject
 {
     public BoardThemeType Theme;
-    public List<Lane> Lanes;
+    public List<LaneData> Lanes;
 }

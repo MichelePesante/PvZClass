@@ -31,7 +31,7 @@ namespace StateMachine.Card
             context.OnCardMulliganChanged();
         }
 
-        private void HandleOnpointerDown(CardController obj)
+        private void HandleOnpointerDown(CardViewController obj)
         {
             if (obj != context.cardController)
                 return;

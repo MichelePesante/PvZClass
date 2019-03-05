@@ -4,7 +4,7 @@ using System;
 
 namespace StateMachine.Card {
 
-    [RequireComponent(typeof (CardController))]
+    [RequireComponent(typeof (CardViewController))]
     public class CardSMController : StateMachineBase {
         [SerializeField]
         private RuntimeAnimatorController mulliganSMPrefab;
@@ -15,7 +15,7 @@ namespace StateMachine.Card {
 
             CardSMContext tmpContext = new CardSMContext() {
                 OnSetupDoneCallback = HandleOnSetupDone,
-                cardController = GetComponent<CardController>(),
+                cardController = GetComponent<CardViewController>(),
                 mulliganCtrl = null,
                 OnCardMulliganSelected = HandleCardMulliganSelected,
                 OnCardMulliganDeselected = HandleCardMulliganDeselected,
@@ -26,7 +26,7 @@ namespace StateMachine.Card {
             return tmpContext;
         }
 
-        private void OnCardStateChanged(CardController.State _currentState) {
+        private void OnCardStateChanged(CardViewController.State _currentState) {
             SM.SetInteger("CardStateInHand", (int)_currentState);
         }
 
@@ -69,7 +69,7 @@ namespace StateMachine.Card {
         #endregion
 
         public Action OnSetupDoneCallback;
-        public CardController cardController;
+        public CardViewController cardController;
         public BoardController boardCtrl;
     }
 }

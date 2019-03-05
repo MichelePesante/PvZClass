@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class HandUI : DeckControllerUI
+public class HandDeckViewController : DeckViewControllerBase
 {
-
-    [SerializeField] CardController cardPrefab;
+    [SerializeField] CardViewController cardPrefab;
 
     [HideInInspector]
-    public List<CardController> instantiatedCards = new List<CardController>();
+    public List<CardViewController> instantiatedCards = new List<CardViewController>();
 
     public override void LateSetup() {
         foreach (CardData card in Data.Cards) {

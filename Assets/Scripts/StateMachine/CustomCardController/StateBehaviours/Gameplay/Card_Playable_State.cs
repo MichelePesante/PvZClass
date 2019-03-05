@@ -12,10 +12,10 @@ namespace StateMachine.Card {
             context.cardController.SetHiglight(CardData.Highlight.Highlighted);
         }
 
-        private void HandleOnpointerDown(CardController obj)
+        private void HandleOnpointerDown(CardViewController obj)
         {
             if (obj == context.cardController)
-                context.cardController.CurrentState = CardController.State.Drag;
+                context.cardController.CurrentState = CardViewController.State.Drag;
         }
 
         public override void Exit()

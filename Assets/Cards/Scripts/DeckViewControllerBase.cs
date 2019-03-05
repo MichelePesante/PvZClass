@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DeckControllerUI : MonoBehaviour {
+public abstract class DeckViewControllerBase : MonoBehaviour {
 
     DeckData _data;
     public DeckData Data {
@@ -12,7 +12,7 @@ public abstract class DeckControllerUI : MonoBehaviour {
         }
     }
 
-    public DeckControllerUI Setup(DeckData _deck) {
+    public DeckViewControllerBase Setup(DeckData _deck) {
         if (_deck == null)
             return null;
 
@@ -26,4 +26,13 @@ public abstract class DeckControllerUI : MonoBehaviour {
     public virtual void LateSetup() {
 
     }
+
+    #region API
+
+    public void Shuffle() {
+        Data = DeckController.Shuffle(Data);
+    }
+
+    #endregion
+    
 }

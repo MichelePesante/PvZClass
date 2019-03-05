@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CardBehaviourTester : MonoBehaviour
 {
-    public CardController cardController;
+    public CardViewController cardController;
     public BoardController boardController;
 
     // Start is called before the first frame update

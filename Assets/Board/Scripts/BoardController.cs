@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 
 public class BoardController : MonoBehaviour {
+
     [Header("Prefabs")]
     [SerializeField]
-    private LaneUI LanePrefab;
+    private LaneViewController LanePrefab;
 
     [Header("Data")]
     [SerializeField]
     private BoardData boardData;
 
-    List<LaneUI> laneUIs;
+    List<LaneViewController> laneUIs;
 
     public void SetUp(BoardData _boardData = null) {
         if (_boardData) {
@@ -21,35 +22,24 @@ public class BoardController : MonoBehaviour {
                 return;
             }
         }
-        laneUIs = new List<LaneUI>();
+        laneUIs = new List<LaneViewController>();
     }
 
     public void InstantiateBoard() {
         for (int i = 0; i < transform.childCount; i++) {
             Destroy(transform.GetChild(i).gameObject);
         }
-        foreach (Lane l in boardData.Lanes) {
-            l.SetPrefab(LanePrefab.gameObject);
-            LaneUI instantiatedLane = Instantiate(l.Prefab, transform).GetComponent<LaneUI>();
-            instantiatedLane.SetUp(l);
+        foreach (LaneData l in boardData.Lanes) {
+            LaneViewController instantiatedLane = Instantiate(LanePrefab, transform).SetUp(l);
             laneUIs.Add(instantiatedLane);
         }
     }
 
-    public bool CheckCardPlayability(CardController _cardToCheck) {
-        foreach (LaneUI laneUI in laneUIs) {
-            if (laneUI.MyLane.CheckCardPlayability(_cardToCheck))
+    public bool CheckCardPlayability(CardViewController _cardToCheck) {
+        foreach (LaneViewController laneUI in laneUIs) {
+            if (LaneController.CheckCardPlayability(laneUI.Data, _cardToCheck.Data))
                 return true;
         }
         return false;
-    }
-
-    public void ToggleBoardInteractability(bool _value, CardController _cardToCheck = null) {
-        foreach (LaneUI laneUI in laneUIs) {
-            if (_cardToCheck)
-                laneUI.SetInteractability(_value, _cardToCheck);
-            else
-                laneUI.SetInteractability(_value);
-        }
     }
 }
