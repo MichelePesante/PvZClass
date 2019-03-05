@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 using StateMachine.Card;
 using UnityEngine.UI;
 
-public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDetecter {
+public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDetecter
+{
 
     [Header("Data References")]
     [SerializeField]
@@ -25,7 +26,8 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     private Color HeroColor = Color.green;
     private Color StandardColor = Color.gray;
 
-    public enum State {
+    public enum State
+    {
         Inactive = -1,
         Idle = 0,
         Playable = 1,
@@ -37,11 +39,14 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     public Action<State> OnCurrentStateChanged;
 
     private State _currentState;
-    public State CurrentState {
+    public State CurrentState
+    {
         get { return _currentState; }
-        set {
+        set
+        {
             _currentState = value;
-            if (OnCurrentStateChanged != null) {
+            if (OnCurrentStateChanged != null)
+            {
                 OnCurrentStateChanged(_currentState);
             }
         }
@@ -49,7 +54,8 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     private CardSMController cardSM;
 
-    internal void SetHiglight(CardData.Highlight _Higlight) {
+    internal void SetHiglight(CardData.Highlight _Higlight)
+    {
         Data.Higlight = _Higlight;
         onDataChanged(Data);
     }
@@ -57,9 +63,11 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     public Action<CardViewController> OnCardPointerDown;
     public Action<CardViewController> OnCardPointerUp;
     private CardData _data;
-    public CardData Data {
+    public CardData Data
+    {
         get { return _data; }
-        set {
+        set
+        {
             _data = value;
             onDataChanged(_data);
         }
@@ -71,16 +79,19 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     private Camera cam;
     private RectTransform rectTransform;
 
-    public void Setup() {
+    public void Setup()
+    {
         CurrentState = State.Inactive;
         rectTransform = GetComponent<RectTransform>();
         cam = Camera.main;
         eventSystem = FindObjectOfType<EventSystem>();
-        if (!eventSystem) {
+        if (!eventSystem)
+        {
             Debug.LogError(name + " has not found an event system!");
         }
         graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
-        if (!graphicRaycaster) {
+        if (!graphicRaycaster)
+        {
             Debug.LogError(name + " has not found a graphic raycaster!");
         }
         Data = Instantiate(cardDataPrefab);
@@ -90,16 +101,19 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         cardSM.Setup();
     }
 
-    public void Setup(CardData _data, IPlayer _player) {
+    public void Setup(CardData _data, IPlayer _player)
+    {
         CurrentState = State.Inactive;
         rectTransform = GetComponent<RectTransform>();
         cam = Camera.main;
         eventSystem = FindObjectOfType<EventSystem>();
-        if (!eventSystem) {
+        if (!eventSystem)
+        {
             Debug.LogError(name + " has not found an event system!");
         }
         graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
-        if (!graphicRaycaster) {
+        if (!graphicRaycaster)
+        {
             Debug.LogError(name + " has not found a graphic raycaster!");
         }
         Data = Instantiate(_data);
@@ -110,18 +124,23 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         cardSM.Setup();
     }
 
-    private void onDataChanged(CardData _data) {
+    private void onDataChanged(CardData _data)
+    {
         //Name.text = _data.NameToShow;
         Attack.SetValue(_data.Attack.ToString());
         Life.SetValue(_data.Life.ToString());
         Cost.SetValue(_data.Cost.ToString());
         Image.sprite = _data.CardImage;
-        if (_data.IsHeroCard) {
+        if (_data.IsHeroCard)
+        {
             Frame.color = HeroColor;
-        } else {
+        }
+        else
+        {
             Frame.color = StandardColor;
         }
-        switch (_data.Higlight) {
+        switch (_data.Higlight)
+        {
             case CardData.Highlight.NoHighlight:
                 LowlightPanel.enabled = false;
                 HighlightPanel.enabled = false;
@@ -139,15 +158,20 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData) {
-        if (interactable && OnCardPointerDown != null) {
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (interactable && OnCardPointerDown != null)
+        {
             OnCardPointerDown(this);
         }
     }
 
-    public void OnPointerUp(PointerEventData eventData) {
-        if (interactable) {
-            if (OnCardPointerUp != null) {
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (interactable)
+        {
+            if (OnCardPointerUp != null)
+            {
                 OnCardPointerUp(this);
                 detectedObjects.Clear();
             }
@@ -155,49 +179,65 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     }
 
     bool interactable;
-    public void Interactable(bool _intertactable) {
+    public void Interactable(bool _intertactable)
+    {
         interactable = _intertactable;
     }
 
     /// <summary>
     /// Funzione che ritorna il player
     /// </summary>
-    public IPlayer GetPlayerOwner() {
+    public IPlayer GetPlayerOwner()
+    {
         return playerOwner;
     }
 
     private List<IDetectable> detectedObjects = new List<IDetectable>();
     private PointerEventData pointerEventData;
-    public void Detect() {
+    public void Detect()
+    {
         pointerEventData = new PointerEventData(eventSystem);
 
         pointerEventData.position = rectTransform.position;
         List<RaycastResult> results = new List<RaycastResult>();
         graphicRaycaster.Raycast(pointerEventData, results);
 
-        foreach (RaycastResult result in results) {
+        if (results.Count == 0)
+        {
+            for (int i = 0; i < detectedObjects.Count; i++)
+            {
+                detectedObjects[i].OnExit(this);
+                detectedObjects.RemoveAt(i);
+                i--;
+            }
+        }
+
+        foreach (RaycastResult result in results)
+        {
             IDetectable _detectedObj = result.gameObject.GetComponent<IDetectable>();
             if (_detectedObj == null)
                 continue;
 
-            if (!detectedObjects.Contains(_detectedObj)) {
+            if (!detectedObjects.Contains(_detectedObj))
+            {
                 _detectedObj.OnEnter(this);
                 detectedObjects.Add(_detectedObj);
             }
 
-            for (int i = 0; i < detectedObjects.Count; i++) {
-                if (detectedObjects[i] != _detectedObj) {
+            for (int i = 0; i < detectedObjects.Count; i++)
+            {
+                if (detectedObjects[i] != _detectedObj)
+                {
                     detectedObjects[i].OnExit(this);
                     detectedObjects.RemoveAt(i);
                     i--;
                 }
             }
         }
-
-
     }
 
-    public List<IDetectable> GetDetectedObjects() {
+    public List<IDetectable> GetDetectedObjects()
+    {
         return detectedObjects;
     }
 
