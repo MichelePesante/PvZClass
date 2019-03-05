@@ -14,13 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Theme: {fileID: 11400000, guid: 142d92320bff845458700ff12034a79c, type: 2}
   Lanes:
-  - type: {fileID: 11400000, guid: 80b8c7b0edfa3e04582259564e2284aa, type: 2}
-    cardSlotsPerPlayer: 2
-  - type: {fileID: 11400000, guid: f12c10384dbbb1c4ab36dd974f4c553e, type: 2}
-    cardSlotsPerPlayer: 2
-  - type: {fileID: 11400000, guid: caa284e0607d11c459bfb20aa5584d63, type: 2}
-    cardSlotsPerPlayer: 2
-  - type: {fileID: 11400000, guid: f12c10384dbbb1c4ab36dd974f4c553e, type: 2}
-    cardSlotsPerPlayer: 2
-  - type: {fileID: 11400000, guid: 80b8c7b0edfa3e04582259564e2284aa, type: 2}
-    cardSlotsPerPlayer: 2
+  - {fileID: 11400000, guid: 94c24ad909b8a69408b0e43751186654, type: 2}
+  - {fileID: 11400000, guid: 2ddeac32fc79e7b4f880178c02a6208e, type: 2}
+  - {fileID: 11400000, guid: af07387f5616be04980de0c57ba4890e, type: 2}
+  - {fileID: 11400000, guid: 2ddeac32fc79e7b4f880178c02a6208e, type: 2}
+  - {fileID: 11400000, guid: 94c24ad909b8a69408b0e43751186654, type: 2}

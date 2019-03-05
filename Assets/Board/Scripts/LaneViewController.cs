@@ -3,22 +3,27 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 
-public class LaneUI : MonoBehaviour, IDetectable
+public class LaneViewController : MonoBehaviour, IDetectable
 {
-    public Lane MyLane { get; set; }
+    LaneData _data;
+    public LaneData Data {
+        get { return _data; }
+        private set { _data = value; }
+    }
 
     public Image LaneColourImage;
     public Image HighlightImage;
 
     bool isInteractable = false;
-    CardController cardToCheck;
+    CardViewController cardToCheck;
 
     public enum Highlight { playable, unplayable, off }
 
-    public void SetUp(Lane _l)
+    public LaneViewController SetUp(LaneData _data)
     {
-        MyLane = _l;
-        LaneColourImage.color = MyLane.Type.LaneColor;
+        Data = _data;
+        LaneColourImage.color = Data.type.LaneColor;
+        return this;
     }
 
     /// <summary>
@@ -43,23 +48,15 @@ public class LaneUI : MonoBehaviour, IDetectable
         }
     }
 
-    /// <summary>
-    /// Sets the interactability of the lane, also passes the card in drag in that moment.
-    /// </summary>
-    /// <param name="_value"></param>
-    /// <param name="_cardToCheck"></param>
-    public void SetInteractability(bool _value, CardController _cardToCheck = null)
-    {
-        isInteractable = _value;
-        if (_cardToCheck)
-            cardToCheck = _cardToCheck;
+    public void PlaceCard(CardViewController _cardToPlace) {
+
     }
 
     public void OnEnter(IDetecter _detecter) {
-        CardController _card = _detecter as CardController;
+        CardViewController _card = _detecter as CardViewController;
         if (_card) {
             cardToCheck = _card;
-            if (MyLane.CheckCardPlayability(cardToCheck)) {
+            if (LaneController.CheckCardPlayability(Data, _card.Data)) {
                 ToggleHighlight(Highlight.playable);
             } else {
                 ToggleHighlight(Highlight.unplayable);
@@ -68,7 +65,7 @@ public class LaneUI : MonoBehaviour, IDetectable
     }
 
     public void OnExit(IDetecter _detecter) {
-        CardController _card = _detecter as CardController;
+        CardViewController _card = _detecter as CardViewController;
         if (_card) {
             ToggleHighlight(Highlight.off);
         }
