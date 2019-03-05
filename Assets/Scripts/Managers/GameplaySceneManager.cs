@@ -39,4 +39,16 @@ public class GameplaySceneManager : MonoBehaviour {
         }
         return null;
     }
+
+    public static IPlayer GetPlayer(Player.Type _player)
+    {
+        switch (_player)
+        {
+            case Player.Type.one:
+                return i.player1;
+            case Player.Type.two:
+                return i.player2;
+        }
+        return null;
+    }
 }
