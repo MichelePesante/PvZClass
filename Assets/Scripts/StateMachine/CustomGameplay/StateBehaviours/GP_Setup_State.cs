@@ -56,8 +56,8 @@ namespace StateMachine.Gameplay {
             _player.CurrentEnergy = 0;
             _player.Deck = _deck;
             _player.Deck.Player = _player;
-            _player.Hand = new DeckData();
-            _player.Hand.Player = _player;
+            _player.Hand.Setup(new DeckData());
+            _player.Hand.Data.Player = _player;
             _player.Draw(8);
             _player.Lost += setWinner;
 

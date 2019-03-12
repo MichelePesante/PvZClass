@@ -16,14 +16,14 @@ namespace StateMachine.Gameplay {
             // Abilitiamo la UI del mulligan
             context.UICanvas.EnableMenu(PanelType.Mulligan);
             // Inizializiamo il pannello del mulligan
-            context.P1mulliganCtrl.Init(context.PlayerOne.Hand);
-            context.P2mulliganCtrl.Init(context.PlayerTwo.Hand);
+            context.P1mulliganCtrl.Init(context.PlayerOne.Hand.Data);
+            context.P2mulliganCtrl.Init(context.PlayerTwo.Hand.Data);
         }
 
         int mulliganPlayerCount;
         private void MulliganEndP1(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
-            context.PlayerOne.Hand = new DeckData(_chosenCards);
-            context.PlayerOne.Hand.Player = context.PlayerOne;
+            context.PlayerOne.Hand.Setup(new DeckData(_chosenCards));
+            context.PlayerOne.Hand.Data.Player = context.PlayerOne;
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
                 DeckController.AddCard(context.PlayerOne.Deck, _notSelectedCards[i]);
@@ -34,8 +34,8 @@ namespace StateMachine.Gameplay {
         }
 
         private void MulliganEndP2(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
-            context.PlayerTwo.Hand = new DeckData(_chosenCards);
-            context.PlayerTwo.Hand.Player = context.PlayerTwo;
+            context.PlayerTwo.Hand.Setup(new DeckData(_chosenCards));
+            context.PlayerTwo.Hand.Data.Player = context.PlayerTwo;
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
                 DeckController.AddCard(context.PlayerTwo.Deck, _notSelectedCards[i]);

@@ -12,6 +12,23 @@ public abstract class DeckViewControllerBase : MonoBehaviour {
         }
     }
 
+    protected virtual void OnDataChanged()
+    {
+
+    }
+
+    protected virtual void LateSetup() {
+
+    }
+
+    #region API
+
+    public void SetData(DeckData _data)
+    {
+        Data = _data;
+        OnDataChanged();
+    }
+
     public DeckViewControllerBase Setup(DeckData _deck) {
         if (_deck == null)
             return null;
@@ -22,12 +39,6 @@ public abstract class DeckViewControllerBase : MonoBehaviour {
 
         return this;
     }
-
-    public virtual void LateSetup() {
-
-    }
-
-    #region API
 
     public void Shuffle() {
         Data = DeckController.Shuffle(Data);
