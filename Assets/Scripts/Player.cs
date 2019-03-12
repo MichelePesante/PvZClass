@@ -86,14 +86,13 @@ public class Player : MonoBehaviour, IPlayer
 
     private void HandleCardPlacement(CardData _card)
     {
-        DeckController.RemoveCard(Hand.Data, _card);
+        Hand.SetData(DeckController.RemoveCard(Hand.Data, _card));
         UpdateHandState(CardViewController.State.Idle);
     }
 
     public void Draw(int cards = 1)
     {
-
-        DeckController.Draw(Hand.Data, Deck, cards);
+        Hand.SetData(DeckController.Draw(Hand.Data, Deck, cards));
     }
 
     public void UpdateHandState(CardViewController.State state)

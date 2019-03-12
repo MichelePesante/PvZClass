@@ -49,14 +49,16 @@ public static class DeckController {
     }
 
     /// <summary>
-    /// Aggiunge cardsToDraw carte dal deck alla hand e la rimuove dal deck
+    /// Aggiunge cardsToDraw carte dal deck alla hand e la rimuove dal deck, ritorna hand.
     /// </summary>
-    public static void Draw(DeckData _deckToAddTo, DeckData _deckToRemoveFrom, int cardsToDraw = 1)
+    public static DeckData Draw(DeckData _deckToAddTo, DeckData _deckToRemoveFrom, int cardsToDraw = 1)
     {
         for (int i = 0; i < cardsToDraw; i++)
         {
             AddCard(_deckToAddTo, _deckToRemoveFrom.Cards[0]);
             RemoveCard(_deckToRemoveFrom, _deckToRemoveFrom.Cards[0]);
         }
+
+        return _deckToAddTo;
     }
 }
