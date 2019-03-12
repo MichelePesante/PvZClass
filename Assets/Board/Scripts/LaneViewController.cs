@@ -62,7 +62,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
         switch (TurnManager.GetActivePlayer().CurrentType)
         {
             case Player.Type.one:
-                for (int i = 0; i < playerASlots.Length; i++)
+                for (int i = playerASlots.Length - 1; i >= 0; i--)
                 {
                     if (!playerASlots[i].card)
                     {
