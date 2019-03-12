@@ -10,6 +10,11 @@ namespace StateMachine.Card
             initBoardController();
 
             context.cardController.SetHiglight(CardData.Highlight.NoHighlight);
+            if (context.cardController.GetPlayerOwner() != TurnManager.GetActivePlayer())
+            {
+                context.cardController.CurrentState = CardViewController.State.Inactive;
+                return;
+            }
             if (context.boardCtrl.CheckCardPlayability(context.cardController))
                 context.cardController.CurrentState = CardViewController.State.Playable;
             else

@@ -13,6 +13,7 @@ public interface IPlayer
     int Shield { get; set; }
     Player.Type CurrentType { get; set; }
 
+    void Setup(DeckData _deck);
     void Draw(int cards = 1);
     event PlayerEvent.PlayerLost Lost;
 }

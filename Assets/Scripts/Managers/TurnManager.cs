@@ -4,7 +4,7 @@ using UnityEngine;
 public static class TurnManager
 {
     #region Delegate
-    public static Action<IPlayer> OnturnChange;
+    public static Action<IPlayer> OnTurnChange;
     #endregion
 
     private static IPlayer activePlayer;
@@ -19,8 +19,8 @@ public static class TurnManager
         if (newActivePlayer != null)
         {
             activePlayer = newActivePlayer;
-            if (OnturnChange != null)
-                OnturnChange(activePlayer);
+            if (OnTurnChange != null)
+                OnTurnChange(activePlayer);
         }
         else
             Debug.LogError("Player Inesistente");

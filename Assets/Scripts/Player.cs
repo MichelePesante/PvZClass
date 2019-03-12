@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System;
 
-public class Player : MonoBehaviour, IPlayer {
+public class Player : MonoBehaviour, IPlayer
+{
 
     public enum Type { one, two }
 
@@ -10,15 +11,18 @@ public class Player : MonoBehaviour, IPlayer {
     public Type CurrentType { get { return currentType; } set { currentType = value; } }
 
     DeckData _deck;
-    public DeckData Deck {
+    public DeckData Deck
+    {
         get { return _deck; }
         set { _deck = value; }
     }
 
     [SerializeField] HandDeckViewController _hand;
-    public HandDeckViewController Hand {
+    public HandDeckViewController Hand
+    {
         get { return _hand; }
-        set {
+        set
+        {
             _hand = value;
         }
     }
@@ -26,11 +30,14 @@ public class Player : MonoBehaviour, IPlayer {
     public event PlayerEvent.PlayerLost Lost;
 
     int life;
-    public int Life {
+    public int Life
+    {
         get { return life; }
-        set {
+        set
+        {
             life = value;
-            if (life <= 0) {
+            if (life <= 0)
+            {
                 if (Lost != null)
                     Lost(this);
             }
@@ -38,24 +45,53 @@ public class Player : MonoBehaviour, IPlayer {
     }
 
     int maxEnergy;
-    public int MaxEnergy {
+    public int MaxEnergy
+    {
         get { return maxEnergy; }
         set { maxEnergy = value; }
     }
 
     int energy;
-    public int CurrentEnergy {
+    public int CurrentEnergy
+    {
         get { return energy; }
         set { energy = value; }
     }
 
     int shield;
-    public int Shield {
+    public int Shield
+    {
         get { return shield; }
         set { shield = value; }
     }
 
-    public void Draw(int cards = 1) {
+    public void Setup(DeckData _deck)
+    {
+        Life = 20;
+        MaxEnergy = 0;
+        CurrentEnergy = 0;
+        Deck = _deck;
+        Deck.Player = this;
+        Hand.Setup(new DeckData());
+        Hand.Data.Player = this;
+        Draw(8);
+        CardController.OnPlaced += HandleCardPlacement;
+        TurnManager.OnTurnChange += HandleTurnChange;
+    }
+
+    private void HandleTurnChange(IPlayer _player)
+    {
+        UpdateHandState(CardViewController.State.Idle);
+    }
+
+    private void HandleCardPlacement(CardData _card)
+    {
+        DeckController.RemoveCard(Hand.Data, _card);
+        UpdateHandState(CardViewController.State.Idle);
+    }
+
+    public void Draw(int cards = 1)
+    {
 
         DeckController.Draw(Hand.Data, Deck, cards);
     }

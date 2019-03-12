@@ -18,7 +18,6 @@ namespace StateMachine.Gameplay {
         {
             _player.MaxEnergy++;
             _player.CurrentEnergy = context.CurrentPlayer.MaxEnergy;
-            Debug.Log(_player.CurrentEnergy);
             _player.Draw();
         }
     }
