@@ -33,6 +33,15 @@ public static class DeckController {
         return _deck.Cards[indexCard];
     }
 
+    public static DeckViewControllerBase SetCardsState(DeckViewControllerBase _deck, CardViewController.State state)
+    {
+        foreach (CardViewController card in _deck.instantiatedCards)
+        {
+            card.CurrentState = state;
+        }
+        return _deck;
+    }
+
     public static DeckData RemoveCard(DeckData _deck ,CardData cardToRemove)
     {
         _deck.Cards.Remove(cardToRemove);

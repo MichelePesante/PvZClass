@@ -12,6 +12,9 @@ public abstract class DeckViewControllerBase : MonoBehaviour {
         }
     }
 
+    [HideInInspector]
+    public List<CardViewController> instantiatedCards = new List<CardViewController>();
+
     public DeckViewControllerBase Setup(DeckData _deck) {
         if (_deck == null)
             return null;
