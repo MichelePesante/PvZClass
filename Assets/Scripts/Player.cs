@@ -59,4 +59,9 @@ public class Player : MonoBehaviour, IPlayer {
 
         DeckController.Draw(Hand.Data, Deck, cards);
     }
+
+    public void UpdateHandState(CardViewController.State state)
+    {
+        DeckController.SetCardsState(Hand, state);
+    }
 }

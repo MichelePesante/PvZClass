@@ -5,9 +5,6 @@ public class HandDeckViewController : DeckViewControllerBase
 {
     [SerializeField] CardViewController cardPrefab;
 
-    [HideInInspector]
-    public List<CardViewController> instantiatedCards = new List<CardViewController>();
-
     public void InstantiateCards()
     {
         foreach (CardData card in Data.Cards)
