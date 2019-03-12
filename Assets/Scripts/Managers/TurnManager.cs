@@ -1,9 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public static class TurnManager
 {
+    #region Delegate
+    public static Action<IPlayer> OnturnChange;
+    #endregion
+
     private static IPlayer activePlayer;
 
     /// <summary>
@@ -14,7 +17,11 @@ public static class TurnManager
     {
         IPlayer newActivePlayer = GameplaySceneManager.GetPlayer(_player);
         if (newActivePlayer != null)
+        {
             activePlayer = newActivePlayer;
+            if (OnturnChange != null)
+                OnturnChange(activePlayer);
+        }
         else
             Debug.LogError("Player Inesistente");
     }
