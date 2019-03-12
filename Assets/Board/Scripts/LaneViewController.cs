@@ -26,7 +26,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
     public LaneViewController SetUp(LaneData _data, int _cardSlotsCount)
     {
-        Data = _data;
+        Data = Instantiate(_data);
         Data.playerAFreeSlots = _cardSlotsCount;
         Data.playerBFreeSlots = _cardSlotsCount;
         CardSlotsSetup(ref playerASlots, _cardSlotsCount, 0);
@@ -62,7 +62,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
         switch (TurnManager.GetActivePlayer().CurrentType)
         {
             case Player.Type.one:
-                for (int i = 0; i < playerASlots.Length; i++)
+                for (int i = playerASlots.Length - 1; i >= 0; i--)
                 {
                     if (!playerASlots[i].card)
                     {
