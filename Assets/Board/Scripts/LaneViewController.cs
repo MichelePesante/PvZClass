@@ -13,6 +13,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
     }
     public Image LaneColourImage;
     public Image HighlightImage;
+    [SerializeField] RectTransform SlotPrefab;
     [SerializeField] RectTransform playerAZone;
     [SerializeField] RectTransform playerBZone;
     #endregion
@@ -28,8 +29,8 @@ public class LaneViewController : MonoBehaviour, IDetectable
         Data = _data;
         Data.playerAFreeSlots = _cardSlotsCount;
         Data.playerBFreeSlots = _cardSlotsCount;
-        CardSlotsSetup(playerASlots, _cardSlotsCount, 0);
-        CardSlotsSetup(playerBSlots, _cardSlotsCount, 1);
+        CardSlotsSetup(ref playerASlots, _cardSlotsCount, 0);
+        CardSlotsSetup(ref playerBSlots, _cardSlotsCount, 1);
         LaneColourImage.color = Data.type.LaneColor;
         return this;
     }
@@ -68,6 +69,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
                         playerASlots[i].card = _cardToPlace;
                         _cardToPlace.transform.position = playerASlots[i].slot.position;
                         Data.playerAFreeSlots--;
+                        break;
                     }
                 }
                 break;
@@ -79,6 +81,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
                         playerBSlots[i].card = _cardToPlace;
                         _cardToPlace.transform.position = playerBSlots[i].slot.position;
                         Data.playerBFreeSlots--;
+                        break;
                     }
                 }
                 break;
@@ -112,7 +115,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
     #endregion
 
-    void CardSlotsSetup(CardSlot[] _slotsToSetup, int _slotCount, int _player)
+    void CardSlotsSetup(ref CardSlot[] _slotsToSetup, int _slotCount, int _player)
     {
         _slotsToSetup = new CardSlot[_slotCount];
 
@@ -120,7 +123,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
         for (int i = 0; i < _slotsToSetup.Length; i++)
         {
-            RectTransform t = Instantiate(new RectTransform(), slotsParent);
+            RectTransform t = Instantiate(SlotPrefab, slotsParent);
             _slotsToSetup[i].slot = t;
         }
     }

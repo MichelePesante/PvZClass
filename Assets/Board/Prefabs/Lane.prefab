@@ -53,7 +53,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 1
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -121,6 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LaneColourImage: {fileID: 4016177923247752987}
   HighlightImage: {fileID: 4587227804012106541}
+  SlotPrefab: {fileID: 4916618416995989199, guid: 7f37134ba268a394e8f08030642c9e32,
+    type: 3}
   playerAZone: {fileID: 5677425532094266983}
   playerBZone: {fileID: 369218767246153367}
 --- !u!114 &3631958638810669898
@@ -300,7 +302,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 7
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1

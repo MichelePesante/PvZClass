@@ -39,7 +39,7 @@ namespace StateMachine.Card
                     if (LaneController.CheckCardPlayability(lane.Data, _cardCtrl.Data))
                     {
                         context.cardController.CurrentState = CardViewController.State.Played;
-                        //lane.PlaceCard();
+                        lane.PlaceCard(context.cardController);
                         lanePlaced = true;
                     }
                 }               

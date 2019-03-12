@@ -810,6 +810,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2674830143898405894, guid: 37ecdd71780675c489d1a0ec439faed1,
         type: 3}
+    - target: {fileID: 6155613716769193564, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_ChildControlWidth
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8852898921288523620, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
         type: 3}
       propertyPath: playerReference
