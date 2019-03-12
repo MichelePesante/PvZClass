@@ -1,9 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public static class CardController
 {
+
+    #region Events
+
+    public static Action<CardData> OnPlaced;
+
+    #endregion
 
     public static CardData ResetOriginalLife(CardData _data)
     {
