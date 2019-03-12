@@ -8,15 +8,9 @@ namespace StateMachine.Gameplay {
 
         public override void Enter() {
             context.BoardCtrl.InstantiateBoard();
-            context.SceneManager.playerOneHandUI.Setup(context.PlayerOne.Hand);
-            context.SceneManager.playerTwoHandUI.Setup(context.PlayerTwo.Hand);
             context.GenericForwardCallBack();
-        }
-
-        public override void Exit() {
-            foreach (CardViewController card in context.SceneManager.playerOneHandUI.instantiatedCards) {
-                card.CurrentState = CardViewController.State.Idle; //TODO: refactoring cardcontrollersz.
-            }
+            context.PlayerOne.Hand.InstantiateCards();
+            context.PlayerTwo.Hand.InstantiateCards();
         }
 
     }

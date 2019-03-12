@@ -15,8 +15,8 @@ public class Player : MonoBehaviour, IPlayer {
         set { _deck = value; }
     }
 
-    DeckData _hand;
-    public DeckData Hand {
+    [SerializeField] HandDeckViewController _hand;
+    public HandDeckViewController Hand {
         get { return _hand; }
         set {
             _hand = value;
@@ -57,6 +57,6 @@ public class Player : MonoBehaviour, IPlayer {
 
     public void Draw(int cards = 1) {
 
-        DeckController.Draw(Hand, Deck, cards);
+        DeckController.Draw(Hand.Data, Deck, cards);
     }
 }
