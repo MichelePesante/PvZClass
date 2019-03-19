@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeckData
 {
     public List<CardData> Cards;
-    public IPlayer Player;
+    public IPlayer Player;    
 
     public DeckData() {
         Cards = new List<CardData>();

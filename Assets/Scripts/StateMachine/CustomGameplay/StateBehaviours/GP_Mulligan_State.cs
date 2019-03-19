@@ -26,7 +26,7 @@ namespace StateMachine.Gameplay {
             context.PlayerOne.Hand.Data.Player = context.PlayerOne;
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
-                DeckController.AddCard(context.PlayerOne.Deck, _notSelectedCards[i]);
+                DeckController.AddCard(context.PlayerOne.Deck.Data, _notSelectedCards[i]);
             }
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
@@ -38,7 +38,7 @@ namespace StateMachine.Gameplay {
             context.PlayerTwo.Hand.Data.Player = context.PlayerTwo;
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
-                DeckController.AddCard(context.PlayerTwo.Deck, _notSelectedCards[i]);
+                DeckController.AddCard(context.PlayerTwo.Deck.Data, _notSelectedCards[i]);
             }            
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)

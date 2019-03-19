@@ -116,7 +116,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         {
             Debug.LogError(name + " has not found a graphic raycaster!");
         }
-        Data = Instantiate(_data);
+        Data = _data;
         playerOwner = _player;
         Interactable(true);
         detectedObjects = new List<IDetectable>();

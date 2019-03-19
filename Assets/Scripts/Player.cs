@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour, IPlayer
 {
+    #region Delegates
+    public static Action<Type,List<CardData>> OnCardsDrawn;
+    #endregion
 
     public enum Type { one, two }
 
@@ -10,14 +14,16 @@ public class Player : MonoBehaviour, IPlayer
     Type currentType;
     public Type CurrentType { get { return currentType; } set { currentType = value; } }
 
-    DeckData _deck;
-    public DeckData Deck
+    [SerializeField]
+    DeckViewController _deck;
+    public DeckViewController Deck
     {
         get { return _deck; }
         set { _deck = value; }
     }
 
-    [SerializeField] HandDeckViewController _hand;
+    [SerializeField]
+    HandDeckViewController _hand;
     public HandDeckViewController Hand
     {
         get { return _hand; }
@@ -65,16 +71,15 @@ public class Player : MonoBehaviour, IPlayer
         set { shield = value; }
     }
 
-    public void Setup(DeckData _deck)
+    public void Setup()
     {
         Life = 20;
         MaxEnergy = 0;
         CurrentEnergy = 0;
-        Deck = _deck;
-        Deck.Player = this;
+        Deck.Data.Player = this;
         Hand.Setup(new DeckData());
+        Hand.Draw(Deck, 8, HandDrawCallback);
         Hand.Data.Player = this;
-        Draw(8);
         CardController.OnPlaced += HandleCardPlacement;
         TurnManager.OnTurnChange += HandleTurnChange;
     }
@@ -86,17 +91,18 @@ public class Player : MonoBehaviour, IPlayer
 
     private void HandleCardPlacement(CardData _card)
     {
-        Hand.SetData(DeckController.RemoveCard(Hand.Data, _card));
+        Hand.RemoveCard(_card);
         UpdateHandState(CardViewController.State.Idle);
-    }
-
-    public void Draw(int cards = 1)
-    {
-        Hand.SetData(DeckController.Draw(Hand.Data, Deck, cards));
     }
 
     public void UpdateHandState(CardViewController.State state)
     {
         DeckController.SetCardsState(Hand, state);
+    }
+
+    public void HandDrawCallback(List<CardData> _drawnCard)
+    {
+        if (OnCardsDrawn != null)
+            OnCardsDrawn(currentType,_drawnCard);
     }
 }

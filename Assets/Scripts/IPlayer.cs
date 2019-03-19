@@ -5,7 +5,7 @@ using System;
 
 public interface IPlayer
 {
-    DeckData Deck { get; set; }
+    DeckViewController Deck { get; set; }
     HandDeckViewController Hand { get; set; }
     int Life { get; set; }
     int MaxEnergy { get; set; }
@@ -13,8 +13,7 @@ public interface IPlayer
     int Shield { get; set; }
     Player.Type CurrentType { get; set; }
 
-    void Setup(DeckData _deck);
-    void Draw(int cards = 1);
+    void Setup();
     event PlayerEvent.PlayerLost Lost;
 }
 

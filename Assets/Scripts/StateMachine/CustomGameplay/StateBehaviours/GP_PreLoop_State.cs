@@ -9,10 +9,15 @@ namespace StateMachine.Gameplay {
         public override void Enter() {
             context.BoardCtrl.InstantiateBoard();
             context.GenericForwardCallBack();
-            context.PlayerOne.Hand.InstantiateCards();
-            context.PlayerTwo.Hand.InstantiateCards();
             context.GameFlowButton.Setup(context.GenericForwardCallBack);
+            context.PlayerOne.Hand.AddViews(context.P1firstHandCardDrawn);
+            context.PlayerTwo.Hand.AddViews(context.P2firstHandCardDrawn);
         }
 
+        public override void Exit()
+        {
+            context.P1firstHandCardDrawn = null;
+            context.P2firstHandCardDrawn = null;
+        }
     }
 }
