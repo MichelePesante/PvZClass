@@ -9,6 +9,7 @@ namespace StateMachine.Gameplay {
         public override void Enter()
         {
             TurnManager.SetActivePlayer(playerTurn);
+            context.GameFlowButton.GoToNextPhase();
         }
 
         public override void Tick()

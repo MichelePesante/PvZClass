@@ -11,6 +11,7 @@ namespace StateMachine.Gameplay {
             context.GenericForwardCallBack();
             context.PlayerOne.Hand.InstantiateCards();
             context.PlayerTwo.Hand.InstantiateCards();
+            context.GameFlowButton.Setup(context.GenericForwardCallBack);
         }
 
     }

@@ -42,12 +42,13 @@ namespace StateMachine.Gameplay {
             return new GameplaySMContext() {
                 SceneManager = sceneManager,
                 ContextName = "stringa GameplaySMContext",
-                PlayerOne = sceneManager.player1,                
+                PlayerOne = sceneManager.player1,
                 PlayerTwo = sceneManager.player2,
                 Winner = null,
                 P1mulliganCtrl = sceneManager.mulliganP1,
                 P2mulliganCtrl = sceneManager.mulliganP2,
                 BoardCtrl = sceneManager.BoardCtrl,
+                GameFlowButton = sceneManager.gameFlowButton,
                 // SM flow callback
                 GenericForwardCallBack = GoToForward,
                 GenericBackwardCallBack = GoToBack,
@@ -88,6 +89,8 @@ namespace StateMachine.Gameplay {
         public Action<bool> OnWinnerCondChanged;
 
         public BoardController BoardCtrl;
+
+        public GameFlowButtonController GameFlowButton;
 
         public MulliganController P1mulliganCtrl;
         public MulliganController P2mulliganCtrl;

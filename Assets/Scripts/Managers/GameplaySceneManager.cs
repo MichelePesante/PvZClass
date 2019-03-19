@@ -12,6 +12,7 @@ public class GameplaySceneManager : MonoBehaviour {
     public UIManager GlobalUI;
     public MulliganController mulliganP1;
     public MulliganController mulliganP2;
+    public GameFlowButtonController gameFlowButton;
 
     private void Awake()
     {
@@ -19,6 +20,12 @@ public class GameplaySceneManager : MonoBehaviour {
     }
 
     public void Setup() {
+
+    }
+
+    public static GameFlowButtonController GetGameFlowButton()
+    {
+        return i.gameFlowButton;
     }
 
     public static BoardController GetBoardController()
