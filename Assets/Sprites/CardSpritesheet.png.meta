@@ -9,6 +9,10 @@ TextureImporter:
     21300008: CardSpritesheet_4
     21300010: CardSpritesheet_5
     21300012: CardSpritesheet_6
+    21300014: CardSpritesheet_7
+    21300016: CardSpritesheet_8
+    21300018: CardSpritesheet_9
+    21300020: CardSpritesheet_10
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -105,7 +109,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9f4a80fcf94dcb47a7cd1c52329240e
+      spriteID: d2a89553cdd5fde458aa95ec961e201d
       vertices: []
       indices: 
       edges: []
@@ -125,7 +129,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 505947f491f44e747bf94cdd23724e7c
+      spriteID: 5f26a94cdf791db42ac3c5dedf05c8eb
       vertices: []
       indices: 
       edges: []
@@ -145,7 +149,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32636e6249b4374418600ff08d48589d
+      spriteID: 91ffcb5184e1df143a3cbdffbb1e4d2d
       vertices: []
       indices: 
       edges: []
@@ -165,7 +169,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bd713d7c5997e849b2bc154e021237a
+      spriteID: d22a858a51e31e245a426128f6e10284
       vertices: []
       indices: 
       edges: []
@@ -185,13 +189,93 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3288825acf0001c4dac078e2cbbe408d
+      spriteID: 2f48158eb91c5ea40aeb4b4d49a36b5f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: CardSpritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 124
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c961dd5af20d674aac2ebf2e655485e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardSpritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 123
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb436ce7df351f944b42ccb8c38fcf6a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardSpritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 123
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e348c173e66426b40bce3e8b14015dcc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardSpritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 120
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8afcb6fa6392ad4e8e78fb6c9599d25
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardSpritesheet_9
       rect:
         serializedVersion: 2
         x: 14
@@ -205,13 +289,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3f4eba57a6bb674c89460f900686855
+      spriteID: f3bcbbd94290c2944a17811fddd2d108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CardSpritesheet_6
+      name: CardSpritesheet_10
       rect:
         serializedVersion: 2
         x: 116
@@ -225,7 +309,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ae84a4f56824284a924ee923ae5954b
+      spriteID: 6938b7be1767db2428f06a4c986df39a
       vertices: []
       indices: 
       edges: []
