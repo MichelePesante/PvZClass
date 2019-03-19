@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentType: 1
+  _deck: {fileID: 1640084293}
   _hand: {fileID: 898810970}
 --- !u!4 &689736464
 Transform:
@@ -318,9 +319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f999e774ccaeff4aaf7d3c46583f65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instantiatedCards: []
   cardPrefab: {fileID: 917044520009991403, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
     type: 3}
-  instantiatedCards: []
 --- !u!1 &898810969 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4529307819561145631, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
@@ -339,9 +340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f999e774ccaeff4aaf7d3c46583f65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instantiatedCards: []
   cardPrefab: {fileID: 917044520009991403, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
     type: 3}
-  instantiatedCards: []
 --- !u!1 &1021143635
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentType: 0
+  _deck: {fileID: 2004908265}
   _hand: {fileID: 850605907}
 --- !u!4 &1049406601
 Transform:
@@ -1119,6 +1121,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10127641ac945564aa55f1e7bd057f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1640084292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640084294}
+  - component: {fileID: 1640084293}
+  m_Layer: 0
+  m_Name: Player 2 Deck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1640084293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640084292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e077487ae8e33444f9e630da6f7ac5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiatedCards: []
+--- !u!4 &1640084294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640084292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1730499596 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1730499596, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
@@ -1131,3 +1177,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74bb2231e2aa9a418e9ed4bebeeb74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2004908264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2004908266}
+  - component: {fileID: 2004908265}
+  m_Layer: 0
+  m_Name: Player 1 Deck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2004908265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004908264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e077487ae8e33444f9e630da6f7ac5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiatedCards: []
+--- !u!4 &2004908266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004908264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

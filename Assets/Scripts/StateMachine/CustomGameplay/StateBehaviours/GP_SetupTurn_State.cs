@@ -18,7 +18,7 @@ namespace StateMachine.Gameplay {
         {
             _player.MaxEnergy++;
             _player.CurrentEnergy = context.CurrentPlayer.MaxEnergy;
-            _player.Draw();
+            _player.Hand.Draw(_player.Deck, 1);
         }
     }
 

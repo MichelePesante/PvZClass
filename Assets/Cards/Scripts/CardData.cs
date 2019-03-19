@@ -8,6 +8,8 @@ public class CardData : ScriptableObject {
     [SerializeField] private int StartCost;
     [SerializeField] private int StartLife;
     [SerializeField] private int StartAttack;
+    private static int cardCounter;
+    public int cardIndex;
     public Faction CardFaction;
     public Rarity CardRarity;
     public bool IsHeroCard;
@@ -24,9 +26,16 @@ public class CardData : ScriptableObject {
     public int Cost, Attack, Life;
 
     private void Awake() {
+        cardCounter++;
+        cardIndex = cardCounter;
         ResetOriginalLife();
     }
     
+    public bool CompareIndex(int _index)
+    {
+        return cardIndex == _index;
+    }
+
     public enum Rarity { common, uncommon, rare, legendary}
 
     public enum Faction { Hipster, Alcool }
