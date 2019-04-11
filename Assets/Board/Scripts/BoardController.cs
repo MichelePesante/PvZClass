@@ -38,10 +38,17 @@ public class BoardController : MonoBehaviour {
     }
 
     public bool CheckCardPlayability(CardViewController _cardToCheck) {
+
+        if(_cardToCheck.GetPlayerOwner().CurrentEnergy < _cardToCheck.Data.Cost)
+        {
+            return false;
+        }
+
         foreach (LaneViewController laneUI in laneUIs) {
             if (LaneController.CheckCardPlayability(laneUI.Data, _cardToCheck.Data))
                 return true;
         }
+
         return false;
     }
 }

@@ -66,6 +66,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
                 {
                     if (!playerASlots[i].card)
                     {
+                        _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
                         playerASlots[i].card = _cardToPlace;
                         _cardToPlace.transform.position = playerASlots[i].slot.position;
                         Data.playerAFreeSlots--;
@@ -78,6 +79,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
                 {
                     if (!playerBSlots[i].card)
                     {
+                        _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
                         playerBSlots[i].card = _cardToPlace;
                         _cardToPlace.transform.position = playerBSlots[i].slot.position;
                         Data.playerBFreeSlots--;
