@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Lane Type", menuName = "Board/Lane Type")]
 public class LaneType : ScriptableObject
 {
+    public int LineIndex;
     public Color LaneColor;
 }

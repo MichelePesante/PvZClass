@@ -4,17 +4,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Card", menuName = "New Card")]
 public class CardData : ScriptableObject {
 
+    #region serializable data
     public string CardName;
-    [SerializeField] private int StartCost;
-    [SerializeField] private int StartLife;
-    [SerializeField] private int StartAttack;
-    private static int cardCounter;
-    public int cardIndex;
+    public int StartCost;
+    public int StartLife;
+    public int StartAttack;
+    public int CardIndex;
     public Faction CardFaction;
     public Rarity CardRarity;
     public bool IsHeroCard;
-    public Sprite CardImage;
+    public string CardImageName;
     public LaneType playableLane;
+    #endregion
+
+    private static int cardCounter;
+    public Sprite CardImage;
 
     public string NameToShow {
         get { return CardName.ToUpper(); }
@@ -27,18 +31,18 @@ public class CardData : ScriptableObject {
 
     private void Awake() {
         cardCounter++;
-        cardIndex = cardCounter;
+        CardIndex = cardCounter;
         ResetOriginalLife();
     }
     
     public bool CompareIndex(int _index)
     {
-        return cardIndex == _index;
+        return CardIndex == _index;
     }
 
     public enum Rarity { common, uncommon, rare, legendary}
 
-    public enum Faction { Hipster, Alcool }
+    public enum Faction { Hipster = 0, Alcool = 1 }
 
     public enum Highlight { NoHighlight, Highlighted, Lowlight }
 

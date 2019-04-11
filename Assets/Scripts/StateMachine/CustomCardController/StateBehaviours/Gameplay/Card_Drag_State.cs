@@ -38,9 +38,9 @@ namespace StateMachine.Card
                     lane.ToggleHighlight(LaneViewController.Highlight.off);
                     if (LaneController.CheckCardPlayability(lane.Data, _cardCtrl.Data))
                     {
-                        context.cardController.CurrentState = CardViewController.State.Played;
                         lane.PlaceCard(context.cardController);
                         lanePlaced = true;
+                        context.cardController.CurrentState = CardViewController.State.Played;
                     }
                 }               
             }
