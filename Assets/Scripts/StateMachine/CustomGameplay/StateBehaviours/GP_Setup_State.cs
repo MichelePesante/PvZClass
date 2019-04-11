@@ -13,9 +13,6 @@ namespace StateMachine.Gameplay {
         Canvas uiCanvasInstance;
 
         public override void Enter() {
-
-            Player.OnCardsDrawn += HandleOnCardsDrawn;
-
             if (context.UICanvas == null) {
                 uiCanvasInstance = Instantiate(canvasPrefab);
             }
@@ -44,21 +41,6 @@ namespace StateMachine.Gameplay {
             /// 
 
             context.GenericForwardCallBack();
-        }
-
-        private void HandleOnCardsDrawn(Player.Type _player, List<CardData> _drawnCards)
-        {
-            switch (_player)
-            {
-                case Player.Type.one:
-                    context.P1firstHandCardDrawn = _drawnCards;
-                    break;
-                case Player.Type.two:
-                    context.P2firstHandCardDrawn = _drawnCards;
-                    break;
-                default:
-                    break;
-            }
         }
 
         private void DeckSetup()

@@ -24,6 +24,7 @@ namespace StateMachine.Gameplay {
         private void MulliganEndP1(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
             context.PlayerOne.Hand.Setup(new DeckData(_chosenCards));
             context.PlayerOne.Hand.Data.Player = context.PlayerOne;
+            context.P1firstHandCardDrawn = _chosenCards;
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
                 DeckController.AddCard(context.PlayerOne.Deck.Data, _notSelectedCards[i]);
@@ -36,6 +37,7 @@ namespace StateMachine.Gameplay {
         private void MulliganEndP2(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
             context.PlayerTwo.Hand.Setup(new DeckData(_chosenCards));
             context.PlayerTwo.Hand.Data.Player = context.PlayerTwo;
+            context.P2firstHandCardDrawn = _chosenCards;
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
                 DeckController.AddCard(context.PlayerTwo.Deck.Data, _notSelectedCards[i]);
