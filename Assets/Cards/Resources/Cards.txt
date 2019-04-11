@@ -1,0 +1,24 @@
+{
+  "Cards": [
+    {
+      "CardName": "Capo Hipster",
+      "StartCost": 7,
+      "StartLife": 7,
+      "StartAttack": 7,
+      "CardFaction": 0,
+      "CardRarity": 2,
+      "IsHeroCard": 0,
+      "CardImageName": "Capo_Hipster"
+    },
+    {
+      "CardName": "Capo Alcool",
+      "StartCost": 7,
+      "StartLife": 7,
+      "StartAttack": 7,
+      "CardFaction": 1,
+      "CardRarity": 2,
+      "IsHeroCard": 0,
+      "CardImageName": "Capo_Alcool"
+    }
+  ]
+}

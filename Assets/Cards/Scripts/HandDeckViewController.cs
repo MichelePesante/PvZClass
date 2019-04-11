@@ -55,7 +55,7 @@ public class HandDeckViewController : DeckViewControllerBase
 
     public override void RemoveView(CardData _cardToRemove)
     {
-        CardViewController cardToRemove = instantiatedCards.Where(c => c.Data.CompareIndex(_cardToRemove.cardIndex)).FirstOrDefault();
+        CardViewController cardToRemove = instantiatedCards.Where(c => c.Data.CompareIndex(_cardToRemove.CardIndex)).FirstOrDefault();
         if (cardToRemove != null)
             instantiatedCards.Remove(cardToRemove);
     }
