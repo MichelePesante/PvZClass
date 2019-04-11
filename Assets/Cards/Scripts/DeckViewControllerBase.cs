@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class DeckViewControllerBase : MonoBehaviour
 {
+    #region Delegates
+    public Action<DeckData> OnCardsAdded;
+    #endregion
 
     DeckData _data;
     public DeckData Data
@@ -24,6 +27,14 @@ public abstract class DeckViewControllerBase : MonoBehaviour
         for (int i = 0; i < _cardsToAdd.Count; i++)
         {
             AddView(_cardsToAdd[i]);
+        }
+    }
+
+    public virtual void RemoveViews(List<CardData> _cardsToRemove)
+    {
+        for (int i = 0; i < _cardsToRemove.Count; i++)
+        {
+            RemoveView(_cardsToRemove[i]);
         }
     }
 
@@ -86,7 +97,9 @@ public abstract class DeckViewControllerBase : MonoBehaviour
         if (_DataUpdatedCallback != null)
             _DataUpdatedCallback(Data.Cards);
         else
-            AddViews(Data.Cards);
+        {
+
+        }
     }
 
     public DeckViewControllerBase Setup(DeckData _deck)
