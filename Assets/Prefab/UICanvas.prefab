@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 2610679572826983605}
   - component: {fileID: 1348440083316827355}
   - component: {fileID: 4452848398599077837}
-  - component: {fileID: 898810970}
   m_Layer: 5
   m_Name: P2HandUI
   m_TagString: Untagged
@@ -194,21 +193,6 @@ MonoBehaviour:
   instantiatedCards: []
   cardPrefab: {fileID: 917044520009991403, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
     type: 3}
---- !u!114 &898810970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4529307819561145631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f999e774ccaeff4aaf7d3c46583f65c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instantiatedCards: []
-  cardPrefab: {fileID: 917044520009991403, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
-    type: 3}
 --- !u!1 &6246813778059797049
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +204,6 @@ GameObject:
   - component: {fileID: 6918280719792785893}
   - component: {fileID: 8173708192714575925}
   - component: {fileID: 6357079019146847603}
-  - component: {fileID: 850605907}
   m_Layer: 5
   m_Name: P1HandUI
   m_TagString: Untagged
@@ -271,21 +254,6 @@ MonoBehaviour:
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
 --- !u!114 &6357079019146847603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6246813778059797049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f999e774ccaeff4aaf7d3c46583f65c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instantiatedCards: []
-  cardPrefab: {fileID: 917044520009991403, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
-    type: 3}
---- !u!114 &850605907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -432,11 +400,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 224948079451638220}
     m_Modifications:
-    - target: {fileID: 644355362416772820, guid: 0215a8069e0626648be38364007aab01,
-        type: 3}
-      propertyPath: m_Name
-      value: Board
-      objectReference: {fileID: 0}
     - target: {fileID: 644355362416772823, guid: 0215a8069e0626648be38364007aab01,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -541,6 +504,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 644355362416772820, guid: 0215a8069e0626648be38364007aab01,
+        type: 3}
+      propertyPath: m_Name
+      value: Board
       objectReference: {fileID: 0}
     - target: {fileID: 644355362416772840, guid: 0215a8069e0626648be38364007aab01,
         type: 3}
@@ -567,11 +535,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 224948079451638220}
     m_Modifications:
-    - target: {fileID: 896306556160439823, guid: d189ecc481001a64381d207c1037925e,
-        type: 3}
-      propertyPath: m_Name
-      value: Mulligan
-      objectReference: {fileID: 0}
     - target: {fileID: 2377702931542968927, guid: d189ecc481001a64381d207c1037925e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -676,6 +639,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 896306556160439823, guid: d189ecc481001a64381d207c1037925e,
+        type: 3}
+      propertyPath: m_Name
+      value: Mulligan
       objectReference: {fileID: 0}
     - target: {fileID: 7290419411918294438, guid: d189ecc481001a64381d207c1037925e,
         type: 3}
