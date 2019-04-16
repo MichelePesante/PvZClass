@@ -46,17 +46,4 @@ public class HandDeckViewController : DeckViewControllerBase
 
         InstantiateCards(cardsToInstantate);
     }*/
-
-    public override void AddView(CardData _cardToAdd)
-    {
-        instantiatedCards.Add(Instantiate(cardPrefab, transform));
-        instantiatedCards[instantiatedCards.Count - 1].Setup(_cardToAdd, Data.Player);
-    }
-
-    public override void RemoveView(CardData _cardToRemove)
-    {
-        CardViewController cardToRemove = instantiatedCards.Where(c => c.Data.CompareIndex(_cardToRemove.CardIndex)).FirstOrDefault();
-        if (cardToRemove != null)
-            instantiatedCards.Remove(cardToRemove);
-    }
 }

@@ -78,7 +78,8 @@ public class Player : MonoBehaviour, IPlayer
         CurrentEnergy = 0;
         Deck.Data.Player = this;
         Hand.Setup(new DeckData());
-        Hand.Draw(Deck, 8, HandDrawCallback);
+        DeckData deckFrom = Deck.Data;
+        Hand.Draw(ref deckFrom, 8, HandDrawCallback);
         Hand.Data.Player = this;
         CardController.OnPlaced += HandleCardPlacement;
         TurnManager.OnTurnChange += HandleTurnChange;
@@ -91,7 +92,8 @@ public class Player : MonoBehaviour, IPlayer
 
     private void HandleCardPlacement(CardData _card)
     {
-        Hand.RemoveCard(_card);
+        DeckData deckTo = null;
+        Hand.Move(ref deckTo, ref _card);
         UpdateHandState(CardViewController.State.Idle);
     }
 

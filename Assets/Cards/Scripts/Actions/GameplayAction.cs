@@ -23,6 +23,10 @@ public class GameplayAction : IAction {
         return returnAction;
     }
 
+    public override string ToString()
+    {
+        return string.Format("{0} {1} From: {2}, To: {3} ", Type.ToString(), cardData.ToString(), deckDataFrom.ToString(), deckDataTo.ToString());
+    }
 
 }
 
