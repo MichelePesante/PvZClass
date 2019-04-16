@@ -13,7 +13,7 @@ public class BoardController : MonoBehaviour {
 
     public const int CardSlotsPerPlayer = 2;
 
-    List<LaneViewController> laneUIs;
+    public List<LaneViewController> laneUIs;
 
     public void SetUp(BoardData _boardData = null) {
         if (_boardData) {

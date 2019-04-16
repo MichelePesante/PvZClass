@@ -20,17 +20,24 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
     public enum Highlight { playable, unplayable, off }
 
-    CardSlot[] playerASlots, playerBSlots;
+    DeckViewController playerASlots, playerBSlots;
 
     #region API
 
     public LaneViewController SetUp(LaneData _data, int _cardSlotsCount)
     {
+        //instantiate lane data.
         Data = Instantiate(_data);
-        Data.playerAFreeSlots = _cardSlotsCount;
-        Data.playerBFreeSlots = _cardSlotsCount;
-        CardSlotsSetup(ref playerASlots, _cardSlotsCount, 0);
-        CardSlotsSetup(ref playerBSlots, _cardSlotsCount, 1);
+
+        //create two deckdata and assing to lane data.
+        LaneController.SetPlayerSlots(Data, new DeckData(), Player.Type.one);
+        LaneController.SetPlayerSlots(Data, new DeckData(), Player.Type.one);
+
+        //setup view 
+        CardSlotsSetup(playerASlots, _cardSlotsCount, 0);
+        CardSlotsSetup(playerBSlots, _cardSlotsCount, 1);
+
+        //view stuff
         LaneColourImage.color = Data.type.LaneColor;
         return this;
     }
@@ -117,22 +124,30 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
     #endregion
 
-    void CardSlotsSetup(ref CardSlot[] _slotsToSetup, int _slotCount, int _player)
+    /// <summary>
+    /// Initialize Lane Datas and instantiates needed transforms.
+    /// </summary>
+    /// <param name="_slotsToSetup"></param>
+    /// <param name="_slotCount"></param>
+    /// <param name="_player"></param>
+    void CardSlotsSetup(DeckViewController _slotsToSetup, int _slotCount, int _player)
     {
-        _slotsToSetup = new CardSlot[_slotCount];
+        if(_player == 0 )
+        {
+            Data.playerAPlacedCards.MaxCards = _slotCount;
+        }
+        else
+        {
+            Data.playerBPlacedCards.MaxCards = _slotCount;
+        }
 
-        RectTransform slotsParent = _player == 0 ? playerAZone : playerBZone;
+        _slotsToSetup.Data.Player = _player == 0 ? GameplaySceneManager.GetPlayer(Player.Type.one) : GameplaySceneManager.GetPlayer(Player.Type.one);
 
-        for (int i = 0; i < _slotsToSetup.Length; i++)
+        RectTransform slotsParent = _slotsToSetup.Data.Player.CurrentType == Player.Type.one ? playerAZone : playerBZone;
+
+        for (int i = 0; i < _slotsToSetup.Data.MaxCards; i++)
         {
             RectTransform t = Instantiate(SlotPrefab, slotsParent);
-            _slotsToSetup[i].slot = t;
         }
-    }
-
-    struct CardSlot
-    {
-        public CardViewController card;
-        public RectTransform slot;
     }
 }
