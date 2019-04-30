@@ -26,37 +26,14 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     private Color HeroColor = Color.white;
     private Color StandardColor = Color.white;
 
-    public enum State
-    {
-        Inactive = -1,
-        Idle = 0,
-        Playable = 1,
-        Unplayable = 2,
-        Drag = 3,
-        Played = 4,
-    }
-
-    public Action<State> OnCurrentStateChanged;
-
-    private State _currentState;
-    public State CurrentState
-    {
-        get { return _currentState; }
-        set
-        {
-            _currentState = value;
-            if (OnCurrentStateChanged != null)
-            {
-                OnCurrentStateChanged(_currentState);
-            }
-        }
-    }
-
     private CardSMController cardSM;
 
-    internal void SetHiglight(CardData.Highlight _Higlight)
+    public enum HighlightState { NoHighlight, Highlighted, Lowlight }
+    public HighlightState Higlight { get; internal set; }
+
+    internal void SetHiglight(HighlightState _Higlight)
     {
-        Data.Higlight = _Higlight;
+        Higlight = _Higlight;
         onDataChanged(Data);
     }
 
@@ -81,7 +58,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void Setup()
     {
-        CurrentState = State.Inactive;
+        Data.CurrentState = CardState.Inactive;
         rectTransform = GetComponent<RectTransform>();
         cam = Camera.main;
         eventSystem = FindObjectOfType<EventSystem>();
@@ -103,7 +80,6 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void Setup(CardData _data, IPlayer _player)
     {
-        CurrentState = State.Inactive;
         rectTransform = GetComponent<RectTransform>();
         cam = Camera.main;
         eventSystem = FindObjectOfType<EventSystem>();
@@ -117,6 +93,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
             Debug.LogError(name + " has not found a graphic raycaster!");
         }
         Data = _data;
+        Data.CurrentState = CardState.Inactive;
         playerOwner = _player;
         Interactable(true);
         detectedObjects = new List<IDetectable>();
@@ -139,17 +116,17 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         {
             Frame.color = StandardColor;
         }
-        switch (_data.Higlight)
+        switch (Higlight)
         {
-            case CardData.Highlight.NoHighlight:
+            case HighlightState.NoHighlight:
                 LowlightPanel.enabled = false;
                 HighlightPanel.enabled = false;
                 break;
-            case CardData.Highlight.Highlighted:
+            case HighlightState.Highlighted:
                 LowlightPanel.enabled = false;
                 HighlightPanel.enabled = true;
                 break;
-            case CardData.Highlight.Lowlight:
+            case HighlightState.Lowlight:
                 LowlightPanel.enabled = true;
                 HighlightPanel.enabled = false;
                 break;

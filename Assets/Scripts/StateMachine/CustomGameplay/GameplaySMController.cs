@@ -14,6 +14,7 @@ namespace StateMachine.Gameplay {
         private GameplaySceneManager sceneManager;
 
         private void Start() {
+            sceneManager.Setup();
             Setup();
         }
 

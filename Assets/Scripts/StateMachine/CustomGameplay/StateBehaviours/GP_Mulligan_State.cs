@@ -28,7 +28,7 @@ namespace StateMachine.Gameplay
         {
             context.PlayerOne.Hand.Setup(new DeckData(_chosenCards));
             context.PlayerOne.Hand.Data.Player = context.PlayerOne;
-            context.P1firstHandCardDrawn = _chosenCards;
+            context.P1firstHandCardDrawn = new List<CardData>(_chosenCards);
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
                 DeckData deckToAdd = context.PlayerOne.Deck.Data;
@@ -45,10 +45,13 @@ namespace StateMachine.Gameplay
         {
             context.PlayerTwo.Hand.Setup(new DeckData(_chosenCards));
             context.PlayerTwo.Hand.Data.Player = context.PlayerTwo;
-            context.P2firstHandCardDrawn = _chosenCards;
+            context.P2firstHandCardDrawn = new List<CardData>(_chosenCards);
             for (int i = 0; i < _notSelectedCards.Count; i++)
             {
-                DeckController.AddCard(context.PlayerTwo.Deck.Data, _notSelectedCards[i]);
+                DeckData deckToAdd = context.PlayerTwo.Deck.Data;
+                DeckData deckFrom = null;
+                CardData cardToMove = _notSelectedCards[i];
+                DeckController.Move(ref deckToAdd, ref deckFrom, ref cardToMove);
             }
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)

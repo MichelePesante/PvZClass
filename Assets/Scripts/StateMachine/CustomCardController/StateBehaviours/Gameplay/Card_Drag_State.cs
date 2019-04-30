@@ -40,7 +40,7 @@ namespace StateMachine.Card
                     {
                         lane.PlaceCard(context.cardController);
                         lanePlaced = true;
-                        context.cardController.CurrentState = CardViewController.State.Played;
+                        context.cardController.Data.CurrentState = CardState.Played;
                     }
                 }               
             }
@@ -54,7 +54,7 @@ namespace StateMachine.Card
         private void ResetPosition()
         {
             context.cardController.transform.position = startPosition;
-            context.cardController.CurrentState = CardViewController.State.Idle;
+            context.cardController.Data.CurrentState = CardState.Idle;
         }
 
         public override void Tick()

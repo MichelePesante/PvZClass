@@ -11,7 +11,7 @@ namespace StateMachine.Card
 
             context.mulliganCtrl.OnCardChanged += HandleCardChanged;
             context.cardController.OnCardPointerDown += HandleOnpointerDown;
-            context.cardController.SetHiglight(CardData.Highlight.NoHighlight);
+            context.cardController.SetHiglight(CardViewController.HighlightState.NoHighlight);
         }
 
         private void initMulliganController() {

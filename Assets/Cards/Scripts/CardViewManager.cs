@@ -26,7 +26,10 @@ public class CardViewManager : MonoBehaviour
 
     private void HandleOnCardsMoved(List<GameplayAction> actions)
     {
- 
+        foreach (GameplayAction action in actions)
+        {
+            HandleOnCardMoved(action);
+        }
     }
 
     private void HandleOnCardMoved(GameplayAction action)
@@ -34,18 +37,20 @@ public class CardViewManager : MonoBehaviour
         //TODO controllare il deck a cui va aggiunto
         if (action.deckDataFrom == null)
         {
-            CardViewController instantiatedCard = Instantiate(cardPrefab);
+            CardViewController instantiatedCard = Instantiate(cardPrefab.gameObject).GetComponent<CardViewController>();
             instantiatedCards.Add(instantiatedCard);
-            instantiatedCard.Setup(action.cardData, action.deckDataTo.Player);
             switch (action.deckDataTo.Player.CurrentType)
             {
                 case Player.Type.one:
+                    instantiatedCard.transform.parent = p1HandView.transform;
                     instantiatedCard.transform.position = p1HandView.transform.position;                    
                     break;
                 case Player.Type.two:
+                    instantiatedCard.transform.parent = p2HandView.transform;
                     instantiatedCard.transform.position = p2HandView.transform.position;
                     break;
             }
+            instantiatedCard.Setup(action.cardData, action.deckDataTo.Player);
         }
     }
 

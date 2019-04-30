@@ -9,19 +9,19 @@ namespace StateMachine.Card {
         public override void Enter()
         {
             context.cardController.OnCardPointerDown += HandleOnpointerDown;
-            context.cardController.SetHiglight(CardData.Highlight.Highlighted);
+            context.cardController.SetHiglight(CardViewController.HighlightState.Highlighted);
         }
 
         private void HandleOnpointerDown(CardViewController obj)
         {
             if (obj == context.cardController)
-                context.cardController.CurrentState = CardViewController.State.Drag;
+                context.cardController.Data.CurrentState = CardState.Drag;
         }
 
         public override void Exit()
         {
             context.cardController.OnCardPointerDown -= HandleOnpointerDown;
-            context.cardController.SetHiglight(CardData.Highlight.NoHighlight);
+            context.cardController.SetHiglight(CardViewController.HighlightState.NoHighlight);
         }
     }
 }

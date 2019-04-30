@@ -37,10 +37,9 @@ public static class DeckController
         return _deck.Cards[indexCard];
     }
 
-    public static DeckViewControllerBase SetCardsState(DeckViewControllerBase _deck, CardViewController.State state)
+    public static DeckViewControllerBase SetCardsState(DeckViewControllerBase _deck, CardState state)
     {
-        //TODO: prendere card view manager che filtra carte istanziate
-        foreach (CardViewController card in _deck.instantiatedCards)
+        foreach (CardData card in _deck.Data.Cards)
         {
             card.CurrentState = state;
         }

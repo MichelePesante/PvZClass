@@ -87,17 +87,17 @@ public class Player : MonoBehaviour, IPlayer
 
     private void HandleTurnChange(IPlayer _player)
     {
-        UpdateHandState(CardViewController.State.Idle);
+        UpdateHandState(CardState.Idle);
     }
 
     private void HandleCardPlacement(CardData _card)
     {
         DeckData deckTo = null;
         Hand.Move(ref deckTo, ref _card);
-        UpdateHandState(CardViewController.State.Idle);
+        UpdateHandState(CardState.Idle);
     }
 
-    public void UpdateHandState(CardViewController.State state)
+    public void UpdateHandState(CardState state)
     {
         DeckController.SetCardsState(Hand, state);
     }

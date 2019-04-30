@@ -57,6 +57,24 @@ public abstract class DeckViewControllerBase : MonoBehaviour
             OnCardMoved(action);
     }
 
+    public void Moves(ref DeckData _deckToMove, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    {
+        List<GameplayAction> actions = new List<GameplayAction>();
+        for (int i = 0; i < _cardToMove.Count; i++)
+        {
+            DeckData deckFrom = Data;
+            DeckData deckTo = _deckToMove;
+            CardData cardToMove = _cardToMove[i];
+            GameplayAction action = DeckController.Move(ref deckFrom, ref deckTo, ref cardToMove);
+            actions.Add(action);
+
+            if (_DataUpdatedCallback != null)
+                _DataUpdatedCallback(Data.Cards);
+        }
+        if (OnCardsMoved != null)
+            OnCardsMoved(actions);
+    }
+
     public DeckViewControllerBase Setup(DeckData _deck)
     {
         if (_deck == null)
