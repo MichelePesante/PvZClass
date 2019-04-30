@@ -24,48 +24,70 @@ namespace StateMachine.Gameplay
         }
 
         int mulliganPlayerCount;
-        private void MulliganEndP1(List<CardData> _chosenCards, List<CardData> _notSelectedCards)
+
+        #region P1
+        List<CardData> p1ChosenCards;
+        List<CardData> p1NotChosenCards;
+        private void MulliganEndP1(List<CardData> _chosenCards, List<CardData> _notChosenCards)
         {
-            context.PlayerOne.Hand.Setup(new DeckData(_chosenCards));
-            context.PlayerOne.Hand.Data.Player = context.PlayerOne;
-            context.P1firstHandCardDrawn = new List<CardData>(_chosenCards);
-            for (int i = 0; i < _notSelectedCards.Count; i++)
-            {
-                DeckData deckToAdd = context.PlayerOne.Deck.Data;
-                DeckData deckFrom = null;
-                CardData cardToMove = _notSelectedCards[i];
-                DeckController.Move(ref deckToAdd, ref deckFrom, ref cardToMove);
-            }
+            p1ChosenCards = _chosenCards;
+            p1NotChosenCards = _notChosenCards;
+
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
                 context.GenericForwardCallBack();
         }
 
-        private void MulliganEndP2(List<CardData> _chosenCards, List<CardData> _notSelectedCards)
+        private void P1DeckSetup()
         {
-            context.PlayerTwo.Hand.Setup(new DeckData(_chosenCards));
-            context.PlayerTwo.Hand.Data.Player = context.PlayerTwo;
-            context.P2firstHandCardDrawn = new List<CardData>(_chosenCards);
-            for (int i = 0; i < _notSelectedCards.Count; i++)
+            DeckData deckFrom = null;
+            context.PlayerOne.Hand.Moves(ref deckFrom, ref p1ChosenCards);
+            context.PlayerOne.Hand.Data.Player = context.PlayerOne;
+            for (int i = 0; i < p1NotChosenCards.Count; i++)
             {
-                DeckData deckToAdd = context.PlayerTwo.Deck.Data;
-                DeckData deckFrom = null;
-                CardData cardToMove = _notSelectedCards[i];
+                DeckData deckToAdd = context.PlayerOne.Deck.Data;
+                CardData cardToMove = p1NotChosenCards[i];
                 DeckController.Move(ref deckToAdd, ref deckFrom, ref cardToMove);
             }
+        }
+        #endregion
+
+        #region P2
+        List<CardData> p2ChosenCards;
+        List<CardData> p2NotChosenCards;
+        private void MulliganEndP2(List<CardData> _chosenCards, List<CardData> _notChosenCards)
+        {
+            p2ChosenCards = _chosenCards;
+            p2NotChosenCards = _notChosenCards;
+
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
                 context.GenericForwardCallBack();
         }
+
+        private void P2DeckSetup()
+        {
+            DeckData deckFrom = null;
+            context.PlayerTwo.Hand.Moves(ref deckFrom, ref p2ChosenCards);
+            context.PlayerTwo.Hand.Data.Player = context.PlayerTwo;
+            for (int i = 0; i < p2NotChosenCards.Count; i++)
+            {
+                DeckData deckToAdd = context.PlayerTwo.Deck.Data;
+                CardData cardToMove = p2NotChosenCards[i];
+                DeckController.Move(ref deckToAdd, ref deckFrom, ref cardToMove);
+            }
+        }
+        #endregion
 
         public override void Exit()
         {
             context.P1mulliganCtrl.OnMulliganEnd -= MulliganEndP1;
             context.P2mulliganCtrl.OnMulliganEnd -= MulliganEndP2;
 
+            P1DeckSetup();
+            P2DeckSetup();
+
             context.UICanvas.DisableAllPanels();
         }
-
     }
-
 }

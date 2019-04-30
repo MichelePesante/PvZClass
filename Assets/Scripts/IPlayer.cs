@@ -6,7 +6,7 @@ using System;
 public interface IPlayer
 {
     DeckViewController Deck { get; set; }
-    HandDeckViewController Hand { get; set; }
+    DeckViewController Hand { get; set; }
     int Life { get; set; }
     int MaxEnergy { get; set; }
     int CurrentEnergy { get; set; }

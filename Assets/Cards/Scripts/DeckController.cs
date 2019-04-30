@@ -1,9 +1,23 @@
-﻿using System.Collections;
+﻿using PvZ.Helpers;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class DeckController
 {
+    public static DeckData CreateDeck(int _cardsNumber = 1)
+    {
+        List<CardData> allCards = Resources.LoadAll<CardData>("CardsScriptables").ToList();
+        DeckData newDeck = new DeckData();
+
+        for (int i = 0; i < _cardsNumber; i++)
+        {
+            newDeck.Cards.Add(GameObject.Instantiate(allCards.GetRandomElement()));
+        }
+        return newDeck;
+    }
+
     public static DeckData Shuffle(DeckData _deckToShuffle)
     {
         for (int i = 0; i < (_deckToShuffle.Cards.Count * 2); i++) // Mischia 20 volte
@@ -37,7 +51,7 @@ public static class DeckController
         return _deck.Cards[indexCard];
     }
 
-    public static DeckViewControllerBase SetCardsState(DeckViewControllerBase _deck, CardState state)
+    public static DeckViewController SetCardsState(DeckViewController _deck, CardState state)
     {
         foreach (CardData card in _deck.Data.Cards)
         {

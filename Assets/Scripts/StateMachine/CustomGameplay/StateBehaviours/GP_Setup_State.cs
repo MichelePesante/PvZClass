@@ -47,9 +47,8 @@ namespace StateMachine.Gameplay {
         {
             DeckViewController playerOneDeck = context.PlayerOne.Deck;
             DeckViewController playerTwoDeck = context.PlayerTwo.Deck;
-
-            playerOneDeck.Setup(playerOneDeck.CreateDeck(20));
-            playerTwoDeck.Setup(playerTwoDeck.CreateDeck(20));
+            playerOneDeck.Setup(DeckController.CreateDeck(20));
+            playerTwoDeck.Setup(DeckController.CreateDeck(20));
         }
     }
 }

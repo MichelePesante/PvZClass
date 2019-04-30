@@ -23,8 +23,8 @@ public class Player : MonoBehaviour, IPlayer
     }
 
     [SerializeField]
-    HandDeckViewController _hand;
-    public HandDeckViewController Hand
+    DeckViewController _hand;
+    public DeckViewController Hand
     {
         get { return _hand; }
         set
