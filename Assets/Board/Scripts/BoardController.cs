@@ -15,7 +15,7 @@ public class BoardController : MonoBehaviour {
 
     public List<LaneViewController> laneUIs;
 
-    public void SetUp(BoardData _boardData = null) {
+    public void SetUp(BoardData _boardData = null, bool _instantiate = false) {
         if (_boardData) {
             boardData = _boardData;
         } else {
@@ -25,6 +25,9 @@ public class BoardController : MonoBehaviour {
             }
         }
         laneUIs = new List<LaneViewController>();
+
+        if (_instantiate)
+            InstantiateBoard();
     }
 
     public void InstantiateBoard() {

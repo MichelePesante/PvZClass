@@ -5,6 +5,6 @@ public class LaneData : ScriptableObject
 {
     public LaneType type;
 
-    [HideInInspector] public DeckData playerAPlacedCards;
-    [HideInInspector] public DeckData playerBPlacedCards;
+    [HideInInspector] public DeckData playerAPlacedDeck;
+    [HideInInspector] public DeckData playerBPlacedDeck;
 }

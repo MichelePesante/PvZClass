@@ -17,6 +17,8 @@ public class CardData : ScriptableObject {
     public LaneType playableLane;
     #endregion
 
+    public Action<CardData> OnDataChanged;
+ 
     private static int cardCounter;
     public Sprite CardImage;
 
@@ -50,5 +52,8 @@ public class CardData : ScriptableObject {
         Cost = StartCost;
         Life = StartLife;
         Attack = StartAttack;
+
+        if(OnDataChanged != null)
+            OnDataChanged(this);
     }
 }

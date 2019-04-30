@@ -5,22 +5,54 @@ using System.Collections.Generic;
 public class LaneViewController : MonoBehaviour, IDetectable
 {
     #region Serialized Fields
+
     LaneData _data;
     public LaneData Data
     {
         get { return _data; }
         private set { _data = value; }
     }
+
+    [Header("UI Objects")]
     public Image LaneColourImage;
     public Image HighlightImage;
     [SerializeField] RectTransform SlotPrefab;
-    [SerializeField] RectTransform playerAZone;
-    [SerializeField] RectTransform playerBZone;
+    [SerializeField] DeckViewController _playerASlotsView;
+    [SerializeField] DeckViewController _playerBSlotsView;
+
     #endregion
 
     public enum Highlight { playable, unplayable, off }
 
-    DeckViewController playerASlots, playerBSlots;
+    DeckViewController PlayerASlotsView
+    {
+        get
+        {
+            if (_playerASlotsView.Data == null)
+                _playerASlotsView.Setup(Data.playerAPlacedDeck);
+
+            return _playerASlotsView;
+        }
+        set
+        {
+            _playerASlotsView = value;
+        }
+    }
+
+    DeckViewController PlayerBSlotsView
+    {
+        get
+        {
+            if (_playerBSlotsView.Data == null)
+                _playerBSlotsView.Setup(Data.playerBPlacedDeck);
+
+            return _playerBSlotsView;
+        }
+        set
+        {
+            _playerBSlotsView = value;
+        }
+    }
 
     #region API
 
@@ -30,12 +62,11 @@ public class LaneViewController : MonoBehaviour, IDetectable
         Data = Instantiate(_data);
 
         //create two deckdata and assing to lane data.
-        LaneController.SetPlayerSlots(Data, new DeckData(), Player.Type.one);
-        LaneController.SetPlayerSlots(Data, new DeckData(), Player.Type.one);
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), Player.Type.one);
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), Player.Type.two);
 
-        //setup view 
-        CardSlotsSetup(playerASlots, _cardSlotsCount, 0);
-        CardSlotsSetup(playerBSlots, _cardSlotsCount, 1);
+        PlayerASlotsView.Setup(Data.playerAPlacedDeck);
+        PlayerBSlotsView.Setup(Data.playerBPlacedDeck);
 
         //view stuff
         LaneColourImage.color = Data.type.LaneColor;
@@ -69,30 +100,22 @@ public class LaneViewController : MonoBehaviour, IDetectable
         switch (TurnManager.GetActivePlayer().CurrentType)
         {
             case Player.Type.one:
-                for (int i = playerASlots.Length - 1; i >= 0; i--)
-                {
-                    if (!playerASlots[i].card)
-                    {
-                        _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
-                        playerASlots[i].card = _cardToPlace;
-                        _cardToPlace.transform.position = playerASlots[i].slot.position;
-                        Data.playerAFreeSlots--;
-                        break;
-                    }
-                }
+                //add card data to placed deck data
+                DeckController.AddCard(PlayerASlotsView.Data, _cardToPlace.Data);
+
+                _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
+
+                _cardToPlace.transform.parent = PlayerASlotsView.transform;
+
                 break;
             case Player.Type.two:
-                for (int i = 0; i < playerBSlots.Length; i++)
-                {
-                    if (!playerBSlots[i].card)
-                    {
-                        _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
-                        playerBSlots[i].card = _cardToPlace;
-                        _cardToPlace.transform.position = playerBSlots[i].slot.position;
-                        Data.playerBFreeSlots--;
-                        break;
-                    }
-                }
+                //add card data to placed deck data
+                DeckController.AddCard(PlayerBSlotsView.Data, _cardToPlace.Data);
+
+                _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
+
+                _cardToPlace.transform.parent = PlayerBSlotsView.transform;
+
                 break;
         }
     }
@@ -127,27 +150,27 @@ public class LaneViewController : MonoBehaviour, IDetectable
     /// <summary>
     /// Initialize Lane Datas and instantiates needed transforms.
     /// </summary>
-    /// <param name="_slotsToSetup"></param>
-    /// <param name="_slotCount"></param>
+    /// <param name="_laneDeckToSetup"></param>
+    /// <param name="_cardSlotsCount"></param>
     /// <param name="_player"></param>
-    void CardSlotsSetup(DeckViewController _slotsToSetup, int _slotCount, int _player)
+    void CardSlotsSetup(DeckViewController _laneDeckToSetup, int _cardSlotsCount, int _player)
     {
-        if(_player == 0 )
-        {
-            Data.playerAPlacedCards.MaxCards = _slotCount;
-        }
-        else
-        {
-            Data.playerBPlacedCards.MaxCards = _slotCount;
-        }
+        //if (_player == 0)
+        //{
+        //    Data.playerAPlacedDeck.MaxCards = _cardSlotsCount;
+        //}
+        //else
+        //{
+        //    Data.playerBPlacedDeck.MaxCards = _cardSlotsCount;
+        //}
 
-        _slotsToSetup.Data.Player = _player == 0 ? GameplaySceneManager.GetPlayer(Player.Type.one) : GameplaySceneManager.GetPlayer(Player.Type.one);
+        //_laneDeckToSetup.Data.Player = _player == 0 ? GameplaySceneManager.GetPlayer(Player.Type.one) : GameplaySceneManager.GetPlayer(Player.Type.one);
 
-        RectTransform slotsParent = _slotsToSetup.Data.Player.CurrentType == Player.Type.one ? playerAZone : playerBZone;
+        //RectTransform slotsParent = _laneDeckToSetup.Data.Player.CurrentType == Player.Type.one ? PlayerASlotsView.transform : PlayerBSlotsView.transform;
 
-        for (int i = 0; i < _slotsToSetup.Data.MaxCards; i++)
-        {
-            RectTransform t = Instantiate(SlotPrefab, slotsParent);
-        }
+        //for (int i = 0; i < _laneDeckToSetup.Data.MaxCards; i++)
+        //{
+        //    RectTransform t = Instantiate(SlotPrefab, slotsParent);
+        //}
     }
 }

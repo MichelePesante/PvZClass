@@ -10,6 +10,7 @@ namespace StateMachine.Gameplay {
         {
             TurnManager.SetActivePlayer(playerTurn);
             context.GameFlowButton.GoToNextPhase();
+            context.GameFlowButton.ToggleGoNextButton(true);
         }
 
         public override void Tick()

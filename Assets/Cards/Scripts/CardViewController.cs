@@ -156,6 +156,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
             default:
                 break;
         }
+        _data.OnDataChanged += onDataChanged;
     }
 
     public void OnPointerDown(PointerEventData eventData)
