@@ -19,5 +19,5 @@ public interface IPlayer
 
 public class PlayerEvent
 {
-    public delegate void PlayerLost(IPlayer player);
+    public delegate void PlayerLost(PlayerData player);
 }
