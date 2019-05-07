@@ -100,6 +100,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
         switch (TurnManager.GetActivePlayer().CurrentType)
         {
             case Player.Type.one:
+                //TODO: generate gameplay action
                 //add card data to placed deck data
                 DeckController.AddCard(PlayerASlotsView.Data, _cardToPlace.Data);
 
@@ -109,6 +110,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
                 break;
             case Player.Type.two:
+                //TODO: generate gameplay action
                 //add card data to placed deck data
                 DeckController.AddCard(PlayerBSlotsView.Data, _cardToPlace.Data);
 
