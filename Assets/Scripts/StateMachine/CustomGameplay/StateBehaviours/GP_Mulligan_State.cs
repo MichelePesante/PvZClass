@@ -19,8 +19,8 @@ namespace StateMachine.Gameplay
             // Abilitiamo la UI del mulligan
             context.UICanvas.EnableMenu(PanelType.Mulligan);
             // Inizializiamo il pannello del mulligan
-            context.P1mulliganCtrl.Init(context.PlayerOne.Hand.Data);
-            context.P2mulliganCtrl.Init(context.PlayerTwo.Hand.Data);
+            context.P1mulliganCtrl.Init(context.PlayerOne);
+            context.P2mulliganCtrl.Init(context.PlayerTwo);
         }
 
         int mulliganPlayerCount;
@@ -38,17 +38,14 @@ namespace StateMachine.Gameplay
                 context.GenericForwardCallBack();
         }
 
-        private void P1DeckSetup()
+        private void P1DeckSetupCallback()
         {
             DeckData deckFrom = null;
-            context.PlayerOne.Hand.Moves(ref deckFrom, ref p1ChosenCards);
-            context.PlayerOne.Hand.Data.Player = context.PlayerOne;
-            for (int i = 0; i < p1NotChosenCards.Count; i++)
-            {
-                DeckData deckToAdd = context.PlayerOne.Deck.Data;
-                CardData cardToMove = p1NotChosenCards[i];
-                DeckController.Move(ref deckToAdd, ref deckFrom, ref cardToMove);
-            }
+            // muove le carte dal null alla mano
+            context.PlayerOne.HandDeck.DoMoves(ref deckFrom, ref p1ChosenCards);
+            // muove le carte dal null al playerDeck
+            context.PlayerOne.PlayerDeck.DoMoves(ref deckFrom, ref p1NotChosenCards);
+
         }
         #endregion
 
@@ -65,17 +62,13 @@ namespace StateMachine.Gameplay
                 context.GenericForwardCallBack();
         }
 
-        private void P2DeckSetup()
+        private void P2DeckSetupCallback()
         {
             DeckData deckFrom = null;
-            context.PlayerTwo.Hand.Moves(ref deckFrom, ref p2ChosenCards);
-            context.PlayerTwo.Hand.Data.Player = context.PlayerTwo;
-            for (int i = 0; i < p2NotChosenCards.Count; i++)
-            {
-                DeckData deckToAdd = context.PlayerTwo.Deck.Data;
-                CardData cardToMove = p2NotChosenCards[i];
-                DeckController.Move(ref deckToAdd, ref deckFrom, ref cardToMove);
-            }
+            // muove le carte dal null alla mano
+            context.PlayerTwo.HandDeck.DoMoves(ref deckFrom, ref p2ChosenCards);
+            // muove le carte dal null al playerDeck
+            context.PlayerTwo.PlayerDeck.DoMoves(ref deckFrom, ref p2NotChosenCards);
         }
         #endregion
 
@@ -84,8 +77,8 @@ namespace StateMachine.Gameplay
             context.P1mulliganCtrl.OnMulliganEnd -= MulliganEndP1;
             context.P2mulliganCtrl.OnMulliganEnd -= MulliganEndP2;
 
-            P1DeckSetup();
-            P2DeckSetup();
+            P1DeckSetupCallback();
+            P2DeckSetupCallback();
 
             context.UICanvas.DisableAllPanels();
         }

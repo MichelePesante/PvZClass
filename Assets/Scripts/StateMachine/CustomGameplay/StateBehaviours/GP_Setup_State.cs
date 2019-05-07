@@ -13,22 +13,20 @@ namespace StateMachine.Gameplay {
         Canvas uiCanvasInstance;
 
         public override void Enter() {
+            // player setup
+            context.PlayerOne.Init(new PlayerData(PlayerData.Type.one));
+            context.PlayerTwo.Init(new PlayerData(PlayerData.Type.two));
+            // board setup 
+            context.BoardCtrl.SetUp(boardData);
+            // deck setup
+            DeckSetup();
+
+            // UI
             if (context.UICanvas == null) {
                 uiCanvasInstance = Instantiate(canvasPrefab);
             }
-            context.BoardCtrl.SetUp(boardData);
             context.UICanvas.DisableAllPanels();
 
-            DeckSetup();
-
-            if (context.PlayerOne != null && context.PlayerTwo != null)
-            {
-                context.CurrentPlayer = context.PlayerOne;
-
-                // Player Setup
-                context.PlayerOne.Setup();
-                context.PlayerTwo.Setup();
-            }
 
             /// TODO:
             /// - Setup grafica
@@ -45,8 +43,29 @@ namespace StateMachine.Gameplay {
 
         private void DeckSetup()
         {
-            DeckViewController playerOneDeck = context.PlayerOne.Deck;
-            DeckViewController playerTwoDeck = context.PlayerTwo.Deck;
+            if (context.PlayerOne != null && context.PlayerTwo != null) {
+                context.CurrentPlayer = context.PlayerOne;
+                // Player Setup
+                // p1 hand 
+                DeckViewController p1Hand = context.SceneManager.cardViewManager.GetHandDeck(context.PlayerOne.Data.CurrentType);
+                p1Hand.Data = new DeckData();
+                context.PlayerOne.SetHandDeck(p1Hand);
+                // p1 deck 
+                DeckViewController p1Deck = context.SceneManager.cardViewManager.GetPlayerDeck(context.PlayerOne.Data.CurrentType);
+                p1Deck.Data = new DeckData();
+                context.PlayerOne.SetPlayerDeck(p1Deck);
+                // p2 hand
+                DeckViewController p2Hand = context.SceneManager.cardViewManager.GetHandDeck(context.PlayerTwo.Data.CurrentType);
+                p2Hand.Data = new DeckData();
+                context.PlayerTwo.SetHandDeck(p2Hand);
+                // p2 deck 
+                DeckViewController p2Deck = context.SceneManager.cardViewManager.GetPlayerDeck(context.PlayerTwo.Data.CurrentType);
+                p2Deck.Data = new DeckData();
+                context.PlayerTwo.SetPlayerDeck(p2Deck);
+            }
+
+            DeckViewController playerOneDeck = context.PlayerOne.PlayerDeck;
+            DeckViewController playerTwoDeck = context.PlayerTwo.PlayerDeck;
             playerOneDeck.Setup(DeckController.CreateDeck(20));
             playerTwoDeck.Setup(DeckController.CreateDeck(20));
         }

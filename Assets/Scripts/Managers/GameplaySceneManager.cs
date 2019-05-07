@@ -6,7 +6,7 @@ public class GameplaySceneManager : MonoBehaviour {
 
     private static GameplaySceneManager i;
 
-    public Player player1, player2;
+    public PlayerView player1, player2;
     public BoardController BoardCtrl;
     public CardViewManager cardViewManager;
 
@@ -40,25 +40,25 @@ public class GameplaySceneManager : MonoBehaviour {
         return i.cardViewManager;
     }
 
-    public static MulliganController GetMulliganController(Player.Type _type)
+    public static MulliganController GetMulliganController(PlayerData.Type _type)
     {
         switch (_type)
         {
-            case Player.Type.one:
+            case PlayerData.Type.one:
                 return i.mulliganP1;
-            case Player.Type.two:
+            case PlayerData.Type.two:
                 return i.mulliganP2;
         }
         return null;
     }
 
-    public static IPlayer GetPlayer(Player.Type _player)
+    public static PlayerView GetPlayer(PlayerData.Type _player)
     {
         switch (_player)
         {
-            case Player.Type.one:
+            case PlayerData.Type.one:
                 return i.player1;
-            case Player.Type.two:
+            case PlayerData.Type.two:
                 return i.player2;
         }
         return null;

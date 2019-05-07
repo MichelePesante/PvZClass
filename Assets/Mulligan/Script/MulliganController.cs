@@ -19,23 +19,27 @@ public class MulliganController : MonoBehaviour
     private List<CardViewController> cardsOnScreen;
     private List<CardData> cardsToDisplay;
     private List<CardData> cardNotSelected;
-    private IPlayer player;
+    private PlayerView player;
     int cardsToDisplayLastIndex;
     bool changeDone;
 
-    public void Init(DeckData _hand)
+    public void Init(PlayerView _playerView)
     {
-        player = _hand.Player;
+        player = _playerView;
         changeButton.onClick.AddListener(ChangeButtonClicked);
         changeButton.gameObject.SetActive(true);
         continueButton.onClick.AddListener(ContinueButtonClicked);
         continueButton.gameObject.SetActive(false);
         cardsOnScreen = GetComponentsInChildren<CardViewController>().ToList();
         cardsToDisplayLastIndex = 0;
-        cardsToDisplay = _hand.Cards;
+        // HACK: Auto select cards init
+        DeckData newDeckData = new DeckData();
+        DeckData playersDeckData = player.PlayerDeck.Data;
+        DeckController.Draw(ref newDeckData, ref playersDeckData, 8);
+        cardsToDisplay = newDeckData.Cards;
         for (int i = 0; i < cardsOnScreen.Count; i++)
         {
-            cardsOnScreen[i].Setup(cardsToDisplay[i], player);
+            cardsOnScreen[i].Setup(cardsToDisplay[i], player.Data);
             cardsToDisplayLastIndex = i;
         }
         cardNotSelected = new List<CardData>();
@@ -73,7 +77,7 @@ public class MulliganController : MonoBehaviour
     /// Return mulligan owner.
     /// </summary>
     /// <returns></returns>
-    public IPlayer GetPlayer() {
+    public PlayerView GetPlayer() {
         return this.player;
     }
 

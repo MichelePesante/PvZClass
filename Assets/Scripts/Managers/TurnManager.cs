@@ -4,18 +4,21 @@ using UnityEngine;
 public static class TurnManager
 {
     #region Delegate
-    public static Action<IPlayer> OnTurnChange;
+    // TODO: non endrebbe usata una view ma un data quì
+    public static Action<PlayerView> OnTurnChange;
     #endregion
 
-    private static IPlayer activePlayer;
+    // TODO: non endrebbe usata una view ma un data quì
+    private static PlayerView activePlayer;
 
     /// <summary>
     /// Funzione che imposta il player attivo con quello passato come parametro
     /// </summary>
     /// <param name="_player"></param>
-    public static void SetActivePlayer(Player.Type _player)
+    public static void SetActivePlayer(PlayerData.Type _player)
     {
-        IPlayer newActivePlayer = GameplaySceneManager.GetPlayer(_player);
+        // TODO: non endrebbe usata una view ma un data quì
+        PlayerView newActivePlayer = GameplaySceneManager.GetPlayer(_player);
         if (newActivePlayer != null)
         {
             activePlayer = newActivePlayer;
@@ -30,7 +33,7 @@ public static class TurnManager
     /// Funzione che ritorna il player attivo
     /// </summary>
     /// <returns></returns>
-    public static IPlayer GetActivePlayer()
+    public static PlayerView GetActivePlayer() // TODO: non endrebbe usata una view ma un data quì
     {
         return activePlayer;
     }

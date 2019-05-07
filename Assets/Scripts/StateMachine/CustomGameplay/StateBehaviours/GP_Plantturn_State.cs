@@ -4,7 +4,7 @@ using System.Collections;
 namespace StateMachine.Gameplay {
     public class GP_Plantturn_State : GP_BaseState {
         [SerializeField]
-        private Player.Type playerTurn;
+        private PlayerData.Type playerTurn;
 
         public override void Enter()
         {
@@ -20,9 +20,9 @@ namespace StateMachine.Gameplay {
 
             // Debug
             if (Input.GetKeyDown(KeyCode.Z))
-                context.PlayerOne.Life--;
+                context.PlayerOne.Data.CurrentLife--;
             if (Input.GetKeyDown(KeyCode.X))
-                context.PlayerTwo.Life--;
+                context.PlayerTwo.Data.CurrentLife--;
         }
     }
 }

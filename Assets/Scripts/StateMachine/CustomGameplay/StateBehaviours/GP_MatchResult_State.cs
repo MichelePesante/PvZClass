@@ -15,7 +15,7 @@ namespace StateMachine.Gameplay {
             if (WinTextPrefab != null)
             {
                 WinTextGO = Instantiate(WinTextPrefab, context.UICanvas.transform);
-                WinTextGO.GetComponent<Text>().text = context.Winner.CurrentType + " win";
+                WinTextGO.GetComponent<Text>().text = context.Winner.Data.CurrentType + " win";
             }
         }
     }

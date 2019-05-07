@@ -83,9 +83,9 @@ namespace StateMachine.Gameplay {
 
         public GameplaySceneManager SceneManager;
 
-        public IPlayer PlayerOne, PlayerTwo;
-        public IPlayer CurrentPlayer;
-        public IPlayer Winner;
+        public PlayerView PlayerOne, PlayerTwo;
+        public PlayerView CurrentPlayer;
+        public PlayerView Winner;
 
         public Action<bool> OnWinnerCondChanged;
         public BoardController BoardCtrl;

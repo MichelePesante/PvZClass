@@ -45,7 +45,13 @@ public class DeckViewController : MonoBehaviour
             OnCardsMoved(actions);
     }
 
-    public void Move(ref DeckData _deckToMove, ref CardData _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    /// <summary>
+    /// Sposta card da un deck all'altro e scatena evento pubblico con action se <paramref name="_DataUpdatedCallback"/> è null.
+    /// </summary>
+    /// <param name="_deckToMove"></param>
+    /// <param name="_cardToMove"></param>
+    /// <param name="_DataUpdatedCallback"></param>
+    public void DoMove(ref DeckData _deckToMove, ref CardData _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
     {
         DeckData deckFrom = Data;
         DeckData deckTo = _deckToMove;
@@ -57,7 +63,13 @@ public class DeckViewController : MonoBehaviour
             OnCardMoved(action);
     }
 
-    public void Moves(ref DeckData _deckToMove, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    /// <summary>
+    /// Sposta cards da un deck all'altro e scatena evento pubblico con action se <paramref name="_DataUpdatedCallback"/> è null.
+    /// </summary>
+    /// <param name="_deckToMove"></param>
+    /// <param name="_cardToMove"></param>
+    /// <param name="_DataUpdatedCallback"></param>
+    public void DoMoves(ref DeckData _deckToMove, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
     {
         List<GameplayAction> actions = new List<GameplayAction>();
         for (int i = 0; i < _cardToMove.Count; i++)

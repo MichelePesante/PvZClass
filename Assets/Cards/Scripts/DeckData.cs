@@ -18,7 +18,7 @@ public class DeckData
         }
     }
     public List<CardData> OldCards;
-    public IPlayer Player;    
+    public PlayerData Player;    
 
     public DeckData() {
         Cards = new List<CardData>();

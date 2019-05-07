@@ -19,7 +19,7 @@ namespace StateMachine.Card
                 return;
             MulliganController[] mulligans = FindObjectsOfType<MulliganController>();
             for (int i = 0; i < mulligans.Length; i++) {
-                if (mulligans[i].GetPlayer() == context.cardController.GetPlayerOwner())
+                if (mulligans[i].GetPlayer().Data == context.cardController.GetPlayerOwner())
                     context.mulliganCtrl = mulligans[i];
             }
             if (!context.mulliganCtrl)

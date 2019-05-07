@@ -59,9 +59,9 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
     public void PlaceCard(CardViewController _cardToPlace)
     {
-        switch (TurnManager.GetActivePlayer().CurrentType)
+        switch (TurnManager.GetActivePlayer().Data.CurrentType)
         {
-            case Player.Type.one:
+            case PlayerData.Type.one:
                 for (int i = playerASlots.Length - 1; i >= 0; i--)
                 {
                     if (!playerASlots[i].card)
@@ -74,7 +74,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
                     }
                 }
                 break;
-            case Player.Type.two:
+            case PlayerData.Type.two:
                 for (int i = 0; i < playerBSlots.Length; i++)
                 {
                     if (!playerBSlots[i].card)

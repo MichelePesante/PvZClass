@@ -32,6 +32,26 @@ public class CardViewManager : MonoBehaviour
         }
     }
 
+    public DeckViewController GetHandDeck(PlayerData.Type currentType) {
+        switch (currentType) {
+            case PlayerData.Type.one:
+                return p1HandView;
+            case PlayerData.Type.two:
+                return p2HandView;
+        }
+        return null;
+    }
+
+    public DeckViewController GetPlayerDeck(PlayerData.Type currentType) {
+        switch (currentType) {
+            case PlayerData.Type.one:
+                return p1DeckView;
+            case PlayerData.Type.two:
+                return p2DeckView;
+        }
+        return null;
+    }
+
     private void HandleOnCardMoved(GameplayAction action)
     {
         //TODO controllare il deck a cui va aggiunto
@@ -75,7 +95,7 @@ public class CardViewManager : MonoBehaviour
         AddCardToDeck(deckTo, changedCard);
     }
 
-    private DeckViewController GetDeckViewControllerByDeckData(DeckData _data)
+    public DeckViewController GetDeckViewControllerByDeckData(DeckData _data)
     {
         if (_data == null)
             return null;

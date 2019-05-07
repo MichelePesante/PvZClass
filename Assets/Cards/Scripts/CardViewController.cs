@@ -49,7 +49,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
             onDataChanged(_data);
         }
     }
-    private IPlayer playerOwner;
+    private PlayerData playerOwner;
 
     private GraphicRaycaster graphicRaycaster;
     private EventSystem eventSystem;
@@ -78,7 +78,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         cardSM.Setup();
     }
 
-    public void Setup(CardData _data, IPlayer _player)
+    public void Setup(CardData _data, PlayerData _player)
     {
         rectTransform = GetComponent<RectTransform>();
         cam = Camera.main;
@@ -164,7 +164,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     /// <summary>
     /// Funzione che ritorna il player
     /// </summary>
-    public IPlayer GetPlayerOwner()
+    public PlayerData GetPlayerOwner()
     {
         return playerOwner;
     }

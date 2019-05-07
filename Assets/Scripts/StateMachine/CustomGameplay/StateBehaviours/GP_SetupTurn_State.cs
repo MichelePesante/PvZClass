@@ -14,12 +14,12 @@ namespace StateMachine.Gameplay {
             context.GenericForwardCallBack();
         }
 
-        void setupTurnPlayer(IPlayer _player)
+        void setupTurnPlayer(PlayerView _player)
         {
-            _player.MaxEnergy++;
-            _player.CurrentEnergy = context.CurrentPlayer.MaxEnergy;
-            DeckData decktoDrawFrom = _player.Deck.Data;
-            _player.Hand.Draw(ref decktoDrawFrom, 1);
+            _player.Data.MaxEnergy++;
+            _player.Data.CurrentEnergy = context.CurrentPlayer.Data.MaxEnergy;
+            DeckData decktoDrawFrom = _player.PlayerDeck.Data;
+            _player.HandDeck.Draw(ref decktoDrawFrom, 1);
         }
     }
 

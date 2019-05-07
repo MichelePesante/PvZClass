@@ -17,13 +17,13 @@ public static class LaneController
     {
         if (_card.playableLane == _lane.type)
         {
-            switch (TurnManager.GetActivePlayer().CurrentType)
+            switch (TurnManager.GetActivePlayer().Data.CurrentType)
             {
-                case Player.Type.one:
+                case PlayerData.Type.one:
                     if (_lane.playerAFreeSlots > 0)
                         return true;
                     break;
-                case Player.Type.two:
+                case PlayerData.Type.two:
                     if (_lane.playerBFreeSlots > 0)
                         return true;
                     break;
