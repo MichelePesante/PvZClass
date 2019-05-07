@@ -8,6 +8,8 @@ public class GameplaySceneManager : MonoBehaviour {
 
     public Player player1, player2;
     public BoardController BoardCtrl;
+    public CardViewManager cardViewManager;
+
     [Header("UI Elements")]
     public UIManager GlobalUI;
     public MulliganController mulliganP1;
@@ -20,7 +22,7 @@ public class GameplaySceneManager : MonoBehaviour {
     }
 
     public void Setup() {
-
+        cardViewManager.Init();
     }
 
     public static GameFlowButtonController GetGameFlowButton()
@@ -31,6 +33,11 @@ public class GameplaySceneManager : MonoBehaviour {
     public static BoardController GetBoardController()
     {
         return i.BoardCtrl;
+    }
+
+    public static CardViewManager GetCardViewManager()
+    {
+        return i.cardViewManager;
     }
 
     public static MulliganController GetMulliganController(Player.Type _type)

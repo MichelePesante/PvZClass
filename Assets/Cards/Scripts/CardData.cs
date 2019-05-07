@@ -17,14 +17,30 @@ public class CardData : ScriptableObject {
     public LaneType playableLane;
     #endregion
 
+    #region State
+    public Action<CardState> OnCurrentStateChanged;
+
+    private CardState _currentState;
+    public CardState CurrentState
+    {
+        get { return _currentState; }
+        set
+        {
+            _currentState = value;
+            if (OnCurrentStateChanged != null)
+            {
+                OnCurrentStateChanged(_currentState);
+            }
+        }
+    }
+    #endregion
+
     private static int cardCounter;
     public Sprite CardImage;
 
     public string NameToShow {
         get { return CardName.ToUpper(); }
     }
-
-    public Highlight Higlight { get; internal set; }
 
     [HideInInspector]
     public int Cost, Attack, Life;
@@ -44,11 +60,24 @@ public class CardData : ScriptableObject {
 
     public enum Faction { Hipster = 0, Alcool = 1 }
 
-    public enum Highlight { NoHighlight, Highlighted, Lowlight }
-
     internal void ResetOriginalLife() {
         Cost = StartCost;
         Life = StartLife;
         Attack = StartAttack;
     }
+
+    public override string ToString()
+    {
+        return string.Format("{0}({1})", NameToShow, cardCounter);
+    }
+}
+
+public enum CardState
+{
+    Inactive = -1,
+    Idle = 0,
+    Playable = 1,
+    Unplayable = 2,
+    Drag = 3,
+    Played = 4,
 }

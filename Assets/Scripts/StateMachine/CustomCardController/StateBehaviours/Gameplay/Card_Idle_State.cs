@@ -9,16 +9,16 @@ namespace StateMachine.Card
         {
             initBoardController();
 
-            context.cardController.SetHiglight(CardData.Highlight.NoHighlight);
+            context.cardController.SetHiglight(CardViewController.HighlightState.NoHighlight);
             if (context.cardController.GetPlayerOwner() != TurnManager.GetActivePlayer())
             {
-                context.cardController.CurrentState = CardViewController.State.Inactive;
+                context.cardController.Data.CurrentState = CardState.Inactive;
                 return;
             }
             if (context.boardCtrl.CheckCardPlayability(context.cardController))
-                context.cardController.CurrentState = CardViewController.State.Playable;
+                context.cardController.Data.CurrentState = CardState.Playable;
             else
-                context.cardController.CurrentState = CardViewController.State.Unplayable;
+                context.cardController.Data.CurrentState = CardState.Unplayable;
         }
 
         private void initBoardController() {

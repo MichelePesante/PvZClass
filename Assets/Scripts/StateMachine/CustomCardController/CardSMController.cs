@@ -22,11 +22,11 @@ namespace StateMachine.Card {
                 OnCardMulliganChanged = HandleCardMulliganChanged,
                 boardCtrl = null,                
             };
-            tmpContext.cardController.OnCurrentStateChanged += OnCardStateChanged;
+            tmpContext.cardController.Data.OnCurrentStateChanged += OnCardStateChanged;
             return tmpContext;
         }
 
-        private void OnCardStateChanged(CardViewController.State _currentState) {
+        private void OnCardStateChanged(CardState _currentState) {
             SM.SetInteger("CardStateInHand", (int)_currentState);
         }
 

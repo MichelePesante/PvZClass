@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StateMachine.Gameplay {
+namespace StateMachine.Gameplay
+{
 
-    public class GP_Mulligan_State : GP_BaseState {
+    public class GP_Mulligan_State : GP_BaseState
+    {
 
-        public override void Enter() {
+        public override void Enter()
+        {
 
             mulliganPlayerCount = 0;
             // Mi iscrivo all'evento di fine scelta carte per ogni mulligun del player
@@ -21,39 +24,70 @@ namespace StateMachine.Gameplay {
         }
 
         int mulliganPlayerCount;
-        private void MulliganEndP1(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
-            context.PlayerOne.Hand.Setup(new DeckData(_chosenCards));
+
+        #region P1
+        List<CardData> p1ChosenCards;
+        List<CardData> p1NotChosenCards;
+        private void MulliganEndP1(List<CardData> _chosenCards, List<CardData> _notChosenCards)
+        {
+            p1ChosenCards = _chosenCards;
+            p1NotChosenCards = _notChosenCards;
+
+            mulliganPlayerCount++;
+            if (mulliganPlayerCount == 2)
+                context.GenericForwardCallBack();
+        }
+
+        private void P1DeckSetup()
+        {
+            DeckData deckFrom = null;
+            context.PlayerOne.Hand.Moves(ref deckFrom, ref p1ChosenCards);
             context.PlayerOne.Hand.Data.Player = context.PlayerOne;
-            context.P1firstHandCardDrawn = _chosenCards;
-            for (int i = 0; i < _notSelectedCards.Count; i++)
+            for (int i = 0; i < p1NotChosenCards.Count; i++)
             {
-                DeckController.AddCard(context.PlayerOne.Deck.Data, _notSelectedCards[i]);
+                DeckData deckToAdd = context.PlayerOne.Deck.Data;
+                CardData cardToMove = p1NotChosenCards[i];
+                DeckController.Move(ref deckToAdd, ref deckFrom, ref cardToMove);
             }
+        }
+        #endregion
+
+        #region P2
+        List<CardData> p2ChosenCards;
+        List<CardData> p2NotChosenCards;
+        private void MulliganEndP2(List<CardData> _chosenCards, List<CardData> _notChosenCards)
+        {
+            p2ChosenCards = _chosenCards;
+            p2NotChosenCards = _notChosenCards;
+
             mulliganPlayerCount++;
             if (mulliganPlayerCount == 2)
                 context.GenericForwardCallBack();
         }
 
-        private void MulliganEndP2(List<CardData> _chosenCards, List<CardData> _notSelectedCards) {
-            context.PlayerTwo.Hand.Setup(new DeckData(_chosenCards));
+        private void P2DeckSetup()
+        {
+            DeckData deckFrom = null;
+            context.PlayerTwo.Hand.Moves(ref deckFrom, ref p2ChosenCards);
             context.PlayerTwo.Hand.Data.Player = context.PlayerTwo;
-            context.P2firstHandCardDrawn = _chosenCards;
-            for (int i = 0; i < _notSelectedCards.Count; i++)
+            for (int i = 0; i < p2NotChosenCards.Count; i++)
             {
-                DeckController.AddCard(context.PlayerTwo.Deck.Data, _notSelectedCards[i]);
-            }            
-            mulliganPlayerCount++;
-            if (mulliganPlayerCount == 2)
-                context.GenericForwardCallBack();
+                DeckData deckToAdd = context.PlayerTwo.Deck.Data;
+                CardData cardToMove = p2NotChosenCards[i];
+                DeckController.Move(ref deckToAdd, ref deckFrom, ref cardToMove);
+            }
         }
+        #endregion
 
-        public override void Exit() {
+        public override void Exit()
+        {
             context.P1mulliganCtrl.OnMulliganEnd -= MulliganEndP1;
             context.P2mulliganCtrl.OnMulliganEnd -= MulliganEndP2;
 
+            P1DeckSetup();
+            P2DeckSetup();
+
             context.UICanvas.DisableAllPanels();
         }
-
     }
-
 }

@@ -14,6 +14,7 @@ namespace StateMachine.Gameplay {
         private GameplaySceneManager sceneManager;
 
         private void Start() {
+            sceneManager.Setup();
             Setup();
         }
 
@@ -87,8 +88,6 @@ namespace StateMachine.Gameplay {
         public IPlayer Winner;
 
         public Action<bool> OnWinnerCondChanged;
-        public List<CardData> P1firstHandCardDrawn = new List<CardData>();
-        public List<CardData> P2firstHandCardDrawn = new List<CardData>();
         public BoardController BoardCtrl;
 
         public GameFlowButtonController GameFlowButton;
