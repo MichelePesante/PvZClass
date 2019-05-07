@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2610679572826983605}
   - component: {fileID: 1348440083316827355}
-  - component: {fileID: 385747657}
+  - component: {fileID: 6074056079729704508}
   m_Layer: 5
   m_Name: P2HandUI
   m_TagString: Untagged
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
---- !u!114 &385747657
+--- !u!114 &6074056079729704508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4529307819561145631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58f720456e8595841aa27b7cbdc93b3a, type: 3}
+  m_Script: {fileID: 11500000, guid: e077487ae8e33444f9e630da6f7ac5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6246813778059797049
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6918280719792785893}
   - component: {fileID: 8173708192714575925}
-  - component: {fileID: 2128244503}
+  - component: {fileID: 3420035627122955855}
   m_Layer: 5
   m_Name: P1HandUI
   m_TagString: Untagged
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
---- !u!114 &2128244503
+--- !u!114 &3420035627122955855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6246813778059797049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58f720456e8595841aa27b7cbdc93b3a, type: 3}
+  m_Script: {fileID: 11500000, guid: e077487ae8e33444f9e630da6f7ac5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1904721429
