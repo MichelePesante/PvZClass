@@ -866,6 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e077487ae8e33444f9e630da6f7ac5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentViewType: 0
 --- !u!4 &1640084294
 Transform:
   m_ObjectHideFlags: 0
@@ -921,6 +922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e077487ae8e33444f9e630da6f7ac5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentViewType: 0
 --- !u!4 &2004908266
 Transform:
   m_ObjectHideFlags: 0

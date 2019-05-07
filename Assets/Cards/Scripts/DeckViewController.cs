@@ -20,6 +20,9 @@ public class DeckViewController : MonoBehaviour
         }
     }
 
+    public enum ViewType { covered, visible, none }
+    public ViewType CurrentViewType;
+
     protected void LateSetup()
     {
 

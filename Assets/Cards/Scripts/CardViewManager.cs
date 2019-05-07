@@ -62,12 +62,20 @@ public class CardViewManager : MonoBehaviour
         //Se non c'è un deck da cui la carta deriva la istanzio a prescindere
         if (deckFrom == null)
         {
-            AddCardToDeck(deckTo, changedCard);
+            switch (deckTo.CurrentViewType) {
+                case DeckViewController.ViewType.covered:
+                    break;
+                case DeckViewController.ViewType.visible:
+                    AddCardToDeck(deckTo, changedCard);
+                    break;
+                case DeckViewController.ViewType.none:
+                    break;
+            }
             return;
         }
 
         //Se non c'è un deck destinatario la distruggo a prescindere
-        if (deckTo == null)
+        if (deckTo == null || deckTo.CurrentViewType == DeckViewController.ViewType.none)
         {
             foreach (CardViewController card in instantiatedCards)
             {
