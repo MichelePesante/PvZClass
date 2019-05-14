@@ -39,5 +39,36 @@ public class PlayerView : MonoBehaviour {
         PlayerController.SetPlayerDeck(Data, deckView.Data);
     }
 
+    /// <summary>
+    /// Restituisce la deckview del player corrente della <paramref name="_lane"/>.
+    /// </summary>
+    /// <param name="_lane"></param>
+    /// <returns></returns>
+    public DeckViewController GetMyLaneDeck(LaneData _lane) {
+        DeckData returnDeck = null;
+        switch (Data.CurrentType) {
+            case PlayerData.Type.one:
+                returnDeck = _lane.playerAPlacedDeck;
+                break;
+            case PlayerData.Type.two:
+                returnDeck = _lane.playerBPlacedDeck;
+                break; 
+            default:
+                break;
+        }
+
+        if (returnDeck != null) {
+            foreach (var deckView in FindObjectsOfType<DeckViewController>()) {
+                if (deckView.Data == returnDeck)
+                    return deckView;
+            }
+        }
+        return null;
+    }
+
+    public DeckViewController GetHandView() {
+        return HandDeck;
+    }
+
 }
 

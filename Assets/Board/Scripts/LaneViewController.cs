@@ -62,8 +62,8 @@ public class LaneViewController : MonoBehaviour, IDetectable
         Data = Instantiate(_data);
 
         //create two deckdata and assing to lane data.
-        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), Player.Type.one);
-        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), Player.Type.two);
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), PlayerData.Type.one);
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), PlayerData.Type.two);
 
         PlayerASlotsView.Setup(Data.playerAPlacedDeck);
         PlayerBSlotsView.Setup(Data.playerBPlacedDeck);
@@ -97,29 +97,14 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
     public void PlaceCard(CardViewController _cardToPlace)
     {
-        switch (TurnManager.GetActivePlayer().Data.CurrentType)
-        {
-            case Player.Type.one:
-                //TODO: generate gameplay action
-                //add card data to placed deck data
-                DeckController.AddCard(PlayerASlotsView.Data, _cardToPlace.Data);
+        DeckData deckTo = TurnManager.GetActivePlayer().GetMyLaneDeck(Data).Data;
+        DeckData deckFrom = TurnManager.GetActivePlayer().GetHandView().Data;
+        CardData cardToAdd = _cardToPlace.Data;
+        DeckController.Move(ref deckTo, ref deckFrom, ref cardToAdd);
 
-                _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
+        _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
 
-                _cardToPlace.transform.parent = PlayerASlotsView.transform;
-
-                break;
-            case Player.Type.two:
-                //TODO: generate gameplay action
-                //add card data to placed deck data
-                DeckController.AddCard(PlayerBSlotsView.Data, _cardToPlace.Data);
-
-                _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
-
-                _cardToPlace.transform.parent = PlayerBSlotsView.transform;
-
-                break;
-        }
+        _cardToPlace.transform.parent = TurnManager.GetActivePlayer().GetMyLaneDeck(Data).transform;
     }
 
     public void OnEnter(IDetecter _detecter)

@@ -58,7 +58,7 @@ namespace StateMachine.Gameplay
             }
             else if (p1CurrentCard && !p2CurrentCard)
             {
-                p1Cards.Player.Life -= p1CurrentCard.Attack;
+                p1Cards.Player.CurrentLife -= p1CurrentCard.Attack;
             }
 
             //p2 attack
@@ -69,7 +69,7 @@ namespace StateMachine.Gameplay
             }
             else if (!p1CurrentCard && p2CurrentCard)
             {
-                p2Cards.Player.Life -= p2CurrentCard.Attack;
+                p2Cards.Player.CurrentLife -= p2CurrentCard.Attack;
             }
 
             yield return null;
