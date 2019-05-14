@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f02c0e6ed4ba143bdbe7ef7bf31da4, type: 3}
   m_Name: Grass
   m_EditorClassIdentifier: 
-  LaneColor: {r: 0.017205596, g: 1, b: 0, a: 1}
+  LineIndex: 0
+  LaneColor: {r: 0.22352943, g: 0.70980394, b: 0.2901961, a: 1}
