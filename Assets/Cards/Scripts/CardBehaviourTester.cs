@@ -10,8 +10,7 @@ public class CardBehaviourTester : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boardController.SetUp();
-        boardController.InstantiateBoard();
+        boardController.SetUp(null, true);
         cardController.Setup();
     }
 }

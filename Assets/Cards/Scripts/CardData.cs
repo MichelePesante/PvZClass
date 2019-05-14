@@ -35,6 +35,8 @@ public class CardData : ScriptableObject {
     }
     #endregion
 
+    public Action<CardData> OnDataChanged;
+ 
     private static int cardCounter;
     public Sprite CardImage;
 
@@ -64,6 +66,9 @@ public class CardData : ScriptableObject {
         Cost = StartCost;
         Life = StartLife;
         Attack = StartAttack;
+
+        if(OnDataChanged != null)
+            OnDataChanged(this);
     }
 
     public override string ToString()

@@ -18,17 +18,28 @@ public class DeckData
         }
     }
     public List<CardData> OldCards;
-    public PlayerData Player;
+    public IPlayer Player;
+    public int MaxCards;
 
     public DeckData() {
         Cards = new List<CardData>();
         OldCards = new List<CardData>();
         Player = null;
+        MaxCards = -1;
     }
 
-    public DeckData(List<CardData> _cards) {
+    public DeckData(List<CardData> _cards, int _maxCards) {
         Cards = _cards;
         OldCards = new List<CardData>();
+        MaxCards = _maxCards;
+        Player = null;
+    }
+
+    public DeckData(int _maxCards)
+    {
+        Cards = new List<CardData>();
+        OldCards = new List<CardData>();
+        MaxCards = _maxCards;
         Player = null;
     }
 }

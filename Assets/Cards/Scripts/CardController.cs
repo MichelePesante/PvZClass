@@ -19,6 +19,8 @@ public static class CardController
     public static CardData UpdateLife(CardData _data, int _value)
     {
         _data.Life = _value;
+        if (_data.OnDataChanged != null)
+            _data.OnDataChanged(_data);
         return _data;
     }
 

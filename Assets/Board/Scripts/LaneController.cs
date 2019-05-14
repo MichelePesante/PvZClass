@@ -19,17 +19,28 @@ public static class LaneController
         {
             switch (TurnManager.GetActivePlayer().Data.CurrentType)
             {
-                case PlayerData.Type.one:
-                    if (_lane.playerAFreeSlots > 0)
+                case Player.Type.one:
+                    if (_lane.playerAPlacedDeck.Cards.Count < _lane.playerAPlacedDeck.MaxCards)
                         return true;
                     break;
-                case PlayerData.Type.two:
-                    if (_lane.playerBFreeSlots > 0)
+                case Player.Type.two:
+                    if (_lane.playerBPlacedDeck.Cards.Count < _lane.playerBPlacedDeck.MaxCards)
                         return true;
                     break;
             }
         }
 
         return false;
+    }
+
+    public static void SetPlayerSlots(LaneData _dataToSet, DeckData _playerSlots, Player.Type _playerType)
+    {
+        switch (_playerType)
+        {
+            case Player.Type.one: _dataToSet.playerAPlacedDeck = _playerSlots;
+                break;
+            case Player.Type.two: _dataToSet.playerBPlacedDeck = _playerSlots;
+                break;
+        }
     }
 }

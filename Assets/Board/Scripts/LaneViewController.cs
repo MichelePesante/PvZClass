@@ -5,32 +5,70 @@ using System.Collections.Generic;
 public class LaneViewController : MonoBehaviour, IDetectable
 {
     #region Serialized Fields
+
     LaneData _data;
     public LaneData Data
     {
         get { return _data; }
         private set { _data = value; }
     }
+
+    [Header("UI Objects")]
     public Image LaneColourImage;
     public Image HighlightImage;
     [SerializeField] RectTransform SlotPrefab;
-    [SerializeField] RectTransform playerAZone;
-    [SerializeField] RectTransform playerBZone;
+    [SerializeField] DeckViewController _playerASlotsView;
+    [SerializeField] DeckViewController _playerBSlotsView;
+
     #endregion
 
     public enum Highlight { playable, unplayable, off }
 
-    CardSlot[] playerASlots, playerBSlots;
+    DeckViewController PlayerASlotsView
+    {
+        get
+        {
+            if (_playerASlotsView.Data == null)
+                _playerASlotsView.Setup(Data.playerAPlacedDeck);
+
+            return _playerASlotsView;
+        }
+        set
+        {
+            _playerASlotsView = value;
+        }
+    }
+
+    DeckViewController PlayerBSlotsView
+    {
+        get
+        {
+            if (_playerBSlotsView.Data == null)
+                _playerBSlotsView.Setup(Data.playerBPlacedDeck);
+
+            return _playerBSlotsView;
+        }
+        set
+        {
+            _playerBSlotsView = value;
+        }
+    }
 
     #region API
 
     public LaneViewController SetUp(LaneData _data, int _cardSlotsCount)
     {
+        //instantiate lane data.
         Data = Instantiate(_data);
-        Data.playerAFreeSlots = _cardSlotsCount;
-        Data.playerBFreeSlots = _cardSlotsCount;
-        CardSlotsSetup(ref playerASlots, _cardSlotsCount, 0);
-        CardSlotsSetup(ref playerBSlots, _cardSlotsCount, 1);
+
+        //create two deckdata and assing to lane data.
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), Player.Type.one);
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), Player.Type.two);
+
+        PlayerASlotsView.Setup(Data.playerAPlacedDeck);
+        PlayerBSlotsView.Setup(Data.playerBPlacedDeck);
+
+        //view stuff
         LaneColourImage.color = Data.type.LaneColor;
         return this;
     }
@@ -61,31 +99,25 @@ public class LaneViewController : MonoBehaviour, IDetectable
     {
         switch (TurnManager.GetActivePlayer().Data.CurrentType)
         {
-            case PlayerData.Type.one:
-                for (int i = playerASlots.Length - 1; i >= 0; i--)
-                {
-                    if (!playerASlots[i].card)
-                    {
-                        _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
-                        playerASlots[i].card = _cardToPlace;
-                        _cardToPlace.transform.position = playerASlots[i].slot.position;
-                        Data.playerAFreeSlots--;
-                        break;
-                    }
-                }
+            case Player.Type.one:
+                //TODO: generate gameplay action
+                //add card data to placed deck data
+                DeckController.AddCard(PlayerASlotsView.Data, _cardToPlace.Data);
+
+                _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
+
+                _cardToPlace.transform.parent = PlayerASlotsView.transform;
+
                 break;
-            case PlayerData.Type.two:
-                for (int i = 0; i < playerBSlots.Length; i++)
-                {
-                    if (!playerBSlots[i].card)
-                    {
-                        _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
-                        playerBSlots[i].card = _cardToPlace;
-                        _cardToPlace.transform.position = playerBSlots[i].slot.position;
-                        Data.playerBFreeSlots--;
-                        break;
-                    }
-                }
+            case Player.Type.two:
+                //TODO: generate gameplay action
+                //add card data to placed deck data
+                DeckController.AddCard(PlayerBSlotsView.Data, _cardToPlace.Data);
+
+                _cardToPlace.GetPlayerOwner().CurrentEnergy -= _cardToPlace.Data.Cost;
+
+                _cardToPlace.transform.parent = PlayerBSlotsView.transform;
+
                 break;
         }
     }
@@ -117,22 +149,30 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
     #endregion
 
-    void CardSlotsSetup(ref CardSlot[] _slotsToSetup, int _slotCount, int _player)
+    /// <summary>
+    /// Initialize Lane Datas and instantiates needed transforms.
+    /// </summary>
+    /// <param name="_laneDeckToSetup"></param>
+    /// <param name="_cardSlotsCount"></param>
+    /// <param name="_player"></param>
+    void CardSlotsSetup(DeckViewController _laneDeckToSetup, int _cardSlotsCount, int _player)
     {
-        _slotsToSetup = new CardSlot[_slotCount];
+        //if (_player == 0)
+        //{
+        //    Data.playerAPlacedDeck.MaxCards = _cardSlotsCount;
+        //}
+        //else
+        //{
+        //    Data.playerBPlacedDeck.MaxCards = _cardSlotsCount;
+        //}
 
-        RectTransform slotsParent = _player == 0 ? playerAZone : playerBZone;
+        //_laneDeckToSetup.Data.Player = _player == 0 ? GameplaySceneManager.GetPlayer(Player.Type.one) : GameplaySceneManager.GetPlayer(Player.Type.one);
 
-        for (int i = 0; i < _slotsToSetup.Length; i++)
-        {
-            RectTransform t = Instantiate(SlotPrefab, slotsParent);
-            _slotsToSetup[i].slot = t;
-        }
-    }
+        //RectTransform slotsParent = _laneDeckToSetup.Data.Player.CurrentType == Player.Type.one ? PlayerASlotsView.transform : PlayerBSlotsView.transform;
 
-    struct CardSlot
-    {
-        public CardViewController card;
-        public RectTransform slot;
+        //for (int i = 0; i < _laneDeckToSetup.Data.MaxCards; i++)
+        //{
+        //    RectTransform t = Instantiate(SlotPrefab, slotsParent);
+        //}
     }
 }

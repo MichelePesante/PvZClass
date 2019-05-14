@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Lane", menuName = "Board/New Lane")]
 public class LaneData : ScriptableObject
 {
     public LaneType type;
 
-    [HideInInspector] public int playerAFreeSlots;
-    [HideInInspector] public int playerBFreeSlots;
+    [HideInInspector] public DeckData playerAPlacedDeck;
+    [HideInInspector] public DeckData playerBPlacedDeck;
 }

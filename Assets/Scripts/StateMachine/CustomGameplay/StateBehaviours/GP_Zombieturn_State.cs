@@ -11,6 +11,7 @@ namespace StateMachine.Gameplay {
             TurnManager.SetActivePlayer(playerTurn);
             DeckController.SetCardsState(GameplaySceneManager.GetPlayer(playerTurn).HandDeck, CardState.Idle);
             context.GameFlowButton.GoToNextPhase();
+            context.GameFlowButton.ToggleGoNextButton(true);
         }
 
         public override void Tick()

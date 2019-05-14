@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 369218767246153367}
   - component: {fileID: 7376256899289120682}
+  - component: {fileID: 6289890257908827255}
   m_Layer: 5
   m_Name: PlayerB
   m_TagString: Untagged
@@ -59,6 +60,19 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &6289890257908827255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822480461471207344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e077487ae8e33444f9e630da6f7ac5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiatedCards: []
 --- !u!1 &3183401491664897577
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,8 +137,8 @@ MonoBehaviour:
   HighlightImage: {fileID: 4587227804012106541}
   SlotPrefab: {fileID: 4916618416995989199, guid: 7f37134ba268a394e8f08030642c9e32,
     type: 3}
-  playerAZone: {fileID: 5677425532094266983}
-  playerBZone: {fileID: 369218767246153367}
+  _playerASlotsView: {fileID: 5265907001833313523}
+  _playerBSlotsView: {fileID: 6289890257908827255}
 --- !u!114 &3631958638810669898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5677425532094266983}
   - component: {fileID: 6589677295298518398}
+  - component: {fileID: 5265907001833313523}
   m_Layer: 5
   m_Name: PlayerA
   m_TagString: Untagged
@@ -308,6 +323,19 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &5265907001833313523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6757692379700866626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e077487ae8e33444f9e630da6f7ac5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiatedCards: []
 --- !u!1 &7464770506916958096
 GameObject:
   m_ObjectHideFlags: 0
