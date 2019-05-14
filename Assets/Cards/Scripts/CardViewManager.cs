@@ -125,7 +125,7 @@ public class CardViewManager : MonoBehaviour
         instantiatedCards.Add(instantiatedCard);
         instantiatedCard.transform.parent = _deckToAdd.transform;
         instantiatedCard.transform.position = _deckToAdd.transform.position;
-        instantiatedCard.Setup(_cardData, _deckToAdd.Data.Player);
+        instantiatedCard.Setup(_cardData, GameplaySceneManager.GetPlayer(_deckToAdd.Data.Player.CurrentType));
     }
 
     private void OnDisable()

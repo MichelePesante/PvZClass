@@ -42,7 +42,7 @@ public class BoardController : MonoBehaviour {
 
     public bool CheckCardPlayability(CardViewController _cardToCheck) {
 
-        if(_cardToCheck.GetPlayerOwner().CurrentEnergy < _cardToCheck.Data.Cost)
+        if(_cardToCheck.GetPlayerOwner().Data.CurrentEnergy < _cardToCheck.Data.Cost)
         {
             return false;
         }
