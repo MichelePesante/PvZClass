@@ -41,7 +41,7 @@ namespace StateMachine.Card
                         lane.PlaceCard(context.cardController);
                         lanePlaced = true;
                         context.cardController.Data.CurrentState = CardState.Played;
-                        DeckController.SetCardsState(context.cardController.GetPlayerOwner().HandDeck, CardState.Idle);
+                        DeckController.ResetCardsState(context.cardController.GetPlayerOwner().HandDeck);
                     }
                 }               
             }

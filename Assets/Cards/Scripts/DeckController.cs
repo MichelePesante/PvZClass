@@ -51,13 +51,13 @@ public static class DeckController
         return _deck.Cards[indexCard];
     }
 
-    public static DeckViewController SetCardsState(DeckViewController _deck, CardState state)
+    public static DeckViewController ResetCardsState(DeckViewController _deck)
     {
         Debug.Log("NOOOO INCREDIBILEH");
 
         foreach (CardData card in _deck.Data.Cards)
         {
-            card.CurrentState = state;
+            card.CurrentState = CardState.Idle;
         }
         return _deck;
     }
