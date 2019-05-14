@@ -44,6 +44,8 @@ public class PlayerData {
         get { return life; }
         set {
             life = value;
+            if (OnLifeChange != null)
+                OnLifeChange();
             if (life <= 0) {
                 if (Lost != null)
                     Lost(this);
@@ -58,7 +60,11 @@ public class PlayerData {
 
     public int CurrentEnergy {
         get { return energy; }
-        set { energy = value; }
+        set {
+            energy = value;
+            if (OnEnergyChange != null)
+                OnEnergyChange();
+        }
     }
 
     public DeckData Hand { get; internal set; }
@@ -68,6 +74,8 @@ public class PlayerData {
 
     #region events
     public event PlayerEvent.PlayerLost Lost;
+    public event PlayerEvent.DataChange OnEnergyChange;
+    public event PlayerEvent.DataChange OnLifeChange;
     #endregion
 
 

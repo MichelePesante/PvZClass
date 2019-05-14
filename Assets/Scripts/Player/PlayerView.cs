@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 public class PlayerView : MonoBehaviour {
+
+    [SerializeField] Text energyText, lifeText;
+
     public PlayerData Data { get; set; }
     public DeckViewController HandDeck { get; protected set; }
     public DeckViewController PlayerDeck { get; protected set; }
@@ -7,6 +12,8 @@ public class PlayerView : MonoBehaviour {
     public void Init(PlayerData _data) {
         Data = _data;
         Data.Lost += onLost;
+        Data.OnEnergyChange += onEnergyChange;
+        Data.OnLifeChange += onLifeChange;
     }
 
     /// <summary>
@@ -15,6 +22,18 @@ public class PlayerView : MonoBehaviour {
     /// <param name="player"></param>
     private void onLost(PlayerData player) {
         Destroy(gameObject);
+    }
+
+    void onEnergyChange()
+    {
+        if (energyText)
+            energyText.text = Data.CurrentEnergy.ToString();
+    }
+
+    void onLifeChange()
+    {
+        if (lifeText)
+            lifeText.text = Data.CurrentLife.ToString();
     }
 
     public void CardPlayed(CardData cardData) {

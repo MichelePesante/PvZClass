@@ -16,9 +16,11 @@ public interface IPlayer
 
     void Setup();
     event PlayerEvent.PlayerLost Lost;
+
 }
 
 public class PlayerEvent
 {
     public delegate void PlayerLost(PlayerData player);
+    public delegate void DataChange();
 }
