@@ -39,7 +39,7 @@ public class MulliganController : MonoBehaviour
         cardsToDisplay = newDeckData.Cards;
         for (int i = 0; i < cardsOnScreen.Count; i++)
         {
-            cardsOnScreen[i].Setup(cardsToDisplay[i], player.Data);
+            cardsOnScreen[i].Setup(cardsToDisplay[i], player);
             cardsToDisplayLastIndex = i;
         }
         cardNotSelected = new List<CardData>();
