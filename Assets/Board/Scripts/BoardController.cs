@@ -11,6 +11,10 @@ public class BoardController : MonoBehaviour {
     [SerializeField]
     private BoardData boardData;
 
+    [Header("Prefabs")]
+    [SerializeField]
+    private Transform laneContainer;
+
     public const int CardSlotsPerPlayer = 2;
 
     public List<LaneViewController> laneUIs;
@@ -31,11 +35,11 @@ public class BoardController : MonoBehaviour {
     }
 
     public void InstantiateBoard() {
-        for (int i = 0; i < transform.childCount; i++) {
+        for (int i = 0; i < laneContainer.transform.GetComponentsInChildren<LaneViewController>().Length; i++) {
             Destroy(transform.GetChild(i).gameObject);
         }
         foreach (LaneData l in boardData.Lanes) {
-            LaneViewController instantiatedLane = Instantiate(LanePrefab, transform).SetUp(l, CardSlotsPerPlayer);
+            LaneViewController instantiatedLane = Instantiate(LanePrefab, laneContainer).SetUp(l, CardSlotsPerPlayer);
             laneUIs.Add(instantiatedLane);
         }
     }
