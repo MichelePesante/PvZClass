@@ -37,9 +37,13 @@ public static class LaneController
     {
         switch (_playerType)
         {
-            case PlayerData.Type.one: _dataToSet.playerAPlacedDeck = _playerSlots;
+            case PlayerData.Type.one:
+                _dataToSet.playerAPlacedDeck = _playerSlots;
+                _dataToSet.playerAPlacedDeck.Player = GameplaySceneManager.GetPlayer(PlayerData.Type.one).Data;
                 break;
-            case PlayerData.Type.two: _dataToSet.playerBPlacedDeck = _playerSlots;
+            case PlayerData.Type.two:
+                _dataToSet.playerBPlacedDeck = _playerSlots;
+                _dataToSet.playerBPlacedDeck.Player = GameplaySceneManager.GetPlayer(PlayerData.Type.two).Data;
                 break;
         }
     }

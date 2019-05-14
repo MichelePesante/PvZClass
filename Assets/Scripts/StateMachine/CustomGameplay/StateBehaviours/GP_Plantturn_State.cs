@@ -9,7 +9,7 @@ namespace StateMachine.Gameplay {
         public override void Enter()
         {
             TurnManager.SetActivePlayer(playerTurn);
-            DeckController.SetCardsState(GameplaySceneManager.GetPlayer(playerTurn).HandDeck, CardState.Idle);
+            DeckController.SetCardsState(TurnManager.GetActivePlayer().HandDeck, CardState.Idle);
             context.GameFlowButton.GoToNextPhase();
         }
 
@@ -27,7 +27,7 @@ namespace StateMachine.Gameplay {
         }
 
         public override void Exit() {
-            DeckController.SetCardsState(GameplaySceneManager.GetPlayer(playerTurn).HandDeck, CardState.Inactive);
+            DeckController.SetCardsState(TurnManager.GetActivePlayer().HandDeck, CardState.Inactive);
         }
     }
 }
