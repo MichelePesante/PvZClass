@@ -20,10 +20,20 @@ public static class LaneController
             switch (TurnManager.GetActivePlayer().Data.CurrentType)
             {
                 case PlayerData.Type.one:
+                    Debug.Log(_lane.name + " of player A has : ");
+                    foreach (CardData card in _lane.playerAPlacedDeck.Cards)
+                    {
+                        Debug.Log(card.name);
+                    }
                     if (_lane.playerAPlacedDeck.Cards.Count < _lane.playerAPlacedDeck.MaxCards)
                         return true;
                     break;
                 case PlayerData.Type.two:
+                    Debug.Log(_lane.name + " of player B has : ");
+                    foreach (CardData card in _lane.playerBPlacedDeck.Cards)
+                    {
+                        Debug.Log(card.name);
+                    }
                     if (_lane.playerBPlacedDeck.Cards.Count < _lane.playerBPlacedDeck.MaxCards)
                         return true;
                     break;

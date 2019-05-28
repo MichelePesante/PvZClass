@@ -19,6 +19,7 @@ public class CardViewManager : MonoBehaviour
     private DeckViewController p2HandView;
     [SerializeField]
     private DeckViewController trashDeckView;
+    DeckViewController[] boardDeckViews;
 
     List<CardViewController> instantiatedCards = new List<CardViewController>();
 
@@ -34,6 +35,11 @@ public class CardViewManager : MonoBehaviour
 
         DeckViewController.OnCardMoved += HandleOnCardMoved;
         DeckViewController.OnCardsMoved += HandleOnCardsMoved;
+    }
+
+    public void Setup(DeckViewController[] _boardDeckViews)
+    {
+        boardDeckViews = _boardDeckViews;
     }
 
     private void HandleOnCardsMoved(List<GameplayAction> actions)
@@ -144,6 +150,12 @@ public class CardViewManager : MonoBehaviour
             return instance.p1HandView;
         if (instance.p2HandView.Data == _data)
             return instance.p2HandView;
+
+        foreach (DeckViewController deckView in instance.boardDeckViews)
+        {
+            if (deckView.Data == _data)
+                return deckView;
+        }
 
         return null;
     }

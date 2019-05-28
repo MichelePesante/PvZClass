@@ -58,7 +58,7 @@ public class DeckViewController : MonoBehaviour
     {
         DeckData deckFrom = Data;
         DeckData deckTo = _deckToMove;
-        GameplayAction action = DeckController.Move(ref deckFrom, ref deckTo, ref _cardToMove);
+        GameplayAction action = DeckController.Move(ref deckTo, ref deckFrom, ref _cardToMove);
 
         if (_DataUpdatedCallback != null)
             _DataUpdatedCallback(Data.Cards);

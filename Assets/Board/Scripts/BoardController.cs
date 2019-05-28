@@ -18,6 +18,7 @@ public class BoardController : MonoBehaviour {
     public const int CardSlotsPerPlayer = 2;
 
     public List<LaneViewController> laneUIs;
+    public DeckViewController[] deckViews;
 
     public void SetUp(BoardData _boardData = null, bool _instantiate = false) {
         if (_boardData) {
@@ -38,8 +39,14 @@ public class BoardController : MonoBehaviour {
         for (int i = 0; i < laneContainer.transform.GetComponentsInChildren<LaneViewController>().Length; i++) {
             Destroy(transform.GetChild(i).gameObject);
         }
-        foreach (LaneData l in boardData.Lanes) {
-            LaneViewController instantiatedLane = Instantiate(LanePrefab, laneContainer).SetUp(l, CardSlotsPerPlayer);
+
+        deckViews = new DeckViewController[boardData.Lanes.Count * 2];
+
+        for (int i = 0; i < boardData.Lanes.Count; i++)
+        {
+            LaneViewController instantiatedLane = Instantiate(LanePrefab, laneContainer).SetUp(boardData.Lanes[i], CardSlotsPerPlayer);
+            deckViews[i * 2] = instantiatedLane.PlayerASlotsView;
+            deckViews[i * 2 + 1] = instantiatedLane.PlayerBSlotsView;
             laneUIs.Add(instantiatedLane);
         }
     }
