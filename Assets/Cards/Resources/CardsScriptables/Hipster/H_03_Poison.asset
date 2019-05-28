@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34801ab89c73d5649beefc14102ce401, type: 3}
+  m_Name: H_03_Poison
+  m_EditorClassIdentifier: 
+  CardName: Poison
+  StartCost: 1
+  StartLife: 1
+  StartAttack: 1
+  CardIndex: 3
+  CardFaction: 0
+  CardRarity: 0
+  IsHeroCard: 0
+  CardImageName: 
+  playableLane: {fileID: 11400000, guid: f12c10384dbbb1c4ab36dd974f4c553e, type: 2}
+  CardImage: {fileID: 21300004, guid: e22ccab8427eb914db3cd9867cd6ac8c, type: 3}
+  Cost: 2
+  Attack: 1
+  Life: 3
