@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CardViewManager : MonoBehaviour
 {
+    private static CardViewManager instance;
+
     [SerializeField]
     private CardViewController cardPrefab;
     [SerializeField]
@@ -15,11 +17,20 @@ public class CardViewManager : MonoBehaviour
     private DeckViewController p1HandView;
     [SerializeField]
     private DeckViewController p2HandView;
+    [SerializeField]
+    private DeckViewController trashDeckView;
 
-    public List<CardViewController> instantiatedCards = new List<CardViewController>();
+    List<CardViewController> instantiatedCards = new List<CardViewController>();
 
     public void Init()
     {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         DeckViewController.OnCardMoved += HandleOnCardMoved;
         DeckViewController.OnCardsMoved += HandleOnCardsMoved;
     }
@@ -30,26 +41,6 @@ public class CardViewManager : MonoBehaviour
         {
             HandleOnCardMoved(action);
         }
-    }
-
-    public DeckViewController GetHandDeck(PlayerData.Type currentType) {
-        switch (currentType) {
-            case PlayerData.Type.one:
-                return p1HandView;
-            case PlayerData.Type.two:
-                return p2HandView;
-        }
-        return null;
-    }
-
-    public DeckViewController GetPlayerDeck(PlayerData.Type currentType) {
-        switch (currentType) {
-            case PlayerData.Type.one:
-                return p1DeckView;
-            case PlayerData.Type.two:
-                return p2DeckView;
-        }
-        return null;
     }
 
     private void HandleOnCardMoved(GameplayAction action)
@@ -74,7 +65,7 @@ public class CardViewManager : MonoBehaviour
             return;
         }
 
-        //Se non c'è un deck destinatario la distruggo a prescindere
+        //Se non c'è un deck destinatario o il deck è non visibile la distruggo a prescindere
         if (deckTo == null || deckTo.CurrentViewType == DeckViewController.ViewType.none)
         {
             foreach (CardViewController card in instantiatedCards)
@@ -103,22 +94,6 @@ public class CardViewManager : MonoBehaviour
         AddCardToDeck(deckTo, changedCard);
     }
 
-    public DeckViewController GetDeckViewControllerByDeckData(DeckData _data)
-    {
-        if (_data == null)
-            return null;
-        if (p1DeckView.Data == _data)
-            return p1DeckView;
-        if (p2DeckView.Data == _data)
-            return p2DeckView;
-        if (p1HandView.Data == _data)
-            return p1HandView;
-        if (p2HandView.Data == _data)
-            return p2HandView;
-
-        return null;
-    }
-
     private void AddCardToDeck(DeckViewController _deckToAdd, CardData _cardData)
     {
         CardViewController instantiatedCard = Instantiate(cardPrefab);
@@ -127,6 +102,53 @@ public class CardViewManager : MonoBehaviour
         instantiatedCard.transform.position = _deckToAdd.transform.position;
         instantiatedCard.Setup(_cardData, GameplaySceneManager.GetPlayer(_deckToAdd.Data.Player.CurrentType));
     }
+
+    #region Getter
+    public static DeckViewController GetHandDeck(PlayerData.Type currentType)
+    {
+        switch (currentType)
+        {
+            case PlayerData.Type.one:
+                return instance.p1HandView;
+            case PlayerData.Type.two:
+                return instance.p2HandView;
+        }
+        return null;
+    }
+
+    public static DeckViewController GetPlayerDeck(PlayerData.Type currentType)
+    {
+        switch (currentType)
+        {
+            case PlayerData.Type.one:
+                return instance.p1DeckView;
+            case PlayerData.Type.two:
+                return instance.p2DeckView;
+        }
+        return null;
+    }
+
+    public static DeckViewController GetDeckViewControllerByDeckData(DeckData _data)
+    {
+        if (_data == null)
+            return null;
+        if (instance.p1DeckView.Data == _data)
+            return instance.p1DeckView;
+        if (instance.p2DeckView.Data == _data)
+            return instance.p2DeckView;
+        if (instance.p1HandView.Data == _data)
+            return instance.p1HandView;
+        if (instance.p2HandView.Data == _data)
+            return instance.p2HandView;
+
+        return null;
+    }
+
+    public static DeckViewController GetTrashDeckView()
+    {
+        return instance.trashDeckView;
+    }
+    #endregion
 
     private void OnDisable()
     {
