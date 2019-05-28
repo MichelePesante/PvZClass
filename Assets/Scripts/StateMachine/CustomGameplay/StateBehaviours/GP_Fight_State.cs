@@ -6,8 +6,11 @@ namespace StateMachine.Gameplay
     public class GP_Fight_State : GP_BaseState
     {
 
+        DeckData trashDeck;
+
         public override void Enter()
         {
+            trashDeck = CardViewManager.GetTrashDeckView().Data;
             context.GameFlowButton.GoToNextPhase();
             context.GameFlowButton.ToggleGoNextButton(false);
             context.BoardCtrl.StartCoroutine(CombatRoutine());
@@ -40,36 +43,46 @@ namespace StateMachine.Gameplay
             //TODO animations or something visual.
 
             //player A always attacks first!
-            DeckData p1Cards = _laneView.Data.playerAPlacedDeck;
-            DeckData p2Cards = _laneView.Data.playerBPlacedDeck;
+            DeckViewController p1CardsView = _laneView.PlayerASlotsView;
+            DeckViewController p2CardsView = _laneView.PlayerBSlotsView;
 
-            CardData p1CurrentCard = null, p2CurrentCard = null;
+            CardViewController p1CurrentCard = null, p2CurrentCard = null;
 
-            if (p1Cards.Cards.Count > 0)
-                p1CurrentCard = p1Cards.Cards[p1Cards.Cards.Count - 1];
-            if (p2Cards.Cards.Count > 0)
-                p2CurrentCard = p2Cards.Cards[p2Cards.Cards.Count - 1];
+            if (p1CardsView.Data.Cards.Count > 0)
+                p1CurrentCard = CardViewManager.GetCardViewByCardData(p1CardsView.Data.Cards[p1CardsView.Data.Cards.Count - 1]);
+            if (p2CardsView.Data.Cards.Count > 0)
+                p2CurrentCard = CardViewManager.GetCardViewByCardData(p2CardsView.Data.Cards[p2CardsView.Data.Cards.Count - 1]);
 
             //p1 attack
             if (p1CurrentCard && p2CurrentCard)
             {
                 //if cards on both sides
-                CardController.UpdateLife(p2CurrentCard, p2CurrentCard.Life - p1CurrentCard.Attack);
+                CardController.UpdateLife(p2CurrentCard.Data, p2CurrentCard.Data.Life - p1CurrentCard.Data.Attack);
+                if (p2CurrentCard.Data.Life <= 0)
+                {
+                    CardData currentCardData = p2CurrentCard.Data;
+                    p2CardsView.DoMove(ref trashDeck, ref currentCardData);
+                }
             }
             else if (p1CurrentCard && !p2CurrentCard)
             {
-                p1Cards.Player.CurrentLife -= p1CurrentCard.Attack;
+                p1CardsView.Data.Player.CurrentLife -= p1CurrentCard.Data.Attack;
             }
 
             //p2 attack
             if (p1CurrentCard && p2CurrentCard)
             {
                 //if cards on both sides
-                CardController.UpdateLife(p1CurrentCard, p1CurrentCard.Life - p2CurrentCard.Attack);
+                CardController.UpdateLife(p1CurrentCard.Data, p1CurrentCard.Data.Life - p2CurrentCard.Data.Attack);
+                if (p1CurrentCard.Data.Life <= 0)
+                {
+                    CardData currentCardData = p1CurrentCard.Data;
+                    p1CardsView.DoMove(ref trashDeck, ref currentCardData);
+                }
             }
             else if (!p1CurrentCard && p2CurrentCard)
             {
-                p2Cards.Player.CurrentLife -= p2CurrentCard.Attack;
+                p2CardsView.Data.Player.CurrentLife -= p2CurrentCard.Data.Attack;
             }
 
             yield return null;

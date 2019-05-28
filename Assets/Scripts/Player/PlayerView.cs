@@ -14,6 +14,10 @@ public class PlayerView : MonoBehaviour {
         Data.Lost += onLost;
         Data.OnEnergyChange += onEnergyChange;
         Data.OnLifeChange += onLifeChange;
+        if (energyText)
+            energyText.text = Data.CurrentEnergy.ToString();
+        if (lifeText)
+            lifeText.text = Data.CurrentLife.ToString();
     }
 
     /// <summary>

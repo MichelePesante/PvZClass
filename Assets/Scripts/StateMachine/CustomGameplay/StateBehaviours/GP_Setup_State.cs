@@ -47,21 +47,24 @@ namespace StateMachine.Gameplay {
                 context.CurrentPlayer = context.PlayerOne;
                 // Player Setup
                 // p1 hand 
-                DeckViewController p1Hand = context.SceneManager.cardViewManager.GetHandDeck(context.PlayerOne.Data.CurrentType);
+                DeckViewController p1Hand = CardViewManager.GetHandDeck(context.PlayerOne.Data.CurrentType);
                 p1Hand.Data = new DeckData();
                 context.PlayerOne.SetHandDeck(p1Hand);
                 // p1 deck 
-                DeckViewController p1Deck = context.SceneManager.cardViewManager.GetPlayerDeck(context.PlayerOne.Data.CurrentType);
+                DeckViewController p1Deck = CardViewManager.GetPlayerDeck(context.PlayerOne.Data.CurrentType);
                 p1Deck.Data = new DeckData();
                 context.PlayerOne.SetPlayerDeck(p1Deck);
                 // p2 hand
-                DeckViewController p2Hand = context.SceneManager.cardViewManager.GetHandDeck(context.PlayerTwo.Data.CurrentType);
+                DeckViewController p2Hand = CardViewManager.GetHandDeck(context.PlayerTwo.Data.CurrentType);
                 p2Hand.Data = new DeckData();
                 context.PlayerTwo.SetHandDeck(p2Hand);
                 // p2 deck 
-                DeckViewController p2Deck = context.SceneManager.cardViewManager.GetPlayerDeck(context.PlayerTwo.Data.CurrentType);
+                DeckViewController p2Deck = CardViewManager.GetPlayerDeck(context.PlayerTwo.Data.CurrentType);
                 p2Deck.Data = new DeckData();
                 context.PlayerTwo.SetPlayerDeck(p2Deck);
+                //Trash Deck
+                DeckViewController trahDeck = CardViewManager.GetTrashDeckView();
+                trahDeck.Data = new DeckData();
             }
 
             DeckViewController playerOneDeck = context.PlayerOne.PlayerDeck;

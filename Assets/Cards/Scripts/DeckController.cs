@@ -82,6 +82,7 @@ public static class DeckController
         AddCard(ref _deckToAddTo, ref _cardToMove);
         if (_deckToRemoveFrom != null)
             RemoveCard(ref _deckToRemoveFrom, ref _cardToMove);
+
         return GameplayAction.CreateMovementAction(_cardToMove, _deckToRemoveFrom, _deckToAddTo);
     }
 }

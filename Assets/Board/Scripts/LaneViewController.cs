@@ -24,7 +24,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
     public enum Highlight { playable, unplayable, off }
 
-    DeckViewController PlayerASlotsView
+    public DeckViewController PlayerASlotsView
     {
         get
         {
@@ -39,7 +39,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
         }
     }
 
-    DeckViewController PlayerBSlotsView
+    public DeckViewController PlayerBSlotsView
     {
         get
         {

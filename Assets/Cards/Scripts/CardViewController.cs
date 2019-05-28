@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDetecter
 {
-
     [Header("Data References")]
     [SerializeField]
     private CardData cardDataPrefab;
