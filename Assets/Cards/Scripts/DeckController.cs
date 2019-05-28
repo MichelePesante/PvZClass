@@ -53,8 +53,6 @@ public static class DeckController
 
     public static DeckViewController ResetCardsState(DeckViewController _deck)
     {
-        Debug.Log("NOOOO INCREDIBILEH");
-
         foreach (CardData card in _deck.Data.Cards)
         {
             card.CurrentState = CardState.Idle;
