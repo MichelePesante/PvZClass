@@ -31,6 +31,7 @@ public class CardViewManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         DeckViewController.OnCardMoved += HandleOnCardMoved;
         DeckViewController.OnCardsMoved += HandleOnCardsMoved;
     }

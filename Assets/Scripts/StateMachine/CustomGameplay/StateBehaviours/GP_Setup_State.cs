@@ -62,6 +62,9 @@ namespace StateMachine.Gameplay {
                 DeckViewController p2Deck = CardViewManager.GetPlayerDeck(context.PlayerTwo.Data.CurrentType);
                 p2Deck.Data = new DeckData();
                 context.PlayerTwo.SetPlayerDeck(p2Deck);
+                //Trash Deck
+                DeckViewController trahDeck = CardViewManager.GetTrashDeckView();
+                trahDeck.Data = new DeckData();
             }
 
             DeckViewController playerOneDeck = context.PlayerOne.PlayerDeck;
