@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34801ab89c73d5649beefc14102ce401, type: 3}
+  m_Name: A_05_Gravity
+  m_EditorClassIdentifier: 
+  CardName: Gravity
+  StartCost: 6
+  StartLife: 7
+  StartAttack: 7
+  CardIndex: 47
+  CardFaction: 1
+  CardRarity: 0
+  IsHeroCard: 0
+  CardImageName: 
+  playableLane: {fileID: 11400000, guid: f12c10384dbbb1c4ab36dd974f4c553e, type: 2}
+  CardImage: {fileID: 21300008, guid: ff508c52ba5bf7f40985b9f07b22813c, type: 3}
+  Cost: 6
+  Attack: 7
+  Life: 7
