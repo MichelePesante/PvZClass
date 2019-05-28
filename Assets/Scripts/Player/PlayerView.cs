@@ -11,21 +11,12 @@ public class PlayerView : MonoBehaviour {
 
     public void Init(PlayerData _data) {
         Data = _data;
-        Data.Lost += onLost;
         Data.OnEnergyChange += onEnergyChange;
         Data.OnLifeChange += onLifeChange;
         if (energyText)
             energyText.text = Data.CurrentEnergy.ToString();
         if (lifeText)
             lifeText.text = Data.CurrentLife.ToString();
-    }
-
-    /// <summary>
-    /// Richiamata quando il player perde.
-    /// </summary>
-    /// <param name="player"></param>
-    private void onLost(PlayerData player) {
-        Destroy(gameObject);
     }
 
     void onEnergyChange()

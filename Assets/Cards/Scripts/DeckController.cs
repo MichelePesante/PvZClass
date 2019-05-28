@@ -6,9 +6,10 @@ using UnityEngine;
 
 public static class DeckController
 {
-    public static DeckData CreateDeck(int _cardsNumber = 1)
+    public static DeckData CreateDeck(PlayerData _playerData, int _cardsNumber = 1)
     {
-        List<CardData> allCards = Resources.LoadAll<CardData>("CardsScriptables").ToList();
+        List<CardData> allCards = Resources.LoadAll<CardData>("CardsScriptables")
+            .Where(c => c.CardFaction == _playerData.Faction).ToList();
         DeckData newDeck = new DeckData();
 
         for (int i = 0; i < _cardsNumber; i++)
