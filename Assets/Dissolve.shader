@@ -58,9 +58,11 @@
                 fixed4 col = tex2D(_MainTex, i.uv);
 				fixed4 dissolve = tex2D(_NoiseTex, i.uv);
 				float alpha = step(_DissolvePercent, dissolve);
-				col.a = alpha;
+				col.a *= alpha;
+
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
+
                 return col;
             }
             ENDCG
