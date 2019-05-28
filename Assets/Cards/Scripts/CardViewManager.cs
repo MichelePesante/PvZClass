@@ -133,6 +133,8 @@ public class CardViewManager : MonoBehaviour
     {
         if (_data == null)
             return null;
+        if (instance.trashDeckView.Data == _data)
+            return instance.trashDeckView;
         if (instance.p1DeckView.Data == _data)
             return instance.p1DeckView;
         if (instance.p2DeckView.Data == _data)
@@ -148,6 +150,19 @@ public class CardViewManager : MonoBehaviour
     public static DeckViewController GetTrashDeckView()
     {
         return instance.trashDeckView;
+    }
+
+    public static CardViewController GetCardViewByCardData(CardData _data)
+    {
+        foreach (CardViewController card in instance.instantiatedCards)
+        {
+            if (card.Data.CompareIndex(_data.CardIndex))
+            {
+                return card;
+            }
+        }
+
+        return null;
     }
     #endregion
 
