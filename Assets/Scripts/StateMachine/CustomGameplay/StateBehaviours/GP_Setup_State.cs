@@ -14,8 +14,8 @@ namespace StateMachine.Gameplay {
 
         public override void Enter() {
             // player setup
-            context.PlayerOne.Init(new PlayerData(PlayerData.Type.one));
-            context.PlayerTwo.Init(new PlayerData(PlayerData.Type.two));
+            context.PlayerOne.Init(new PlayerData(PlayerData.Type.one) { Faction = CardData.Faction.Alcool });
+            context.PlayerTwo.Init(new PlayerData(PlayerData.Type.two) { Faction = CardData.Faction.Hipster });
             // board setup 
             context.BoardCtrl.SetUp(boardData);
             // deck setup
@@ -69,8 +69,8 @@ namespace StateMachine.Gameplay {
 
             DeckViewController playerOneDeck = context.PlayerOne.PlayerDeck;
             DeckViewController playerTwoDeck = context.PlayerTwo.PlayerDeck;
-            playerOneDeck.Setup(DeckController.CreateDeck(20));
-            playerTwoDeck.Setup(DeckController.CreateDeck(20));
+            playerOneDeck.Setup(DeckController.CreateDeck(context.PlayerOne.Data, 20));
+            playerTwoDeck.Setup(DeckController.CreateDeck(context.PlayerTwo.Data, 20));
         }
     }
 }

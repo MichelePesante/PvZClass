@@ -69,6 +69,7 @@ public class PlayerData {
 
     public DeckData Hand { get; internal set; }
     public DeckData Deck { get; internal set; }
+    public CardData.Faction Faction { get; internal set; }
 
     #endregion
 
