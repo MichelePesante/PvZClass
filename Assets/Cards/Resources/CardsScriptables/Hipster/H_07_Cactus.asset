@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34801ab89c73d5649beefc14102ce401, type: 3}
-  m_Name: Hero01
+  m_Name: H_07_Cactus
   m_EditorClassIdentifier: 
-  CardName: Hero 1
-  StartCost: 52
-  StartLife: 85
+  CardName: Cactus
+  StartCost: 2
+  StartLife: 5
   StartAttack: 1
+  CardIndex: 7
   CardFaction: 0
   CardRarity: 0
-  IsHeroCard: 1
-  CardImage: {fileID: 21300000, guid: e22ccab8427eb914db3cd9867cd6ac8c, type: 3}
-  playableLane: {fileID: 11400000, guid: caa284e0607d11c459bfb20aa5584d63, type: 2}
-  Cost: 52
-  Attack: 1
-  Life: 85
+  IsHeroCard: 0
+  CardImageName: 
+  playableLane: {fileID: 11400000, guid: f12c10384dbbb1c4ab36dd974f4c553e, type: 2}
+  CardImage: {fileID: 21300012, guid: e22ccab8427eb914db3cd9867cd6ac8c, type: 3}
+  Cost: 2
+  Attack: 2
+  Life: 2

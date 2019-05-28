@@ -14,24 +14,5 @@
         // todo...
     }
 
-    // TODO : vecchie operazioni del setup del player che vanno ricollocate
-    //public static void Setup(PlayerData data) {
-    //    Hand.Setup(new DeckData());
-    //    Hand.Draw(Deck, 8, HandDrawCallback);
-    //    Hand.Data.Player = this;
-    //    CardController.OnPlaced += HandleCardPlacement;
-    //    TurnManager.OnTurnChange += HandleTurnChange;
-    //}
-
-    // Vecchie funzione handles da rilocare
-    //private void HandleTurnChange(IPlayer _player) {
-    //    UpdateHandState(CardViewController.State.Idle);
-    //}
-
-    //private void HandleCardPlacement(CardData _card) {
-    //    Hand.RemoveCard(_card);
-    //    UpdateHandState(CardViewController.State.Idle);
-    //}
-
 }
 
