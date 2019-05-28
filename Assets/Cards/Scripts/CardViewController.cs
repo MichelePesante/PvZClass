@@ -13,7 +13,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     private CardData cardDataPrefab;
 
     [Header("UI References")]
-    //public Text Name;
+    public Text Name;
     public ValueDisplayController Attack;
     public ValueDisplayController Life;
     public ValueDisplayController Cost;
@@ -102,7 +102,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     private void onDataChanged(CardData _data)
     {
-        //Name.text = _data.NameToShow;
+        Name.text = _data.NameToShow;
         Attack.SetValue(_data.Attack.ToString());
         Life.SetValue(_data.Life.ToString());
         Cost.SetValue(_data.Cost.ToString());
