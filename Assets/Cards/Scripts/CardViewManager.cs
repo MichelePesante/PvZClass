@@ -73,8 +73,8 @@ public class CardViewManager : MonoBehaviour
             {
                 if (changedCardData.CompareIndex(instantiatedCards[i].Data.CardIndex))
                 {
-                    instantiatedCards.RemoveAt(i);
                     Destroy(instantiatedCards[i].gameObject);
+                    instantiatedCards.RemoveAt(i);
                     return;
                 }
             }
