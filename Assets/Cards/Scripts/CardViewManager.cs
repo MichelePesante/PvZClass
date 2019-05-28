@@ -49,7 +49,7 @@ public class CardViewManager : MonoBehaviour
         //TODO controllare il deck a cui va aggiunto
         DeckViewController deckFrom = GetDeckViewControllerByDeckData(action.deckDataFrom);
         DeckViewController deckTo = GetDeckViewControllerByDeckData(action.deckDataTo);
-        CardData changedCard = action.cardData;
+        CardData changedCardData = action.cardData;
 
         //Se non c'è un deck da cui la carta deriva la istanzio a prescindere
         if (deckFrom == null)
@@ -58,7 +58,7 @@ public class CardViewManager : MonoBehaviour
                 case DeckViewController.ViewType.covered:
                     break;
                 case DeckViewController.ViewType.visible:
-                    AddCardToDeck(deckTo, changedCard);
+                    AddCardToDeck(deckTo, changedCardData);
                     break;
                 case DeckViewController.ViewType.none:
                     break;
@@ -71,9 +71,9 @@ public class CardViewManager : MonoBehaviour
         {
             foreach (CardViewController card in instantiatedCards)
             {
-                if (changedCard.CompareIndex(card.Data.CardIndex))
+                if (changedCardData.CompareIndex(card.Data.CardIndex))
                 {
-                    Destroy(changedCard);
+                    Destroy(card.gameObject);
                     return;
                 }
             }
@@ -83,7 +83,7 @@ public class CardViewManager : MonoBehaviour
         //Se c'è da spostare una carta da un deck ad un altro
         for (int i = 0; i < instantiatedCards.Count; i++)
         {
-            if (changedCard.CompareIndex(instantiatedCards[i].Data.CardIndex))
+            if (changedCardData.CompareIndex(instantiatedCards[i].Data.CardIndex))
             {
                 //Se la carta esiste gìà la sposto
                 instantiatedCards[i].transform.position = deckTo.transform.position;
@@ -92,7 +92,7 @@ public class CardViewManager : MonoBehaviour
         }
 
         //Se la carta non esisteva ancora la istanzio
-        AddCardToDeck(deckTo, changedCard);
+        AddCardToDeck(deckTo, changedCardData);
     }
 
     private void AddCardToDeck(DeckViewController _deckToAdd, CardData _cardData)
