@@ -12,12 +12,12 @@ public class PlayerData {
 
     public PlayerData(Type type) {
         currentType = type;
+        isAlive = true;
     }
 
-    public PlayerData(Type type, int life, int maxEnergy) : this(type) {
-        this.life = life;
-        this.maxEnergy = maxEnergy;
-        this.CurrentEnergy = maxEnergy;
+    public PlayerData(Type type, int _life, int _maxEnergy) : this(type) {
+        currentLife = _life;
+        currentEnergy = currentMaxEnergy = _maxEnergy;
     }
 
     #region Serializables
@@ -28,6 +28,11 @@ public class PlayerData {
     [SerializeField] private int shield;
     [SerializeField] public enum Type { one, two }
     #endregion
+
+    private int currentLife = 20;
+    private int currentMaxEnergy = 0;
+    private int currentEnergy = 0;
+    private bool isAlive;
 
     #region Properties
     public Type CurrentType {
@@ -41,29 +46,40 @@ public class PlayerData {
     }
 
     public int CurrentLife {
-        get { return life; }
+        get { return currentLife; }
         set {
-            life = value;
+            currentLife = Mathf.Clamp(value, 0, life);
             if (OnLifeChange != null)
                 OnLifeChange();
-            if (life <= 0) {
-                if (Lost != null)
-                    Lost(this);
+            if (currentLife == 0) {
+                isAlive = false;
             }
         }
     }
 
     public int MaxEnergy {
-        get { return maxEnergy; }
-        set { maxEnergy = value; }
+        get { return currentMaxEnergy; }
+        set { currentMaxEnergy = value; }
     }
 
     public int CurrentEnergy {
-        get { return energy; }
+        get { return currentEnergy; }
         set {
-            energy = value;
+            currentEnergy = value;
             if (OnEnergyChange != null)
                 OnEnergyChange();
+        }
+    }
+
+    public bool IsAlive
+    {
+        get
+        {
+            return isAlive;
+        }
+        set
+        {
+            isAlive = value;
         }
     }
 
@@ -74,7 +90,6 @@ public class PlayerData {
     #endregion
 
     #region events
-    public event PlayerEvent.PlayerLost Lost;
     public event PlayerEvent.DataChange OnEnergyChange;
     public event PlayerEvent.DataChange OnLifeChange;
     #endregion
