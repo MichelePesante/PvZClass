@@ -69,11 +69,12 @@ public class CardViewManager : MonoBehaviour
         //Se non c'è un deck destinatario o il deck è non visibile la distruggo a prescindere
         if (deckTo == null || deckTo.CurrentViewType == DeckViewController.ViewType.none)
         {
-            foreach (CardViewController card in instantiatedCards)
+            for (int i = 0; i < instantiatedCards.Count; i++)
             {
-                if (changedCardData.CompareIndex(card.Data.CardIndex))
+                if (changedCardData.CompareIndex(instantiatedCards[i].Data.CardIndex))
                 {
-                    Destroy(card.gameObject);
+                    instantiatedCards.RemoveAt(i);
+                    Destroy(instantiatedCards[i].gameObject);
                     return;
                 }
             }

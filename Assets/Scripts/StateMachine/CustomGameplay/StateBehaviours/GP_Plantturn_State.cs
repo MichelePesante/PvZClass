@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace StateMachine.Gameplay {
-    public class GP_Plantturn_State : GP_BaseState {
+namespace StateMachine.Gameplay
+{
+    public class GP_Plantturn_State : GP_BaseState
+    {
         [SerializeField]
         private PlayerData.Type playerTurn;
 
         public override void Enter()
         {
+            PlayerView oldActivePlayer = TurnManager.GetActivePlayer();
             TurnManager.SetActivePlayer(playerTurn);
+            if (oldActivePlayer != null)
+                DeckController.ResetCardsState(oldActivePlayer.HandDeck);
             DeckController.ResetCardsState(TurnManager.GetActivePlayer().HandDeck);
+
             context.GameFlowButton.GoToNextPhase();
         }
 
@@ -26,7 +32,8 @@ namespace StateMachine.Gameplay {
                 context.PlayerTwo.Data.CurrentLife--;
         }
 
-        public override void Exit() {
+        public override void Exit()
+        {
             DeckController.ResetCardsState(TurnManager.GetActivePlayer().HandDeck);
         }
     }
