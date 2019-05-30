@@ -27,4 +27,8 @@ public class BackgroundManager : MonoBehaviour
                 break;
         }
     }
+
+    public void SetNeutralBG() {
+        CommonBG.color = Color.white;
+    }
 }
