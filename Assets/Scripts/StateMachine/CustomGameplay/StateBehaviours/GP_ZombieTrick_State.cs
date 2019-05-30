@@ -8,12 +8,5 @@ namespace StateMachine.Gameplay {
         {
             context.GameFlowButton.GoToNextPhase();
         }
-
-        public override void Tick()
-        {
-            base.Tick();
-            if (Input.GetKeyDown(KeyCode.Space))
-                context.GenericForwardCallBack();
-        }
     }
 }
