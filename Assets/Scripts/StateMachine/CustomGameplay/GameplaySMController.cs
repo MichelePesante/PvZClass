@@ -20,8 +20,8 @@ namespace StateMachine.Gameplay {
 
         #region reactive properties callback
 
-        private void onWinConditionChanged(bool winCondition) {
-            SM.SetBool("WinCondition", winCondition);
+        private void onMatchEnd() {
+            SM.SetTrigger("MatchEnd");
         }
 
         #endregion
@@ -54,32 +54,16 @@ namespace StateMachine.Gameplay {
                 GenericForwardCallBack = GoToForward,
                 GenericBackwardCallBack = GoToBack,
                 // --- Reactive properties callback
-                OnWinnerCondChanged = onWinConditionChanged,
+                OnMatchEnd = onMatchEnd,
                 UICanvas = sceneManager.GlobalUI,
             };
         }
 
         #endregion
-
-        //private void Update() {
-        //    if (Input.GetKeyDown(KeyCode.Space)) {
-        //        GoToForward();
-        //    }
-        //}
-
     }
 
     public class GameplaySMContext : IStateMachineContext {
         public string ContextName;
-        private bool _isWinCondition;
-        public bool IsWinCondition {
-            get { return _isWinCondition; }
-            set {
-                _isWinCondition = value;
-                if (OnWinnerCondChanged != null)
-                    OnWinnerCondChanged(_isWinCondition);
-            }
-        }
 
         public GameplaySceneManager SceneManager;
 
@@ -87,7 +71,7 @@ namespace StateMachine.Gameplay {
         public PlayerView CurrentPlayer;
         public PlayerView Winner;
 
-        public Action<bool> OnWinnerCondChanged;
+        public Action OnMatchEnd;
         public BoardController BoardCtrl;
 
         public GameFlowButtonController GameFlowButton;

@@ -52,7 +52,7 @@ public class PlayerData {
             if (OnLifeChange != null)
                 OnLifeChange();
             if (currentLife == 0) {
-                isAlive = false;
+                IsAlive = false;
             }
         }
     }
@@ -80,6 +80,8 @@ public class PlayerData {
         set
         {
             isAlive = value;
+            if (OnDeath != null)
+                OnDeath();
         }
     }
 
@@ -92,9 +94,6 @@ public class PlayerData {
     #region events
     public event PlayerEvent.DataChange OnEnergyChange;
     public event PlayerEvent.DataChange OnLifeChange;
+    public Action OnDeath;
     #endregion
-
-
-
 }
-
