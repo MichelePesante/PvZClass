@@ -5,22 +5,19 @@ namespace StateMachine.Gameplay
 {
     public class GP_Fight_State : GP_BaseState
     {
-
         DeckData trashDeck;
 
         public override void Enter()
         {
             trashDeck = CardViewManager.GetTrashDeckView().Data;
+
             context.GameFlowButton.GoToNextPhase();
             context.GameFlowButton.ToggleGoNextButton(false);
-            context.BoardCtrl.StartCoroutine(CombatRoutine());
-        }
 
-        public override void Tick()
-        {
-            base.Tick();
-            if (Input.GetKeyDown(KeyCode.Space))
-                context.GenericForwardCallBack();
+            context.PlayerOne.Data.OnDeath += context.OnMatchEnd;
+            context.PlayerTwo.Data.OnDeath += context.OnMatchEnd;
+
+            context.BoardCtrl.StartCoroutine(CombatRoutine());
         }
 
         //Routine
@@ -32,7 +29,7 @@ namespace StateMachine.Gameplay
                 yield return context.BoardCtrl.StartCoroutine(LaneRoutine(lane));
             }
 
-            context.GameFlowButton.ToggleGoNextButton(true);
+            context.GenericForwardCallBack();
         }
 
         IEnumerator LaneRoutine(LaneViewController _laneView)
@@ -48,10 +45,10 @@ namespace StateMachine.Gameplay
 
             CardViewController p1CurrentCard = null, p2CurrentCard = null;
 
-            for (int i = Mathf.Max(p1CardsView.Data.Cards.Count, p2CardsView.Data.Cards.Count) - 1; i >= 0; i--)
+            for (int i = _laneView.PlayerASlotsView.Data.MaxCards; i >= 0; i--)
             {
                 p1CurrentCard = null;
-                if(i < p1CardsView.Data.Cards.Count)
+                if (i < p1CardsView.Data.Cards.Count)
                     p1CurrentCard = CardViewManager.GetCardViewByCardData(p1CardsView.Data.Cards[i]);
 
                 p2CurrentCard = null;
@@ -59,14 +56,27 @@ namespace StateMachine.Gameplay
                     p2CurrentCard = CardViewManager.GetCardViewByCardData(p2CardsView.Data.Cards[i]);
 
                 //p1 attack
+                //if cards on both sides
                 if (p1CurrentCard && p2CurrentCard)
                 {
-                    //if cards on both sides
-                    CardController.UpdateLife(p2CurrentCard.Data, p2CurrentCard.Data.Life - p1CurrentCard.Data.Attack);
+                    //if defender has 0 health go behind
                     if (p2CurrentCard.Data.Life <= 0)
                     {
-                        CardData currentCardData = p2CurrentCard.Data;
-                        p2CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData);
+                        if (i - 1 < p1CardsView.Data.Cards.Count)
+                            p2CurrentCard = CardViewManager.GetCardViewByCardData(p2CardsView.Data.Cards[i]);
+                        else
+                        {
+                            p2CardsView.Data.Player.CurrentLife -= p1CurrentCard.Data.Attack;
+                        }
+                    }
+                    else
+                    {
+                        CardController.UpdateLife(p2CurrentCard.Data, p2CurrentCard.Data.Life - p1CurrentCard.Data.Attack);
+                        if (p2CurrentCard.Data.Life <= 0)
+                        {
+                            CardData currentCardData = p2CurrentCard.Data;
+                            p2CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData);
+                        }
                     }
                 }
                 else if (p1CurrentCard && !p2CurrentCard)
@@ -75,14 +85,27 @@ namespace StateMachine.Gameplay
                 }
 
                 //p2 attack
+                //if cards on both sides
                 if (p1CurrentCard && p2CurrentCard)
                 {
-                    //if cards on both sides
-                    CardController.UpdateLife(p1CurrentCard.Data, p1CurrentCard.Data.Life - p2CurrentCard.Data.Attack);
+                    //if defender has 0 health go behind
                     if (p1CurrentCard.Data.Life <= 0)
                     {
-                        CardData currentCardData = p1CurrentCard.Data;
-                        p1CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData);
+                        if (i - 1 < p2CardsView.Data.Cards.Count)
+                            p1CurrentCard = CardViewManager.GetCardViewByCardData(p1CardsView.Data.Cards[i]);
+                        else
+                        {
+                            p2CardsView.Data.Player.CurrentLife -= p1CurrentCard.Data.Attack;
+                        }
+                    }
+                    else
+                    {
+                        CardController.UpdateLife(p1CurrentCard.Data, p1CurrentCard.Data.Life - p2CurrentCard.Data.Attack);
+                        if (p1CurrentCard.Data.Life <= 0)
+                        {
+                            CardData currentCardData = p1CurrentCard.Data;
+                            p1CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData);
+                        }
                     }
                 }
                 else if (!p1CurrentCard && p2CurrentCard)
@@ -96,6 +119,8 @@ namespace StateMachine.Gameplay
 
         public override void Exit()
         {
+            context.PlayerOne.Data.OnDeath -= context.OnMatchEnd;
+            context.PlayerTwo.Data.OnDeath -= context.OnMatchEnd;
             context.GameFlowButton.GoToNextPhase();
             context.GameFlowButton.ToggleGoNextButton(false);
         }
