@@ -60,8 +60,10 @@ public class CardViewManager : MonoBehaviour
         //Se non c'è un deck da cui la carta deriva la istanzio a prescindere
         if (deckFrom == null)
         {
-            switch (deckTo.CurrentViewType) {
+            switch (deckTo.CurrentViewType)
+            {
                 case DeckViewController.ViewType.covered:
+                    AddCardToDeck(deckTo, changedCardData);
                     break;
                 case DeckViewController.ViewType.visible:
                     AddCardToDeck(deckTo, changedCardData);
@@ -94,6 +96,7 @@ public class CardViewManager : MonoBehaviour
             {
                 //Se la carta esiste gìà la sposto
                 instantiatedCards[i].transform.position = deckTo.transform.position;
+                instantiatedCards[i].transform.parent = deckTo.transform;
                 return;
             }
         }
@@ -151,10 +154,13 @@ public class CardViewManager : MonoBehaviour
         if (instance.p2HandView.Data == _data)
             return instance.p2HandView;
 
-        foreach (DeckViewController deckView in instance.boardDeckViews)
+        if (instance.boardDeckViews != null)
         {
-            if (deckView.Data == _data)
-                return deckView;
+            foreach (DeckViewController deckView in instance.boardDeckViews)
+            {
+                if (deckView.Data == _data)
+                    return deckView;
+            }
         }
 
         return null;

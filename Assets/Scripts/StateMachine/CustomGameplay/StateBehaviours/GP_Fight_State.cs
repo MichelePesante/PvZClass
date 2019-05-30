@@ -66,7 +66,7 @@ namespace StateMachine.Gameplay
                     if (p2CurrentCard.Data.Life <= 0)
                     {
                         CardData currentCardData = p2CurrentCard.Data;
-                        p2CardsView.DoMove(ref trashDeck, ref currentCardData);
+                        p2CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData);
                     }
                 }
                 else if (p1CurrentCard && !p2CurrentCard)
@@ -82,7 +82,7 @@ namespace StateMachine.Gameplay
                     if (p1CurrentCard.Data.Life <= 0)
                     {
                         CardData currentCardData = p1CurrentCard.Data;
-                        p1CardsView.DoMove(ref trashDeck, ref currentCardData);
+                        p1CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData);
                     }
                 }
                 else if (!p1CurrentCard && p2CurrentCard)

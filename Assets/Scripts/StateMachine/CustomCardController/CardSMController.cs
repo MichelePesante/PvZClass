@@ -57,6 +57,11 @@ namespace StateMachine.Card {
         #endregion
 
         #endregion
+
+        private void OnDestroy()
+        {
+            (currentContext as CardSMContext).cardController.Data.OnCurrentStateChanged -= OnCardStateChanged;
+        }
     }
 
     public class CardSMContext : IStateMachineContext

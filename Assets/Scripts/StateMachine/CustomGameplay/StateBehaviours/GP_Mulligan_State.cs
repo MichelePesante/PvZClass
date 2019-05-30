@@ -42,9 +42,9 @@ namespace StateMachine.Gameplay
         {
             DeckData deckFrom = null;
             // muove le carte dal null alla mano
-            context.PlayerOne.HandDeck.DoMoves(ref deckFrom, ref p1ChosenCards);
+            context.PlayerOne.HandDeck.DoMovesToMe(ref deckFrom, ref p1ChosenCards);
             // muove le carte dal null al playerDeck
-            context.PlayerOne.PlayerDeck.DoMoves(ref deckFrom, ref p1NotChosenCards);
+            context.PlayerOne.PlayerDeck.DoMovesToMe(ref deckFrom, ref p1NotChosenCards);
 
         }
         #endregion
@@ -66,9 +66,9 @@ namespace StateMachine.Gameplay
         {
             DeckData deckFrom = null;
             // muove le carte dal null alla mano
-            context.PlayerTwo.HandDeck.DoMoves(ref deckFrom, ref p2ChosenCards);
+            context.PlayerTwo.HandDeck.DoMovesToMe(ref deckFrom, ref p2ChosenCards);
             // muove le carte dal null al playerDeck
-            context.PlayerTwo.PlayerDeck.DoMoves(ref deckFrom, ref p2NotChosenCards);
+            context.PlayerTwo.PlayerDeck.DoMovesToMe(ref deckFrom, ref p2NotChosenCards);
         }
         #endregion
 
