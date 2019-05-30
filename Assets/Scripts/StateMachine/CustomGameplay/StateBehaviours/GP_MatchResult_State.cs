@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 namespace StateMachine.Gameplay {
@@ -11,7 +10,10 @@ namespace StateMachine.Gameplay {
 
         public override void Enter()
         {
-            base.Enter();
+            if (context.PlayerOne.Data.IsAlive && !context.PlayerTwo.Data.IsAlive)
+                context.Winner = context.PlayerOne;
+            else if (!context.PlayerOne.Data.IsAlive && context.PlayerTwo.Data.IsAlive)
+                context.Winner = context.PlayerTwo;
             if (WinTextPrefab != null)
             {
                 WinTextGO = Instantiate(WinTextPrefab, context.UICanvas.transform);

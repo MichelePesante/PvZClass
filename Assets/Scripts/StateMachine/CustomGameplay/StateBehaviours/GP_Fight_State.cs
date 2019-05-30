@@ -5,14 +5,18 @@ namespace StateMachine.Gameplay
 {
     public class GP_Fight_State : GP_BaseState
     {
-
         DeckData trashDeck;
 
         public override void Enter()
         {
             trashDeck = CardViewManager.GetTrashDeckView().Data;
+
             context.GameFlowButton.GoToNextPhase();
             context.GameFlowButton.ToggleGoNextButton(false);
+
+            context.PlayerOne.Data.OnDeath += context.OnMatchEnd;
+            context.PlayerTwo.Data.OnDeath += context.OnMatchEnd;
+
             context.BoardCtrl.StartCoroutine(CombatRoutine());
         }
 
@@ -22,11 +26,10 @@ namespace StateMachine.Gameplay
             //for each lane wait lane
             foreach (LaneViewController lane in context.BoardCtrl.laneUIs)
             {
-                Debug.Log(lane.Data.type);
                 yield return context.BoardCtrl.StartCoroutine(LaneRoutine(lane));
             }
 
-            context.GameFlowButton.ToggleGoNextButton(true);
+            context.GenericForwardCallBack();
         }
 
         IEnumerator LaneRoutine(LaneViewController _laneView)
@@ -116,6 +119,8 @@ namespace StateMachine.Gameplay
 
         public override void Exit()
         {
+            context.PlayerOne.Data.OnDeath -= context.OnMatchEnd;
+            context.PlayerTwo.Data.OnDeath -= context.OnMatchEnd;
             context.GameFlowButton.GoToNextPhase();
             context.GameFlowButton.ToggleGoNextButton(false);
         }
