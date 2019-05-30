@@ -21,6 +21,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     public Image Frame;
     public Image HighlightPanel;
     public Image LowlightPanel;
+    public Image Cover;
 
     private Color HeroColor = Color.white;
     private Color StandardColor = Color.white;
