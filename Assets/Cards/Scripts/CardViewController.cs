@@ -22,6 +22,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     public Image HighlightPanel;
     public Image LowlightPanel;
     public Image Cover;
+    [SerializeField] Sprite hipsterCoverSprite, alcoolCoverSprite;
 
     private Color HeroColor = Color.white;
     private Color StandardColor = Color.white;
@@ -236,4 +237,18 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         return detectedObjects;
     }
 
+    public void ShowCard()
+    {
+        Cover.enabled = false;
+    }
+
+    public void HideCard()
+    {
+        if (Data.CardFaction == CardData.Faction.Hipster)
+            Cover.sprite = hipsterCoverSprite;
+        else if (Data.CardFaction == CardData.Faction.Alcool)
+            Cover.sprite = alcoolCoverSprite;
+
+        Cover.enabled = true;
+    }
 }
