@@ -6,6 +6,8 @@ namespace StateMachine.Gameplay {
 
         public override void Enter()
         {
+            // Background
+            context.BGManager.ChangeFactionBG(TurnManager.GetActivePlayer().Data.Faction);
             context.GameFlowButton.GoToNextPhase();
         }
     }

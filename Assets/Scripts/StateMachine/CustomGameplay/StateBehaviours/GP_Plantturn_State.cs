@@ -17,6 +17,9 @@ namespace StateMachine.Gameplay
             DeckController.ResetCardsState(TurnManager.GetActivePlayer().HandDeck);
 
             context.GameFlowButton.GoToNextPhase();
+
+            // Background
+            context.BGManager.ChangeFactionBG(TurnManager.GetActivePlayer().Data.Faction); 
         }
 
         public override void Tick()

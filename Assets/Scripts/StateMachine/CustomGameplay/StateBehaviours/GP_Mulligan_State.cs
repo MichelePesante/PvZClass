@@ -21,6 +21,9 @@ namespace StateMachine.Gameplay
             // Inizializiamo il pannello del mulligan
             context.P1mulliganCtrl.Init(context.PlayerOne);
             context.P2mulliganCtrl.Init(context.PlayerTwo);
+
+            // Background
+            context.BGManager.SetNeutralBG();
         }
 
         int mulliganPlayerCount;

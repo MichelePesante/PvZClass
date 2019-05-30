@@ -145,6 +145,7 @@ MonoBehaviour:
   player2: {fileID: 302321741}
   BoardCtrl: {fileID: 1571922069}
   cardViewManager: {fileID: 211442604}
+  BGManager: {fileID: 1571922070}
   GlobalUI: {fileID: 1730499596}
   mulliganP1: {fileID: 209264352}
   mulliganP2: {fileID: 1571922068}
@@ -1040,6 +1041,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: bec1d48b93cedf84faf165f8c54ed9b1,
         type: 3}
+    - target: {fileID: 730184480232695370, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300006, guid: 3e15f1576bcef0e4b96b09425eae4524,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 6155613716769193570, guid: 117af4fc6efc9ff4da434863aa5cfe6d, type: 3}
     - {fileID: 5600486941690559156, guid: 117af4fc6efc9ff4da434863aa5cfe6d, type: 3}
@@ -1066,6 +1073,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10127641ac945564aa55f1e7bd057f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1571922070 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6240733935127285830, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1571922067}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c57fbb67cb9664387c85de28881467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1620989558 stripped

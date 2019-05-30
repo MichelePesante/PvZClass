@@ -9,6 +9,7 @@ public class GameplaySceneManager : MonoBehaviour {
     public PlayerView player1, player2;
     public BoardController BoardCtrl;
     public CardViewManager cardViewManager;
+    public BackgroundManager BGManager;
 
     [Header("UI Elements")]
     public UIManager GlobalUI;

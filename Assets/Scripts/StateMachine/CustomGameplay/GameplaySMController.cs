@@ -50,6 +50,7 @@ namespace StateMachine.Gameplay {
                 P2mulliganCtrl = sceneManager.mulliganP2,
                 BoardCtrl = sceneManager.BoardCtrl,
                 GameFlowButton = sceneManager.gameFlowButton,
+                BGManager = sceneManager.BGManager,
                 // SM flow callback
                 GenericForwardCallBack = GoToForward,
                 GenericBackwardCallBack = GoToBack,
@@ -78,6 +79,8 @@ namespace StateMachine.Gameplay {
 
         public MulliganController P1mulliganCtrl;
         public MulliganController P2mulliganCtrl;
+
+        public BackgroundManager BGManager;
 
         public UIManager UICanvas;
         /// <summary>

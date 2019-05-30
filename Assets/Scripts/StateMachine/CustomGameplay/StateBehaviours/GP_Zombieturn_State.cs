@@ -18,6 +18,9 @@ namespace StateMachine.Gameplay
 
             context.GameFlowButton.GoToNextPhase();
             context.GameFlowButton.ToggleGoNextButton(true);
+
+            // Background
+            context.BGManager.ChangeFactionBG(context.CurrentPlayer.Data.Faction);
         }
 
         public override void Tick()
