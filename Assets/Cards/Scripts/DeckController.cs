@@ -76,6 +76,17 @@ public static class DeckController
         return actions;
     }
 
+    public static List<CardData> GetCards(DeckData _deckFrom, int _cardsNumber)
+    {
+        List<CardData> cardsToReturn = new List<CardData>();
+        for (int i = 0; i < _cardsNumber; i++)
+        {
+            cardsToReturn.Add(_deckFrom.Cards[i]);
+        }
+
+        return cardsToReturn;
+    }
+
     public static GameplayAction Move(ref DeckData _deckToAddTo, ref DeckData _deckToRemoveFrom, ref CardData _cardToMove)
     {
         AddCard(ref _deckToAddTo, ref _cardToMove);

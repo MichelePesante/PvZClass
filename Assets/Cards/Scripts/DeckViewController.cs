@@ -49,12 +49,12 @@ public class DeckViewController : MonoBehaviour
     }
 
     /// <summary>
-    /// Sposta card da un deck all'altro e scatena evento pubblico con action se <paramref name="_DataUpdatedCallback"/> è null.
+    /// Sposta card da me a un deck passato come parametro e scatena evento pubblico con action se <paramref name="_DataUpdatedCallback"/> è null.
     /// </summary>
     /// <param name="_deckToMove"></param>
     /// <param name="_cardToMove"></param>
     /// <param name="_DataUpdatedCallback"></param>
-    public void DoMove(ref DeckData _deckToMove, ref CardData _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    public void DoMoveFromMe(ref DeckData _deckToMove, ref CardData _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
     {
         DeckData deckFrom = Data;
         DeckData deckTo = _deckToMove;
@@ -67,12 +67,12 @@ public class DeckViewController : MonoBehaviour
     }
 
     /// <summary>
-    /// Sposta cards da un deck all'altro e scatena evento pubblico con action se <paramref name="_DataUpdatedCallback"/> è null.
+    /// Sposta cards da me a un deck passato come parametro e scatena evento pubblico con action se <paramref name="_DataUpdatedCallback"/> è null.
     /// </summary>
     /// <param name="_deckToMove"></param>
     /// <param name="_cardToMove"></param>
     /// <param name="_DataUpdatedCallback"></param>
-    public void DoMoves(ref DeckData _deckToMove, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    public void DoMovesFromMe(ref DeckData _deckToMove, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
     {
         List<GameplayAction> actions = new List<GameplayAction>();
         for (int i = 0; i < _cardToMove.Count; i++)
@@ -80,7 +80,48 @@ public class DeckViewController : MonoBehaviour
             DeckData deckFrom = Data;
             DeckData deckTo = _deckToMove;
             CardData cardToMove = _cardToMove[i];
-            GameplayAction action = DeckController.Move(ref deckFrom, ref deckTo, ref cardToMove);
+            GameplayAction action = DeckController.Move(ref deckTo, ref deckFrom, ref cardToMove);
+            actions.Add(action);
+        }
+        if (_DataUpdatedCallback != null)
+            _DataUpdatedCallback(Data.Cards);
+        else if (OnCardsMoved != null)
+            OnCardsMoved(actions);
+    }
+
+    /// <summary>
+    /// Sposta card dal deck passato come parametro a me e scatena evento pubblico con action se <paramref name="_DataUpdatedCallback"/> è null.
+    /// </summary>
+    /// <param name="_deckFrom"></param>
+    /// <param name="_cardToMove"></param>
+    /// <param name="_DataUpdatedCallback"></param>
+    public void DoMoveToMe(ref DeckData _deckFrom, ref CardData _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    {
+        DeckData deckFrom = _deckFrom;
+        DeckData deckTo = Data;
+        GameplayAction action = DeckController.Move(ref deckTo, ref deckFrom, ref _cardToMove);
+
+        if (_DataUpdatedCallback != null)
+            _DataUpdatedCallback(Data.Cards);
+        else if (OnCardMoved != null)
+            OnCardMoved(action);
+    }
+
+    /// <summary>
+    /// Sposta cards dal deck passato come parametro a me e scatena evento pubblico con action se <paramref name="_DataUpdatedCallback"/> è null.
+    /// </summary>
+    /// <param name="_deckFrom"></param>
+    /// <param name="_cardToMove"></param>
+    /// <param name="_DataUpdatedCallback"></param>
+    public void DoMovesToMe(ref DeckData _deckFrom, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    {
+        List<GameplayAction> actions = new List<GameplayAction>();
+        for (int i = 0; i < _cardToMove.Count; i++)
+        {
+            DeckData deckFrom = _deckFrom;
+            DeckData deckTo = Data;
+            CardData cardToMove = _cardToMove[i];
+            GameplayAction action = DeckController.Move(ref deckTo, ref deckFrom, ref cardToMove);
             actions.Add(action);
         }
         if (_DataUpdatedCallback != null)
@@ -94,9 +135,18 @@ public class DeckViewController : MonoBehaviour
         if (_deck == null)
             return null;
 
-        Data = _deck;
+        if (_deck.Cards.Count > 0)
+        {
+            List<CardData> cardsToMove = new List<CardData>(_deck.Cards);
+            DoMovesToMe(ref _deck, ref cardsToMove);
+        }
+        else
+            Data = _deck;
 
-        LateSetup();
+        foreach (CardData card in Data.Cards)
+        {
+            card.CurrentState = CardState.Inactive;
+        }
 
         return this;
     }

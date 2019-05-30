@@ -32,11 +32,13 @@ public class MulliganController : MonoBehaviour
         continueButton.gameObject.SetActive(false);
         cardsOnScreen = GetComponentsInChildren<CardViewController>().ToList();
         cardsToDisplayLastIndex = 0;
+
         // HACK: Auto select cards init
         DeckData newDeckData = new DeckData();
-        DeckData playersDeckData = player.PlayerDeck.Data;
-        DeckController.Draw(ref newDeckData, ref playersDeckData, 8);
+        List<CardData> gotCards = DeckController.GetCards(player.PlayerDeck.Data, 8);
+        player.PlayerDeck.DoMovesFromMe(ref newDeckData, ref gotCards);
         cardsToDisplay = newDeckData.Cards;
+
         for (int i = 0; i < cardsOnScreen.Count; i++)
         {
             cardsOnScreen[i].Setup(cardsToDisplay[i], player);
@@ -66,7 +68,8 @@ public class MulliganController : MonoBehaviour
             cardsToChange.Add(_card);
     }
 
-    private void HandlerMulliganEnd() {
+    private void HandlerMulliganEnd()
+    {
         changeButton.onClick.RemoveAllListeners();
         continueButton.onClick.RemoveAllListeners();
     }
@@ -77,7 +80,8 @@ public class MulliganController : MonoBehaviour
     /// Return mulligan owner.
     /// </summary>
     /// <returns></returns>
-    public PlayerView GetPlayer() {
+    public PlayerView GetPlayer()
+    {
         return this.player;
     }
 
@@ -128,7 +132,7 @@ public class MulliganController : MonoBehaviour
             OnMulliganEnd(choosenCards, cardNotSelected);
     }
 
-#endregion
+    #endregion
 
 
 }

@@ -67,10 +67,8 @@ namespace StateMachine.Gameplay {
                 trahDeck.Data = new DeckData();
             }
 
-            DeckViewController playerOneDeck = context.PlayerOne.PlayerDeck;
-            DeckViewController playerTwoDeck = context.PlayerTwo.PlayerDeck;
-            playerOneDeck.Setup(DeckController.CreateDeck(context.PlayerOne.Data, 20));
-            playerTwoDeck.Setup(DeckController.CreateDeck(context.PlayerTwo.Data, 20));
+            context.PlayerOne.PlayerDeck.Setup(DeckController.CreateDeck(context.PlayerOne.Data, 20));
+            context.PlayerTwo.PlayerDeck.Setup(DeckController.CreateDeck(context.PlayerTwo.Data, 20));
         }
     }
 }
