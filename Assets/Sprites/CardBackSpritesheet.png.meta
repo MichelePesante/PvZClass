@@ -2,8 +2,10 @@ fileFormatVersion: 2
 guid: 3e15f1576bcef0e4b96b09425eae4524
 TextureImporter:
   fileIDToRecycleName:
-    21300000: CardBackSpritesheet_0
-    21300002: CardBackSpritesheet_1
+    21300000: Ipster_CardBG
+    21300002: Alcool_CardBG
+    21300004: Ipster_BG
+    21300006: Alcool_BG
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -86,13 +88,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CardBackSpritesheet_0
+      name: Ipster_CardBG
       rect:
         serializedVersion: 2
         x: 11
-        y: 71
+        y: 111
         width: 105
-        height: 145
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -100,18 +102,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d41ddeb562e9c4342a14d964eed5d94e
+      spriteID: 7f735cc4896b3d345b24ffdc44711a46
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CardBackSpritesheet_1
+      name: Alcool_CardBG
       rect:
         serializedVersion: 2
-        x: 138
-        y: 71
-        width: 105
+        x: 136
+        y: 108
+        width: 104
         height: 145
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -120,7 +122,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6056ab99923f4d741bafc18d0dab85e4
+      spriteID: 68fdd470ad0fe1e46833b214a98fe3eb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ipster_BG
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 76
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff2287294746157439ec402f7f7f51f5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alcool_BG
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 0
+        width: 76
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7f864f2d7e06a14eaf1ae95af68e89a
       vertices: []
       indices: 
       edges: []
