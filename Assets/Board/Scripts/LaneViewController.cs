@@ -100,11 +100,11 @@ public class LaneViewController : MonoBehaviour, IDetectable
         DeckData deckTo = TurnManager.GetActivePlayer().GetMyLaneDeck(Data).Data;
         DeckData deckFrom = TurnManager.GetActivePlayer().GetHandView().Data;
         CardData cardToAdd = _cardToPlace.Data;
-        DeckController.Move(ref deckTo, ref deckFrom, ref cardToAdd);
 
-        _cardToPlace.GetPlayerOwner().Data.CurrentEnergy -= _cardToPlace.Data.Cost;
+        DeckViewController deckFromView = CardViewManager.GetDeckViewControllerByDeckData(deckFrom);
+        deckFromView.DoMoveFromMe(ref deckTo, ref cardToAdd);
 
-        _cardToPlace.transform.parent = TurnManager.GetActivePlayer().GetMyLaneDeck(Data).transform;
+        _cardToPlace.GetPlayerOwner().Data.CurrentEnergy -= _cardToPlace.Data.Cost;       
     }
 
     public void OnEnter(IDetecter _detecter)
