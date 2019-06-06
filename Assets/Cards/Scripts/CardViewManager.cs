@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CardViewManager : MonoBehaviour
 {
@@ -95,8 +96,10 @@ public class CardViewManager : MonoBehaviour
             if (changedCardData.CompareIndex(instantiatedCards[i].Data.CardIndex))
             {
                 //Se la carta esiste gìà la sposto
-                instantiatedCards[i].transform.position = deckTo.transform.position;
-                instantiatedCards[i].transform.parent = deckTo.transform;
+                instantiatedCards[i].transform.DOMove(deckTo.transform.position, 1f).OnComplete(() =>
+                {
+                    instantiatedCards[i].transform.SetParent(deckTo.transform);
+                });
                 return;
             }
         }
