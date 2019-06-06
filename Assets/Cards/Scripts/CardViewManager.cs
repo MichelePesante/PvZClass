@@ -95,11 +95,30 @@ public class CardViewManager : MonoBehaviour
         {
             if (changedCardData.CompareIndex(instantiatedCards[i].Data.CardIndex))
             {
-                //Se la carta esiste gìà la sposto
-                instantiatedCards[i].transform.DOMove(deckTo.transform.position, 1f).OnComplete(() =>
+
+                if (deckFrom.CurrentViewType == DeckViewController.ViewType.covered && (deckTo == p1HandView || deckTo == p2HandView))
+                {
+                    //Se la carta esiste gìà la sposto
+                    instantiatedCards[i].transform.DOMove(deckTo.transform.position, 1f).OnComplete(() =>
+                    {
+                        instantiatedCards[i].transform.SetParent(deckTo.transform);
+                    });
+                }
+                else if (deckFrom == p1HandView || deckFrom == p2HandView)
                 {
                     instantiatedCards[i].transform.SetParent(deckTo.transform);
-                });
+                    Sequence placeSequence = DOTween.Sequence();
+
+                    Vector3 endScale = instantiatedCards[i].transform.localScale / 1.5f;
+                    Tween scaleTween = instantiatedCards[i].transform.DOScale(endScale, 0.25f);
+
+                    Tween shakeTween = instantiatedCards[i].transform.DOShakeScale(0.15f, Vector3.one);
+
+                    placeSequence.Append(scaleTween);
+                    placeSequence.Insert(0.20f, shakeTween);
+                }
+                else
+                    instantiatedCards[i].transform.SetParent(deckTo.transform);
                 return;
             }
         }

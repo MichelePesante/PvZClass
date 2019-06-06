@@ -55,6 +55,7 @@ namespace StateMachine.Card
         private void ResetPosition()
         {
             context.cardController.transform.position = startPosition;
+            context.cardController.transform.localScale = startScale;
             context.cardController.Data.CurrentState = CardState.Idle;
         }
 
@@ -69,8 +70,7 @@ namespace StateMachine.Card
 
         public override void Exit()
         {
-            context.cardController.OnCardPointerUp -= HandleOnPointerUp;
-            context.cardController.transform.localScale = startScale;
+            context.cardController.OnCardPointerUp -= HandleOnPointerUp;            
         }
     }
 }
