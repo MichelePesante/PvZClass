@@ -261,4 +261,14 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         if(Data)
             Data.OnDataChanged -= onDataChanged;
     }
+
+    private void OnEnable()
+    {
+        //HACK: lezzooo
+        if (Data)
+        {
+            Data.OnDataChanged -= onDataChanged;
+            Data.OnDataChanged += onDataChanged;
+        }
+    }
 }
