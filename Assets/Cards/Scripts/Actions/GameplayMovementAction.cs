@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GameplayAction : IAction {
+public class GameplayMovementAction : IAction {
 
     public CardData cardData;
     public DeckData deckDataFrom;
@@ -12,8 +12,8 @@ public class GameplayAction : IAction {
 
     public ActionType Type { get; set; }
 
-    public static GameplayAction CreateMovementAction(CardData _cardData, DeckData _deckDataFrom, DeckData _deckDataTo) {
-        GameplayAction returnAction = new GameplayAction() {
+    public static GameplayMovementAction CreateMovementAction(CardData _cardData, DeckData _deckDataFrom, DeckData _deckDataTo) {
+        GameplayMovementAction returnAction = new GameplayMovementAction() {
             cardData = _cardData,
             deckDataFrom = _deckDataFrom,
             deckDataTo = _deckDataTo,
@@ -32,6 +32,7 @@ public class GameplayAction : IAction {
 
 public enum ActionType {
         Movement = 10,
+        Attack = 20
 }
 
 public interface IAction {

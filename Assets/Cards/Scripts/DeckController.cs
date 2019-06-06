@@ -64,9 +64,9 @@ public static class DeckController
     /// <summary>
     /// Aggiunge cardsToDraw carte dal deck alla hand e la rimuove dal deck, ritorna hand.
     /// </summary>
-    public static List<GameplayAction> Draw(ref DeckData _deckToAddTo, ref DeckData _deckToRemoveFrom, int cardsToDraw = 1)
+    public static List<GameplayMovementAction> Draw(ref DeckData _deckToAddTo, ref DeckData _deckToRemoveFrom, int cardsToDraw = 1)
     {
-        List<GameplayAction> actions = new List<GameplayAction>();
+        List<GameplayMovementAction> actions = new List<GameplayMovementAction>();
         for (int i = 0; i < cardsToDraw; i++)
         {
             CardData cardToMove = _deckToRemoveFrom.Cards[0];
@@ -87,12 +87,12 @@ public static class DeckController
         return cardsToReturn;
     }
 
-    public static GameplayAction Move(ref DeckData _deckToAddTo, ref DeckData _deckToRemoveFrom, ref CardData _cardToMove)
+    public static GameplayMovementAction Move(ref DeckData _deckToAddTo, ref DeckData _deckToRemoveFrom, ref CardData _cardToMove)
     {
         AddCard(ref _deckToAddTo, ref _cardToMove);
         if (_deckToRemoveFrom != null)
             RemoveCard(ref _deckToRemoveFrom, ref _cardToMove);
 
-        return GameplayAction.CreateMovementAction(_cardToMove, _deckToRemoveFrom, _deckToAddTo);
+        return GameplayMovementAction.CreateMovementAction(_cardToMove, _deckToRemoveFrom, _deckToAddTo);
     }
 }

@@ -42,15 +42,22 @@ public class CardViewManager : MonoBehaviour
         boardDeckViews = _boardDeckViews;
     }
 
-    private void HandleOnCardsMoved(List<GameplayAction> actions)
+    private void HandleOnCardAttack(GameplayAttackAction _attackAction)
     {
-        foreach (GameplayAction action in actions)
+        CardViewController attackingCardView = GetCardViewByCardData(_attackAction.attackingCardData);
+        CardViewController defendingCardView = GetCardViewByCardData(_attackAction.defendingCardData);
+        PlayerView defendingPlayerView = GameplaySceneManager.GetPlayer(_attackAction.defendingPlayerData.CurrentType);
+    }
+
+    private void HandleOnCardsMoved(List<GameplayMovementAction> actions)
+    {
+        foreach (GameplayMovementAction action in actions)
         {
             HandleOnCardMoved(action);
         }
     }
 
-    private void HandleOnCardMoved(GameplayAction action)
+    private void HandleOnCardMoved(GameplayMovementAction action)
     {
         //TODO controllare il deck a cui va aggiunto
         DeckViewController deckFrom = GetDeckViewControllerByDeckData(action.deckDataFrom);

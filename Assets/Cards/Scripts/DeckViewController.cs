@@ -6,8 +6,8 @@ using UnityEngine;
 public class DeckViewController : MonoBehaviour
 {
     #region Delegates
-    public static Action<List<GameplayAction>> OnCardsMoved;
-    public static Action<GameplayAction> OnCardMoved;
+    public static Action<List<GameplayMovementAction>> OnCardsMoved;
+    public static Action<GameplayMovementAction> OnCardMoved;
     #endregion
 
     DeckData _data;
@@ -40,7 +40,7 @@ public class DeckViewController : MonoBehaviour
     {
         DeckData deckFrom = Data;
         DeckData deckTo = deckToDrawFrom;
-        List<GameplayAction> actions = DeckController.Draw(ref deckFrom, ref deckTo, _cardsToDraw);
+        List<GameplayMovementAction> actions = DeckController.Draw(ref deckFrom, ref deckTo, _cardsToDraw);
 
         if (_DataUpdatedCallback != null)
             _DataUpdatedCallback(Data.Cards);
@@ -58,7 +58,7 @@ public class DeckViewController : MonoBehaviour
     {
         DeckData deckFrom = Data;
         DeckData deckTo = _deckToMove;
-        GameplayAction action = DeckController.Move(ref deckTo, ref deckFrom, ref _cardToMove);
+        GameplayMovementAction action = DeckController.Move(ref deckTo, ref deckFrom, ref _cardToMove);
 
         if (_DataUpdatedCallback != null)
             _DataUpdatedCallback(Data.Cards);
@@ -74,13 +74,13 @@ public class DeckViewController : MonoBehaviour
     /// <param name="_DataUpdatedCallback"></param>
     public void DoMovesFromMe(ref DeckData _deckToMove, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
     {
-        List<GameplayAction> actions = new List<GameplayAction>();
+        List<GameplayMovementAction> actions = new List<GameplayMovementAction>();
         for (int i = 0; i < _cardToMove.Count; i++)
         {
             DeckData deckFrom = Data;
             DeckData deckTo = _deckToMove;
             CardData cardToMove = _cardToMove[i];
-            GameplayAction action = DeckController.Move(ref deckTo, ref deckFrom, ref cardToMove);
+            GameplayMovementAction action = DeckController.Move(ref deckTo, ref deckFrom, ref cardToMove);
             actions.Add(action);
         }
         if (_DataUpdatedCallback != null)
@@ -99,7 +99,7 @@ public class DeckViewController : MonoBehaviour
     {
         DeckData deckFrom = _deckFrom;
         DeckData deckTo = Data;
-        GameplayAction action = DeckController.Move(ref deckTo, ref deckFrom, ref _cardToMove);
+        GameplayMovementAction action = DeckController.Move(ref deckTo, ref deckFrom, ref _cardToMove);
 
         if (_DataUpdatedCallback != null)
             _DataUpdatedCallback(Data.Cards);
@@ -115,13 +115,13 @@ public class DeckViewController : MonoBehaviour
     /// <param name="_DataUpdatedCallback"></param>
     public void DoMovesToMe(ref DeckData _deckFrom, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
     {
-        List<GameplayAction> actions = new List<GameplayAction>();
+        List<GameplayMovementAction> actions = new List<GameplayMovementAction>();
         for (int i = 0; i < _cardToMove.Count; i++)
         {
             DeckData deckFrom = _deckFrom;
             DeckData deckTo = Data;
             CardData cardToMove = _cardToMove[i];
-            GameplayAction action = DeckController.Move(ref deckTo, ref deckFrom, ref cardToMove);
+            GameplayMovementAction action = DeckController.Move(ref deckTo, ref deckFrom, ref cardToMove);
             actions.Add(action);
         }
         if (_DataUpdatedCallback != null)

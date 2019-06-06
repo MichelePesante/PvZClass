@@ -66,12 +66,14 @@ namespace StateMachine.Gameplay
                             p2CurrentCard = CardViewManager.GetCardViewByCardData(p2CardsView.Data.Cards[i]);
                         else
                         {
-                            p2CardsView.Data.Player.CurrentLife -= p1CurrentCard.Data.Attack;
+                            //Attack the player!
+                            p1CurrentCard.DoAttackPlayer(ref context.PlayerTwo);
                         }
                     }
                     else
                     {
-                        CardController.UpdateLife(p2CurrentCard.Data, p2CurrentCard.Data.Life - p1CurrentCard.Data.Attack);
+                        //Attack the card!
+                        p1CurrentCard.DoAttackCard(ref p2CurrentCard);
                         if (p2CurrentCard.Data.Life <= 0)
                         {
                             CardData currentCardData = p2CurrentCard.Data;
@@ -81,7 +83,8 @@ namespace StateMachine.Gameplay
                 }
                 else if (p1CurrentCard && !p2CurrentCard)
                 {
-                    p2CardsView.Data.Player.CurrentLife -= p1CurrentCard.Data.Attack;
+                    //Attack the player!
+                    p1CurrentCard.DoAttackPlayer(ref context.PlayerTwo);
                 }
 
                 //p2 attack
@@ -95,12 +98,14 @@ namespace StateMachine.Gameplay
                             p1CurrentCard = CardViewManager.GetCardViewByCardData(p1CardsView.Data.Cards[i]);
                         else
                         {
-                            p2CardsView.Data.Player.CurrentLife -= p1CurrentCard.Data.Attack;
+                            //Attack the player!!
+                            p2CurrentCard.DoAttackPlayer(ref context.PlayerOne);
                         }
                     }
                     else
                     {
-                        CardController.UpdateLife(p1CurrentCard.Data, p1CurrentCard.Data.Life - p2CurrentCard.Data.Attack);
+                        //Attack the card!
+                        p2CurrentCard.DoAttackCard(ref p1CurrentCard);
                         if (p1CurrentCard.Data.Life <= 0)
                         {
                             CardData currentCardData = p1CurrentCard.Data;
@@ -110,7 +115,8 @@ namespace StateMachine.Gameplay
                 }
                 else if (!p1CurrentCard && p2CurrentCard)
                 {
-                    p1CardsView.Data.Player.CurrentLife -= p2CurrentCard.Data.Attack;
+                    //Attack the player!!
+                    p2CurrentCard.DoAttackPlayer(ref context.PlayerOne);
                 }
             }
 

@@ -57,6 +57,8 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
     private Camera cam;
     private RectTransform rectTransform;
 
+    public static Action<GameplayAttackAction> OnAttack;
+
     public void Setup()
     {
         Data.CurrentState = CardState.Inactive;
@@ -254,6 +256,28 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
             Cover.sprite = hipsterCoverSprite;
         else if (Data.CardFaction == CardData.Faction.Alcool)
             Cover.sprite = alcoolCoverSprite;
+    }
+
+    public void DoAttackCard(ref CardViewController _cardToAttack, Action _customCallback = null)
+    {
+        GameplayAttackAction attackAction = CardController.AttackCard(Data, _cardToAttack.Data);
+
+        if (_customCallback != null)
+            _customCallback();
+
+        if (OnAttack != null)
+            OnAttack(attackAction);
+    }
+
+    public void DoAttackPlayer(ref PlayerView _playerToAttack, Action _customCallback = null)
+    {
+        GameplayAttackAction attackAction = CardController.AttackPlayer(Data, _playerToAttack.Data);
+
+        if (_customCallback != null)
+            _customCallback();
+
+        if (OnAttack != null)
+            OnAttack(attackAction);
     }
 
     private void OnDisable()
