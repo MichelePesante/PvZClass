@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "New Card")]
@@ -14,7 +15,7 @@ public class CardData : ScriptableObject {
     public Rarity CardRarity;
     public bool IsHeroCard;
     public string CardImageName;
-    public LaneType playableLane;
+    public List<LaneType> excludeLanes;
     #endregion
 
     #region State
