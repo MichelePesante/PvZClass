@@ -96,6 +96,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         Data = _data;
         Data.CurrentState = CardState.Inactive;
         playerOwner = _player;
+        SetupCover();
         Interactable(true);
         detectedObjects = new List<IDetectable>();
         cardSM = GetComponent<CardSMController>();
@@ -244,12 +245,15 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void HideCard()
     {
+        Cover.enabled = true;
+    }
+
+    public void SetupCover()
+    {
         if (Data.CardFaction == CardData.Faction.Hipster)
             Cover.sprite = hipsterCoverSprite;
         else if (Data.CardFaction == CardData.Faction.Alcool)
             Cover.sprite = alcoolCoverSprite;
-
-        Cover.enabled = true;
     }
 
     private void OnDisable()
