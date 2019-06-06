@@ -15,7 +15,7 @@ public static class LaneController
 
     public static bool CheckCardPlayability(LaneData _lane, CardData _card)
     {
-        if (_card.playableLane == _lane.type)
+        if (!_card.excludeLanes.Contains(_lane.type))
         {
             switch (TurnManager.GetActivePlayer().Data.CurrentType)
             {
