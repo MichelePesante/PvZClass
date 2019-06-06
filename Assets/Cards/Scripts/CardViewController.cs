@@ -72,11 +72,11 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         {
             Debug.LogError(name + " has not found a graphic raycaster!");
         }
-        // Data = Instantiate(cardDataPrefab);
         Interactable(true);
         detectedObjects = new List<IDetectable>();
         cardSM = GetComponent<CardSMController>();
         cardSM.Setup();
+        Data.OnDataChanged += onDataChanged;
     }
 
     public void Setup(CardData _data, PlayerView _player)
@@ -101,6 +101,7 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         detectedObjects = new List<IDetectable>();
         cardSM = GetComponent<CardSMController>();
         cardSM.Setup();
+        Data.OnDataChanged += onDataChanged;
     }
 
     private void onDataChanged(CardData _data)
@@ -135,7 +136,6 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
             default:
                 break;
         }
-        _data.OnDataChanged += onDataChanged;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -254,5 +254,11 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
             Cover.sprite = hipsterCoverSprite;
         else if (Data.CardFaction == CardData.Faction.Alcool)
             Cover.sprite = alcoolCoverSprite;
+    }
+
+    private void OnDisable()
+    {
+        if(Data)
+            Data.OnDataChanged -= onDataChanged;
     }
 }
