@@ -30,7 +30,7 @@ public class DeckData
         MaxCards = -1;
     }
 
-    public DeckData(string _name, List<CardData> _cards, int _maxCards) {
+    public DeckData(List<CardData> _cards, int _maxCards, string _name = null) {
         Name = _name;
         Cards = _cards;
         OldCards = new List<CardData>();
