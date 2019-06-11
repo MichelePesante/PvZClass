@@ -36,6 +36,7 @@ public class CardViewManager : MonoBehaviour
 
         DeckViewController.OnCardMoved += HandleOnCardMoved;
         DeckViewController.OnCardsMoved += HandleOnCardsMoved;
+        CardViewController.OnAttack += HandleOnCardAttack;
     }
 
     public void Setup(DeckViewController[] _boardDeckViews)
@@ -43,12 +44,55 @@ public class CardViewManager : MonoBehaviour
         boardDeckViews = _boardDeckViews;
     }
 
+    #region Attack
+    Queue<GameplayAttackAction> attackActions = new Queue<GameplayAttackAction>();
+
     private void HandleOnCardAttack(GameplayAttackAction _attackAction)
     {
-        CardViewController attackingCardView = GetCardViewByCardData(_attackAction.attackingCardData);
-        CardViewController defendingCardView = GetCardViewByCardData(_attackAction.defendingCardData);
-        PlayerView defendingPlayerView = GameplaySceneManager.GetPlayer(_attackAction.defendingPlayerData.CurrentType);
+        attackActions.Enqueue(_attackAction);
     }
+
+    private void ExecuteAttackAction(GameplayAttackAction _attackAction, Action _callback = null)
+    {
+        CardViewController attackingCardView = null;
+        CardViewController defendingCardView = null;
+        PlayerView defendingPlayerView = null;
+
+        if (_attackAction.attackingCardData)
+        {
+            attackingCardView = GetCardViewByCardData(_attackAction.attackingCardData);
+        }
+        if (_attackAction.defendingCardData)
+        {
+            defendingCardView = GetCardViewByCardData(_attackAction.defendingCardData);
+        }
+        if (_attackAction.defendingPlayerData != null)
+        {
+            defendingPlayerView = GameplaySceneManager.GetPlayer(_attackAction.defendingPlayerData.CurrentType);
+        }
+
+        if (defendingCardView)
+        {
+            RectTransform tempRectTransform = attackingCardView.transform as RectTransform;
+            tempRectTransform.DOPunchAnchorPos(defendingCardView.transform.position, 1f).onComplete += () => { if (_callback != null) _callback(); };
+        }
+        else if (defendingPlayerView)
+        {
+            RectTransform tempRectTransform = attackingCardView.transform as RectTransform;
+            tempRectTransform.DOPunchAnchorPos(defendingPlayerView.transform.position, 1f).onComplete += () => { if (_callback != null) _callback(); };
+        }
+    }
+
+    public static void ExecuteAttackActions(Action _callBack = null)
+    {
+        if (instance.attackActions.Count > 0)
+            instance.ExecuteAttackAction(instance.attackActions.Dequeue(), () => ExecuteAttackActions(_callBack));
+        else if (_callBack != null)
+        {
+            _callBack.Invoke();
+        }
+    }
+    #endregion
 
     #region Move
     List<GameplayMovementAction> movementActions = new List<GameplayMovementAction>();
