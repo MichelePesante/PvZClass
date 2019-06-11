@@ -15,26 +15,26 @@ public class LogManager : MonoBehaviour
     public void Init()
     {
         DeckViewController.OnCardMoved += OnCardMoved;
-        //DeckViewController.OnCardsMoved += OnCardsMoved;
+        DeckViewController.OnCardsMoved += OnCardsMoved;
     }
 
-    void OnCardMoved(GameplayMovementAction gameplayAction)
+    void OnCardMoved(GameplayMovementAction gameplayMovementAction)
     {
-        CreateText(gameplayAction);
+        CreateText(gameplayMovementAction);
     }
 
-    void OnCardsMoved(List<GameplayMovementAction> gameplayActions)
+    void OnCardsMoved(List<GameplayMovementAction> gameplayMovementActions)
     {
-        foreach (GameplayMovementAction gameplayAction in gameplayActions)
+        foreach (GameplayMovementAction gameplayAction in gameplayMovementActions)
         {
             CreateText(gameplayAction);
         }
     }
 
-    void CreateText(GameplayMovementAction _gameplayAction)
+    void CreateText(GameplayMovementAction _gameplayMovementAction)
     {
         TextMeshProUGUI text = Instantiate(TextPrefab, content);
         text.transform.SetAsFirstSibling();
-        text.text = _gameplayAction.ToString();
+        text.text = _gameplayMovementAction.ToString();
     }
 }
