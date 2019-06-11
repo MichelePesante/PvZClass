@@ -50,15 +50,45 @@ public class CardViewManager : MonoBehaviour
         PlayerView defendingPlayerView = GameplaySceneManager.GetPlayer(_attackAction.defendingPlayerData.CurrentType);
     }
 
+    #region Move
+    List<GameplayMovementAction> movementActions = new List<GameplayMovementAction>();
+
+    public static void DoMovementActions(Action _OnActionsCompleteCallback)
+    {
+        if (instance.movementActions != null && instance.movementActions.Count > 0)
+        {
+            foreach (GameplayMovementAction action in instance.movementActions)
+            {
+                instance.MoveCard(action);
+            }
+
+            instance.movementActions.Clear();
+        }
+
+        if (_OnActionsCompleteCallback != null)
+            _OnActionsCompleteCallback();
+    }
+
     private void HandleOnCardsMoved(List<GameplayMovementAction> actions)
     {
         foreach (GameplayMovementAction action in actions)
         {
-            HandleOnCardMoved(action);
+            if (action.instantExecute)
+                MoveCard(action);
+            else
+                movementActions.Add(action);
         }
     }
 
     private void HandleOnCardMoved(GameplayMovementAction action)
+    {
+        if (action.instantExecute)
+            MoveCard(action);
+        else
+            movementActions.Add(action);
+    }
+
+    private void MoveCard(GameplayMovementAction action)
     {
         //TODO controllare il deck a cui va aggiunto
         DeckViewController deckFrom = GetDeckViewControllerByDeckData(action.deckDataFrom);
@@ -142,6 +172,7 @@ public class CardViewManager : MonoBehaviour
         instantiatedCard.transform.position = _deckToAdd.transform.position;
         instantiatedCard.Setup(_cardData, GameplaySceneManager.GetPlayer(_deckToAdd.Data.Player.CurrentType));
     }
+    #endregion
 
     #region Getter
     public static DeckViewController GetHandDeck(PlayerData.Type currentType)

@@ -29,7 +29,7 @@ namespace StateMachine.Gameplay
                 yield return context.BoardCtrl.StartCoroutine(LaneRoutine(lane));
             }
 
-            context.GenericForwardCallBack();
+            CardViewManager.DoMovementActions(handleActionsCompleteCallback);
         }
 
         IEnumerator LaneRoutine(LaneViewController _laneView)
@@ -77,7 +77,7 @@ namespace StateMachine.Gameplay
                         if (p2CurrentCard.Data.Life <= 0)
                         {
                             CardData currentCardData = p2CurrentCard.Data;
-                            p2CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData);
+                            p2CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData, false);
                         }
                     }
                 }
@@ -109,7 +109,7 @@ namespace StateMachine.Gameplay
                         if (p1CurrentCard.Data.Life <= 0)
                         {
                             CardData currentCardData = p1CurrentCard.Data;
-                            p1CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData);
+                            p1CardsView.DoMoveFromMe(ref trashDeck, ref currentCardData, false);
                         }
                     }
                 }
@@ -121,6 +121,11 @@ namespace StateMachine.Gameplay
             }
 
             yield return null;
+        }
+
+        void handleActionsCompleteCallback()
+        {
+            context.GenericForwardCallBack();
         }
 
         public override void Exit()

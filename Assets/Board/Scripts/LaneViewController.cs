@@ -102,7 +102,7 @@ public class LaneViewController : MonoBehaviour, IDetectable
         CardData cardToAdd = _cardToPlace.Data;
 
         DeckViewController deckFromView = CardViewManager.GetDeckViewControllerByDeckData(deckFrom);
-        deckFromView.DoMoveFromMe(ref deckTo, ref cardToAdd);
+        deckFromView.DoMoveFromMe(ref deckTo, ref cardToAdd, true);
 
         _cardToPlace.GetPlayerOwner().Data.CurrentEnergy -= _cardToPlace.Data.Cost;       
     }

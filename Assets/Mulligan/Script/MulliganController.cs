@@ -36,7 +36,7 @@ public class MulliganController : MonoBehaviour
         // HACK: Auto select cards init
         DeckData newDeckData = new DeckData();
         List<CardData> gotCards = DeckController.GetCards(player.PlayerDeck.Data, 8);
-        player.PlayerDeck.DoMovesFromMe(ref newDeckData, ref gotCards);
+        player.PlayerDeck.DoMovesFromMe(ref newDeckData, ref gotCards, true);
         cardsToDisplay = newDeckData.Cards;
 
         for (int i = 0; i < cardsOnScreen.Count; i++)

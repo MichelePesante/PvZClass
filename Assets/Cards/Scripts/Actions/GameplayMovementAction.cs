@@ -8,7 +8,7 @@ public class GameplayMovementAction : IAction {
     public CardData cardData;
     public DeckData deckDataFrom;
     public DeckData deckDataTo;
-
+    public bool instantExecute;
 
     public ActionType Type { get; set; }
 

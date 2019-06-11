@@ -36,15 +36,16 @@ public class DeckViewController : MonoBehaviour
     /// <param name="deckToDrawFrom"></param>
     /// <param name="_cardsToDraw"></param>
     /// <param name="_DataUpdatedCallback"></param>
-    public void Draw(ref DeckData deckToDrawFrom, int _cardsToDraw, Action<List<CardData>> _DataUpdatedCallback = null)
+    public void Draw(ref DeckData deckToDrawFrom, int _cardsToDraw, bool _instantExecute)
     {
         DeckData deckFrom = Data;
         DeckData deckTo = deckToDrawFrom;
         List<GameplayMovementAction> actions = DeckController.Draw(ref deckFrom, ref deckTo, _cardsToDraw);
 
-        if (_DataUpdatedCallback != null)
-            _DataUpdatedCallback(Data.Cards);
-        else if (OnCardsMoved != null)
+        foreach (GameplayMovementAction action in actions)
+            action.instantExecute = _instantExecute;
+
+        if (OnCardsMoved != null)
             OnCardsMoved(actions);
     }
 
@@ -54,15 +55,14 @@ public class DeckViewController : MonoBehaviour
     /// <param name="_deckToMove"></param>
     /// <param name="_cardToMove"></param>
     /// <param name="_DataUpdatedCallback"></param>
-    public void DoMoveFromMe(ref DeckData _deckToMove, ref CardData _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    public void DoMoveFromMe(ref DeckData _deckToMove, ref CardData _cardToMove, bool _instantExecute)
     {
         DeckData deckFrom = Data;
         DeckData deckTo = _deckToMove;
         GameplayMovementAction action = DeckController.Move(ref deckTo, ref deckFrom, ref _cardToMove);
+        action.instantExecute = _instantExecute;
 
-        if (_DataUpdatedCallback != null)
-            _DataUpdatedCallback(Data.Cards);
-        else if (OnCardMoved != null)
+        if (OnCardMoved != null)
             OnCardMoved(action);
     }
 
@@ -72,7 +72,7 @@ public class DeckViewController : MonoBehaviour
     /// <param name="_deckToMove"></param>
     /// <param name="_cardToMove"></param>
     /// <param name="_DataUpdatedCallback"></param>
-    public void DoMovesFromMe(ref DeckData _deckToMove, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    public void DoMovesFromMe(ref DeckData _deckToMove, ref List<CardData> _cardToMove, bool _instantExecute)
     {
         List<GameplayMovementAction> actions = new List<GameplayMovementAction>();
         for (int i = 0; i < _cardToMove.Count; i++)
@@ -81,11 +81,11 @@ public class DeckViewController : MonoBehaviour
             DeckData deckTo = _deckToMove;
             CardData cardToMove = _cardToMove[i];
             GameplayMovementAction action = DeckController.Move(ref deckTo, ref deckFrom, ref cardToMove);
+            action.instantExecute = _instantExecute;
             actions.Add(action);
         }
-        if (_DataUpdatedCallback != null)
-            _DataUpdatedCallback(Data.Cards);
-        else if (OnCardsMoved != null)
+
+        if (OnCardsMoved != null)
             OnCardsMoved(actions);
     }
 
@@ -95,15 +95,14 @@ public class DeckViewController : MonoBehaviour
     /// <param name="_deckFrom"></param>
     /// <param name="_cardToMove"></param>
     /// <param name="_DataUpdatedCallback"></param>
-    public void DoMoveToMe(ref DeckData _deckFrom, ref CardData _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    public void DoMoveToMe(ref DeckData _deckFrom, ref CardData _cardToMove, bool _instantExecute)
     {
         DeckData deckFrom = _deckFrom;
         DeckData deckTo = Data;
         GameplayMovementAction action = DeckController.Move(ref deckTo, ref deckFrom, ref _cardToMove);
+        action.instantExecute = _instantExecute;
 
-        if (_DataUpdatedCallback != null)
-            _DataUpdatedCallback(Data.Cards);
-        else if (OnCardMoved != null)
+        if (OnCardMoved != null)
             OnCardMoved(action);
     }
 
@@ -113,7 +112,7 @@ public class DeckViewController : MonoBehaviour
     /// <param name="_deckFrom"></param>
     /// <param name="_cardToMove"></param>
     /// <param name="_DataUpdatedCallback"></param>
-    public void DoMovesToMe(ref DeckData _deckFrom, ref List<CardData> _cardToMove, Action<List<CardData>> _DataUpdatedCallback = null)
+    public void DoMovesToMe(ref DeckData _deckFrom, ref List<CardData> _cardToMove, bool _instantExecute)
     {
         List<GameplayMovementAction> actions = new List<GameplayMovementAction>();
         for (int i = 0; i < _cardToMove.Count; i++)
@@ -122,11 +121,11 @@ public class DeckViewController : MonoBehaviour
             DeckData deckTo = Data;
             CardData cardToMove = _cardToMove[i];
             GameplayMovementAction action = DeckController.Move(ref deckTo, ref deckFrom, ref cardToMove);
+            action.instantExecute = _instantExecute;
             actions.Add(action);
         }
-        if (_DataUpdatedCallback != null)
-            _DataUpdatedCallback(Data.Cards);
-        else if (OnCardsMoved != null)
+
+        if (OnCardsMoved != null)
             OnCardsMoved(actions);
     }
 
@@ -138,7 +137,7 @@ public class DeckViewController : MonoBehaviour
         if (_deck.Cards.Count > 0)
         {
             List<CardData> cardsToMove = new List<CardData>(_deck.Cards);
-            DoMovesToMe(ref _deck, ref cardsToMove);
+            DoMovesToMe(ref _deck, ref cardsToMove, true);
         }
         else
             Data = _deck;

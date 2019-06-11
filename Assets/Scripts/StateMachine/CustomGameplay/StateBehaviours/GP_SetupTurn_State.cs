@@ -11,7 +11,8 @@ namespace StateMachine.Gameplay {
             context.UICanvas.EnableMenu(PanelType.Board);
             setupTurnPlayer(context.PlayerOne);
             setupTurnPlayer(context.PlayerTwo);
-            context.GenericForwardCallBack();
+
+            CardViewManager.DoMovementActions(handleActionCallback);
         }
 
         void setupTurnPlayer(PlayerView _player)
@@ -19,7 +20,12 @@ namespace StateMachine.Gameplay {
             _player.Data.MaxEnergy++;
             _player.Data.CurrentEnergy = context.CurrentPlayer.Data.MaxEnergy;
             DeckData decktoDrawFrom = _player.PlayerDeck.Data;
-            _player.HandDeck.Draw(ref decktoDrawFrom, 1);
+            _player.HandDeck.Draw(ref decktoDrawFrom, 1, false);
+        }
+
+        void handleActionCallback()
+        {
+            context.GenericForwardCallBack();
         }
     }
 
