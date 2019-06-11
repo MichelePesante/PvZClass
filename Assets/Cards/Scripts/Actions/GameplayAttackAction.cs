@@ -40,5 +40,15 @@
         return returnAction;
     }
 
+    public override string ToString()
+    {
+        if (defendingCardData != null)
+            return string.Format("{0} attack {1}", attackingCardData.name, defendingCardData.name);
+        else if (defendingPlayerData != null)
+            return string.Format("{0} attack {1}", attackingCardData.name, defendingPlayerData.ToString());
+        else
+            return string.Format("{0} attack", attackingCardData);
+    }
+
     //HACK: there was a tostring thing here.
 }

@@ -26,9 +26,9 @@ public class GameplayMovementAction : IAction {
     public override string ToString()
     {
         if (deckDataFrom != null)
-            return string.Format("{0} {1} From: {2}, To: {3} ", Type.ToString(), cardData.ToString(), deckDataFrom.ToString(), deckDataTo.ToString());
+            return string.Format("{0} {1} From: {2}, To: {3} ", Type.ToString(), cardData.ToString(), deckDataFrom.Name, deckDataTo.Name);
         else
-            return string.Format("{0} {1} To: {2} ", Type.ToString(), cardData.ToString(), deckDataTo.ToString());
+            return string.Format("{0} {1} To: {2} ", Type.ToString(), cardData.ToString(), deckDataTo.Name);
     }
 
 }
