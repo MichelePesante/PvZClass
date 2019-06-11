@@ -144,6 +144,9 @@ public class CardViewManager : MonoBehaviour
                 else if (deckFrom == p1HandView || deckFrom == p2HandView)
                 {
                     instantiatedCards[i].transform.SetParent(deckTo.transform);
+                    if (deckTo.transform.childCount == 2)
+                        instantiatedCards[i].transform.SetSiblingIndex((deckTo.Data.Player.CurrentType == PlayerData.Type.one) ? 0 : 1);
+
                     Sequence placeSequence = DOTween.Sequence();
 
                     Vector3 endScale = instantiatedCards[i].transform.localScale / 1.5f;
