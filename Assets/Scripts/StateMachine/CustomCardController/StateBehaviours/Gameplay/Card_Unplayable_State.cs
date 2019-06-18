@@ -7,12 +7,12 @@ namespace StateMachine.Card {
 
         public override void Enter()
         {
-            context.cardController.SetHiglight(CardViewController.HighlightState.Lowlight);
+            context.cardViewController.SetHiglight(CardViewController.HighlightState.Lowlight);
         }
 
         public override void Exit()
         {
-            context.cardController.SetHiglight(CardViewController.HighlightState.NoHighlight);
+            context.cardViewController.SetHiglight(CardViewController.HighlightState.NoHighlight);
         }
     }
 }

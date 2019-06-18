@@ -10,8 +10,8 @@ namespace StateMachine.Card
         public override void Enter()
         {
             context.mulliganCtrl.OnCardChanged += HandleCardChanged;
-            context.cardController.OnCardPointerDown += HandleOnpointerDown;
-            context.cardController.SetHiglight(CardViewController.HighlightState.Highlighted);
+            context.cardViewController.OnCardPointerDown += HandleOnpointerDown;
+            context.cardViewController.SetHiglight(CardViewController.HighlightState.Highlighted);
         }
 
         private void HandleCardChanged()
@@ -21,7 +21,7 @@ namespace StateMachine.Card
 
         private void HandleOnpointerDown(CardViewController obj)
         {
-            if (obj != context.cardController)
+            if (obj != context.cardViewController)
                 return;
             context.mulliganCtrl.CardCliked(obj);
             context.OnCardMulliganDeselected();
@@ -30,8 +30,8 @@ namespace StateMachine.Card
         public override void Exit()
         {
             context.mulliganCtrl.OnCardChanged -= HandleCardChanged;
-            context.cardController.OnCardPointerDown -= HandleOnpointerDown;
-            context.cardController.SetHiglight(CardViewController.HighlightState.NoHighlight);
+            context.cardViewController.OnCardPointerDown -= HandleOnpointerDown;
+            context.cardViewController.SetHiglight(CardViewController.HighlightState.NoHighlight);
         }
     }
 }

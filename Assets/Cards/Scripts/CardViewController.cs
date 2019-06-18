@@ -78,6 +78,8 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         detectedObjects = new List<IDetectable>();
         cardSM = GetComponent<CardSMController>();
         cardSM.Setup();
+        Data.Effects.OnDrawEffect.Setup(Data);
+        Data.Effects.OnPlaceEffect.Setup(Data);
         Data.OnDataChanged += onDataChanged;
     }
 
@@ -103,6 +105,8 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
         detectedObjects = new List<IDetectable>();
         cardSM = GetComponent<CardSMController>();
         cardSM.Setup();
+        Data.Effects.OnDrawEffect.Setup(Data);
+        Data.Effects.OnPlaceEffect.Setup(Data);
         Data.OnDataChanged += onDataChanged;
     }
 
@@ -294,5 +298,11 @@ public class CardViewController : MonoBehaviour, IPointerDownHandler, IPointerUp
             Data.OnDataChanged -= onDataChanged;
             Data.OnDataChanged += onDataChanged;
         }
+    }
+
+    public void Place()
+    {
+        if(Data.Effects.OnPlaceEffect)
+            Data.Effects.OnPlaceEffect.Execute();
     }
 }

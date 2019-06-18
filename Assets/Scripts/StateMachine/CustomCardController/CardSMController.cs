@@ -15,14 +15,14 @@ namespace StateMachine.Card {
 
             CardSMContext tmpContext = new CardSMContext() {
                 OnSetupDoneCallback = HandleOnSetupDone,
-                cardController = GetComponent<CardViewController>(),
+                cardViewController = GetComponent<CardViewController>(),
                 mulliganCtrl = null,
                 OnCardMulliganSelected = HandleCardMulliganSelected,
                 OnCardMulliganDeselected = HandleCardMulliganDeselected,
                 OnCardMulliganChanged = HandleCardMulliganChanged,
                 boardCtrl = null,                
             };
-            tmpContext.cardController.Data.OnCurrentStateChanged += OnCardStateChanged;
+            tmpContext.cardViewController.Data.OnCurrentStateChanged += OnCardStateChanged;
             return tmpContext;
         }
 
@@ -60,7 +60,7 @@ namespace StateMachine.Card {
 
         private void OnDestroy()
         {
-            (currentContext as CardSMContext).cardController.Data.OnCurrentStateChanged -= OnCardStateChanged;
+            (currentContext as CardSMContext).cardViewController.Data.OnCurrentStateChanged -= OnCardStateChanged;
         }
     }
 
@@ -74,7 +74,7 @@ namespace StateMachine.Card {
         #endregion
 
         public Action OnSetupDoneCallback;
-        public CardViewController cardController;
+        public CardViewController cardViewController;
         public BoardController boardCtrl;
     }
 }

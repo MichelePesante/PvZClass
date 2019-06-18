@@ -16,6 +16,8 @@ public class CardData : ScriptableObject {
     public bool IsHeroCard;
     public string CardImageName;
     public List<LaneType> excludeLanes;
+    public Sprite CardImage;
+    public EffectsContainer Effects;
     #endregion
 
     #region State
@@ -36,10 +38,11 @@ public class CardData : ScriptableObject {
     }
     #endregion
 
+    public DeckData CurrentDeck { get; set; }
+
     public Action<CardData> OnDataChanged;
  
     private static int cardCounter;
-    public Sprite CardImage;
 
     public string NameToShow {
         get { return CardName.ToUpper(); }

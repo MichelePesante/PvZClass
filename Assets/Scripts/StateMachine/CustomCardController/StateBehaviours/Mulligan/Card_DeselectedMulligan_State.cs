@@ -10,8 +10,8 @@ namespace StateMachine.Card
             initMulliganController();
 
             context.mulliganCtrl.OnCardChanged += HandleCardChanged;
-            context.cardController.OnCardPointerDown += HandleOnpointerDown;
-            context.cardController.SetHiglight(CardViewController.HighlightState.NoHighlight);
+            context.cardViewController.OnCardPointerDown += HandleOnpointerDown;
+            context.cardViewController.SetHiglight(CardViewController.HighlightState.NoHighlight);
         }
 
         private void initMulliganController() {
@@ -19,7 +19,7 @@ namespace StateMachine.Card
                 return;
             MulliganController[] mulligans = FindObjectsOfType<MulliganController>();
             for (int i = 0; i < mulligans.Length; i++) {
-                if (mulligans[i].GetPlayer().Data == context.cardController.GetPlayerOwner().Data)
+                if (mulligans[i].GetPlayer().Data == context.cardViewController.GetPlayerOwner().Data)
                     context.mulliganCtrl = mulligans[i];
             }
             if (!context.mulliganCtrl)
@@ -33,7 +33,7 @@ namespace StateMachine.Card
 
         private void HandleOnpointerDown(CardViewController obj)
         {
-            if (obj != context.cardController)
+            if (obj != context.cardViewController)
                 return;
             context.mulliganCtrl.CardCliked(obj);
             context.OnCardMulliganSelected();
@@ -42,7 +42,7 @@ namespace StateMachine.Card
         public override void Exit()
         {
             context.mulliganCtrl.OnCardChanged -= HandleCardChanged;
-            context.cardController.OnCardPointerDown -= HandleOnpointerDown;
+            context.cardViewController.OnCardPointerDown -= HandleOnpointerDown;
         }
     }
 }
