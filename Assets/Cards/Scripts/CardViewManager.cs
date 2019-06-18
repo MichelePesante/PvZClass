@@ -74,12 +74,12 @@ public class CardViewManager : MonoBehaviour
         if (defendingCardView)
         {
             RectTransform tempRectTransform = attackingCardView.transform as RectTransform;
-            tempRectTransform.DOPunchAnchorPos(defendingCardView.transform.position, 1f).onComplete += () => { if (_callback != null) _callback(); };
+            tempRectTransform.DOMove(defendingCardView.transform.position, 0.5f).SetEase(Ease.OutBounce).SetLoops(2, LoopType.Yoyo).OnComplete(() => { if (_callback != null) _callback(); });
         }
         else if (defendingPlayerView)
         {
             RectTransform tempRectTransform = attackingCardView.transform as RectTransform;
-            tempRectTransform.DOPunchAnchorPos(defendingPlayerView.transform.position, 1f).onComplete += () => { if (_callback != null) _callback(); };
+            tempRectTransform.DOMove(defendingPlayerView.transform.position, 0.5f).SetEase(Ease.InBack).SetLoops(2, LoopType.Yoyo).OnComplete(() => { if (_callback != null) _callback(); });
         }
     }
 
@@ -163,8 +163,17 @@ public class CardViewManager : MonoBehaviour
             {
                 if (changedCardData.CompareIndex(instantiatedCards[i].Data.CardIndex))
                 {
-                    Destroy(instantiatedCards[i].gameObject);
+                    CardViewController cardToDestroy = instantiatedCards[i];
                     instantiatedCards.RemoveAt(i);
+
+                    if (boardDeckViews != null && deckFrom != null && Array.Exists(boardDeckViews, deck => deck == deckFrom) && deckTo == trashDeckView)
+                    {
+                        Material mat = Instantiate(cardToDestroy.Frame.material);
+                        cardToDestroy.Frame.material = mat;
+                        mat.DOFloat(1, "_DissolvePercent", 0.5f).OnComplete(() => Destroy(cardToDestroy.gameObject));
+                    }
+                    else
+                        Destroy(cardToDestroy.gameObject);
                     return;
                 }
             }
@@ -185,7 +194,7 @@ public class CardViewManager : MonoBehaviour
                         instantiatedCards[i].transform.SetParent(deckTo.transform);
                     });
                 }
-                else if (deckFrom == p1HandView || deckFrom == p2HandView)
+                else if ((deckFrom == p1HandView || deckFrom == p2HandView) && Array.Exists(boardDeckViews, deck => deck == deckTo))
                 {
                     instantiatedCards[i].transform.SetParent(deckTo.transform);
                     if (deckTo.transform.childCount == 2)
@@ -290,6 +299,10 @@ public class CardViewManager : MonoBehaviour
 
         return null;
     }
+    #endregion
+
+    #region Effects
+
     #endregion
 
     private void OnDisable()
