@@ -37,13 +37,12 @@ public class LogManager : MonoBehaviour
         CreateText(gameplayAttackAction);
     }
 
-    void CreateText(IAction _gameplayMovementAction)
+    void CreateText(IAction _gameplayAction)
     {
         TextMeshProUGUI text = Instantiate(TextPrefab, content);
         text.transform.SetAsFirstSibling();
-        text.text = _gameplayMovementAction.ToString();
+        text.text = _gameplayAction.ToString();
     }
-
 
     public void ResizeLog()
     {

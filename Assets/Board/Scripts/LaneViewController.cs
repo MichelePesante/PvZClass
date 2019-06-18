@@ -62,8 +62,8 @@ public class LaneViewController : MonoBehaviour, IDetectable
         Data = Instantiate(_data);
 
         //create two deckdata and assing to lane data.
-        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), PlayerData.Type.one);
-        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount), PlayerData.Type.two);
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount, string.Format("Lane {0}", _data.type.LineIndex)), PlayerData.Type.one);
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount, string.Format("Lane {0}", _data.type.LineIndex)), PlayerData.Type.two);
 
         PlayerASlotsView.Setup(Data.playerAPlacedDeck);
         PlayerBSlotsView.Setup(Data.playerBPlacedDeck);
