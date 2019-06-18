@@ -29,7 +29,7 @@ namespace StateMachine.Gameplay
                 yield return context.BoardCtrl.StartCoroutine(LaneRoutine(lane));
             }
 
-            CardViewManager.DoMovementActions(handleActionsCompleteCallback);
+            CardViewManager.ExecuteAttackActions(() => CardViewManager.DoMovementActions(handleActionsCompleteCallback));            
         }
 
         IEnumerator LaneRoutine(LaneViewController _laneView)
@@ -47,12 +47,10 @@ namespace StateMachine.Gameplay
 
             for (int i = _laneView.PlayerASlotsView.Data.MaxCards; i >= 0; i--)
             {
-                p1CurrentCard = null;
-                if (i < p1CardsView.Data.Cards.Count)
+                if (i < p1CardsView.Data.Cards.Count && p1CurrentCard == null)
                     p1CurrentCard = CardViewManager.GetCardViewByCardData(p1CardsView.Data.Cards[i]);
 
-                p2CurrentCard = null;
-                if (i < p2CardsView.Data.Cards.Count)
+                if (i < p2CardsView.Data.Cards.Count && p2CurrentCard == null)
                     p2CurrentCard = CardViewManager.GetCardViewByCardData(p2CardsView.Data.Cards[i]);
 
                 //p1 attack
