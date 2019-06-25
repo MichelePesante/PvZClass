@@ -20,6 +20,8 @@ namespace StateMachine.Gameplay {
             context.BoardCtrl.SetUp(boardData);
             // deck setup
             DeckSetup();
+            //combat manager setup
+            new CombatManager();
 
             // UI
             if (context.UICanvas == null) {

@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16abbca1d339ac642b6d954a9b16bdb5, type: 3}
   m_Name: Draw_1
   m_EditorClassIdentifier: 
+  myData:
+    Card: {fileID: 0}
+    cardsAmount: 1
