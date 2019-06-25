@@ -4,6 +4,7 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: Heroes_0
     21300002: Heroes_1
+    21300004: Heroes_2
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -100,7 +101,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28c65ee6030cb6e419358bd43b466b67
+      spriteID: 7faaea82f95d46f4ba3ab01a0817815a
       vertices: []
       indices: 
       edges: []
@@ -120,7 +121,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0db98beb6736854fa3096864434b349
+      spriteID: 1fef467cc362b69468897d64c8e61d1b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heroes_2
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 9
+        width: 86
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44a817f61d398574db8f7d42545b842b
       vertices: []
       indices: 
       edges: []
