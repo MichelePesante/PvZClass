@@ -8,6 +8,11 @@ public class CardViewManager : MonoBehaviour
 {
     private static CardViewManager instance;
 
+    [Header("General Reference")]
+    [SerializeField]
+    private Transform canvas;
+
+    [Header("Deck References")]
     [SerializeField]
     private CardViewController cardPrefab;
     [SerializeField]
@@ -20,6 +25,13 @@ public class CardViewManager : MonoBehaviour
     private DeckViewController p2HandView;
     [SerializeField]
     private DeckViewController trashDeckView;
+
+    [Header("Effects References")]
+    [SerializeField]
+    private GameObject boomEffectPrefab;
+    [SerializeField]
+    private GameObject baamEffectPrefab;
+
     DeckViewController[] boardDeckViews;
 
     List<CardViewController> instantiatedCards = new List<CardViewController>();
@@ -73,13 +85,71 @@ public class CardViewManager : MonoBehaviour
 
         if (defendingCardView)
         {
+            DeckViewController cardDeck = GetDeckViewControllerByDeckData(attackingCardView.Data.CurrentDeck);
+            int childIndex = attackingCardView.transform.GetSiblingIndex();
+            attackingCardView.transform.SetParent(canvas);
+            attackingCardView.transform.SetAsLastSibling();
+
+            bool boomEffect = false;
             RectTransform tempRectTransform = attackingCardView.transform as RectTransform;
-            tempRectTransform.DOMove(defendingCardView.transform.position, 0.5f).SetEase(Ease.OutBounce).SetLoops(2, LoopType.Yoyo).OnComplete(() => { if (_callback != null) _callback(); });
+            tempRectTransform.DOMove(defendingCardView.transform.position, 0.5f)
+                .SetEase(Ease.InBack)
+                .SetLoops(2, LoopType.Yoyo)
+                .OnStepComplete(() =>
+                {
+                    if (!boomEffect)
+                    {
+                        boomEffect = true;
+                        GameObject instantiatedEffect = Instantiate(boomEffectPrefab, tempRectTransform.position, Quaternion.identity, canvas.transform);
+                        instantiatedEffect.transform.localScale = Vector3.zero;
+                        instantiatedEffect.transform.DOScale(Vector3.one, 0.2f).OnComplete(() => Destroy(instantiatedEffect));
+                    }
+                })
+                .OnComplete(() =>
+                {
+                    if (cardDeck != null && cardDeck != trashDeckView)
+                    {
+                        attackingCardView.transform.SetParent(cardDeck.transform);
+                        attackingCardView.transform.SetSiblingIndex(childIndex);
+                    }
+
+                    if (_callback != null)
+                        _callback();
+                });
         }
         else if (defendingPlayerView)
         {
+            DeckViewController cardDeck = GetDeckViewControllerByDeckData(attackingCardView.Data.CurrentDeck);
+            int childIndex = attackingCardView.transform.GetSiblingIndex();
+            attackingCardView.transform.SetParent(canvas);
+            attackingCardView.transform.SetAsLastSibling();
+
+            bool poomEffect = false;
             RectTransform tempRectTransform = attackingCardView.transform as RectTransform;
-            tempRectTransform.DOMove(defendingPlayerView.transform.position, 0.5f).SetEase(Ease.InBack).SetLoops(2, LoopType.Yoyo).OnComplete(() => { if (_callback != null) _callback(); });
+            tempRectTransform.DOMove(defendingPlayerView.transform.position, 0.5f)
+                .SetEase(Ease.InBack)
+                .SetLoops(2, LoopType.Yoyo)
+                .OnStepComplete(() =>
+                 {
+                     if (!poomEffect)
+                     {
+                         poomEffect = true;
+                         GameObject instantiatedEffect = Instantiate(baamEffectPrefab, defendingPlayerView.transform.position, Quaternion.identity, canvas.transform);
+                         instantiatedEffect.transform.localScale = Vector3.zero;
+                         instantiatedEffect.transform.DOScale(new Vector3(2, 2, 2), 0.3f).OnComplete(() => Destroy(instantiatedEffect));
+                     }
+                 })
+                .OnComplete(() =>
+                 {
+                     if (cardDeck != null)
+                     {
+                         attackingCardView.transform.SetParent(cardDeck.transform);
+                         attackingCardView.transform.SetSiblingIndex(childIndex);
+                     }
+
+                     if (_callback != null)
+                         _callback();
+                 });
         }
     }
 

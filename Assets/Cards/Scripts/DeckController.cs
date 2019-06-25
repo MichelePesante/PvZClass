@@ -91,9 +91,10 @@ public static class DeckController
 
     public static GameplayMovementAction Move(ref DeckData _deckToAddTo, ref DeckData _deckToRemoveFrom, ref CardData _cardToMove)
     {
-        AddCard(ref _deckToAddTo, ref _cardToMove);
         if (_deckToRemoveFrom != null)
             RemoveCard(ref _deckToRemoveFrom, ref _cardToMove);
+
+        AddCard(ref _deckToAddTo, ref _cardToMove);
 
         return GameplayMovementAction.CreateMovementAction(_cardToMove, _deckToRemoveFrom, _deckToAddTo);
     }

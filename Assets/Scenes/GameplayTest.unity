@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e555ad949ae0faa4e80546de06478e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1571922071}
   cardPrefab: {fileID: 917044520009991403, guid: ee29a18a1d7dc4e4ea8fcab12e189f6a,
     type: 3}
   p1DeckView: {fileID: 426605863669096007}
@@ -212,6 +213,10 @@ MonoBehaviour:
   p1HandView: {fileID: 3420035627122955855}
   p2HandView: {fileID: 6074056079729704508}
   trashDeckView: {fileID: 1424343702}
+  boomEffectPrefab: {fileID: 5914401345610636839, guid: f4a507f04d592cd4da4442f23b2f604a,
+    type: 3}
+  baamEffectPrefab: {fileID: 4357186396751795513, guid: 69411d0de75444f4e840ea924bc0dcff,
+    type: 3}
 --- !u!4 &211442605
 Transform:
   m_ObjectHideFlags: 0
@@ -1144,6 +1149,46 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -134
       objectReference: {fileID: 0}
+    - target: {fileID: 7009631504488174961, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 164.90002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009631504488174961, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009631504488174961, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 202.59998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009631504488174961, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009631504117674446, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 164.90002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009631504117674446, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009631504117674446, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -186.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009631504117674446, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2355342658401204974, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1224,6 +1269,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c57fbb67cb9664387c85de28881467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1571922071 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224948079451638220, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1571922067}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1631618786 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4882794747855950390, guid: 117af4fc6efc9ff4da434863aa5cfe6d,
