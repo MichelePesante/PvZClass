@@ -1,4 +1,9 @@
 --------
+Hypster Vz Halcool
+80 ore x 3 programmatori
+--------
+
+--------
 Reame
 --------
 https://docs.google.com/document/d/1ObOZ_DM1Gx5muc7ku9OGBhyGO6UdZedDjo_eBzGXYqk/edit
