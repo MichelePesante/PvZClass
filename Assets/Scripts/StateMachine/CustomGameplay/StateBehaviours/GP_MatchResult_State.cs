@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace StateMachine.Gameplay {
-    public class GP_MatchResult_State : GP_BaseState {
+namespace StateMachine.Gameplay
+{
+    public class GP_MatchResult_State : GP_BaseState
+    {
 
         [SerializeField]
         GameObject WinTextPrefab;
@@ -17,7 +19,10 @@ namespace StateMachine.Gameplay {
             if (WinTextPrefab != null)
             {
                 WinTextGO = Instantiate(WinTextPrefab, context.UICanvas.transform);
-                WinTextGO.GetComponent<Text>().text = context.Winner.Data.CurrentType + " win";
+                if (context.Winner == context.PlayerOne)
+                    WinTextGO.transform.GetChild(0).gameObject.SetActive(false);
+                else
+                    WinTextGO.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
     }
