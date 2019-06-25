@@ -20,9 +20,9 @@ namespace StateMachine.Gameplay
             {
                 WinTextGO = Instantiate(WinTextPrefab, context.UICanvas.transform);
                 if (context.Winner == context.PlayerOne)
-                    WinTextGO.transform.GetChild(0).gameObject.SetActive(false);
-                else
                     WinTextGO.transform.GetChild(1).gameObject.SetActive(false);
+                else
+                    WinTextGO.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
