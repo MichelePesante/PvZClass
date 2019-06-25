@@ -60,6 +60,10 @@ public class LogManager : MonoBehaviour
                 currentSize = Size.Open;
                 break;
             case Size.Open:
+                rectTransform.sizeDelta = Vector2.zero;
+                currentSize = Size.Close;
+                break;
+            case Size.Close:
                 rectTransform.sizeDelta = oldSize;
                 currentSize = Size.Minimize;
                 break;
@@ -70,6 +74,7 @@ public class LogManager : MonoBehaviour
 
     enum Size
     {
+        Close,
         Minimize,
         Open,
     }
