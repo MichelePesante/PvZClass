@@ -7,8 +7,15 @@ public class LogManager : MonoBehaviour
     public TextMeshProUGUI TextPrefab;
     [SerializeField] Transform content;
 
+    RectTransform rectTransform;
+    Vector2 oldSize;
+    Size currentSize;
+
     private void Awake()
     {
+        rectTransform = GetComponent<RectTransform>();
+        oldSize = rectTransform.sizeDelta;
+        currentSize = Size.Minimize;
         Init();
     }
 
@@ -46,6 +53,24 @@ public class LogManager : MonoBehaviour
 
     public void ResizeLog()
     {
+        switch (currentSize)
+        {
+            case Size.Minimize:
+                rectTransform.sizeDelta = new Vector2(Screen.width / 2, Screen.height);
+                currentSize = Size.Open;
+                break;
+            case Size.Open:
+                rectTransform.sizeDelta = oldSize;
+                currentSize = Size.Minimize;
+                break;
+            default:
+                break;
+        }
+    }
 
+    enum Size
+    {
+        Minimize,
+        Open,
     }
 }

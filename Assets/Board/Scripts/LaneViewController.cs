@@ -22,6 +22,8 @@ public class LaneViewController : MonoBehaviour, IDetectable
 
     #endregion
 
+    static int LaneIndex = 0;
+
     public enum Highlight { playable, unplayable, off }
 
     public DeckViewController PlayerASlotsView
@@ -62,8 +64,9 @@ public class LaneViewController : MonoBehaviour, IDetectable
         Data = Instantiate(_data);
 
         //create two deckdata and assing to lane data.
-        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount, string.Format("Lane {0}", _data.type.LineIndex)), PlayerData.Type.one);
-        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount, string.Format("Lane {0}", _data.type.LineIndex)), PlayerData.Type.two);
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount, string.Format("Lane {0}", LaneIndex)), PlayerData.Type.one);
+        LaneController.SetPlayerSlots(Data, new DeckData(_cardSlotsCount, string.Format("Lane {0}", LaneIndex)), PlayerData.Type.two);
+        LaneIndex++;
 
         PlayerASlotsView.Setup(Data.playerAPlacedDeck);
         PlayerBSlotsView.Setup(Data.playerBPlacedDeck);
