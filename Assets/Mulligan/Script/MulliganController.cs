@@ -34,7 +34,7 @@ public class MulliganController : MonoBehaviour
         cardsToDisplayLastIndex = 0;
 
         // HACK: Auto select cards init
-        DeckData newDeckData = new DeckData();
+        DeckData newDeckData = new DeckData(player.Data.Faction.ToString() + " Mulligan");
         List<CardData> gotCards = DeckController.GetCards(player.PlayerDeck.Data, 8);
         player.PlayerDeck.DoMovesFromMe(ref newDeckData, ref gotCards, true);
         cardsToDisplay = newDeckData.Cards;

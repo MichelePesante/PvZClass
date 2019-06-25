@@ -13,10 +13,10 @@ namespace StateMachine.Card
 
         public override void Enter()
         {
-            startPosition = context.cardController.transform.position;
-            context.cardController.OnCardPointerUp += HandleOnPointerUp;
-            startScale = context.cardController.transform.localScale;
-            context.cardController.transform.localScale *= 1.5f;
+            startPosition = context.cardViewController.transform.position;
+            context.cardViewController.OnCardPointerUp += HandleOnPointerUp;
+            startScale = context.cardViewController.transform.localScale;
+            context.cardViewController.transform.localScale *= 1.5f;
             isDragging = true;
         }
 
@@ -38,10 +38,10 @@ namespace StateMachine.Card
                     lane.ToggleHighlight(LaneViewController.Highlight.off);
                     if (LaneController.CheckCardPlayability(lane.Data, _cardCtrl.Data))
                     {
-                        lane.PlaceCard(context.cardController);
+                        lane.PlaceCard(context.cardViewController);
                         lanePlaced = true;
-                        context.cardController.Data.CurrentState = CardState.Played;
-                        DeckController.ResetCardsState(context.cardController.GetPlayerOwner().HandDeck);
+                        context.cardViewController.Data.CurrentState = CardState.Played;
+                        DeckController.ResetCardsState(context.cardViewController.GetPlayerOwner().HandDeck);
                     }
                 }               
             }
@@ -54,23 +54,23 @@ namespace StateMachine.Card
 
         private void ResetPosition()
         {
-            context.cardController.transform.position = startPosition;
-            context.cardController.transform.localScale = startScale;
-            context.cardController.Data.CurrentState = CardState.Idle;
+            context.cardViewController.transform.position = startPosition;
+            context.cardViewController.transform.localScale = startScale;
+            context.cardViewController.Data.CurrentState = CardState.Idle;
         }
 
         public override void Tick()
         {
             if (isDragging)
             {
-                context.cardController.Detect();
-                context.cardController.transform.position = Input.mousePosition;
+                context.cardViewController.Detect();
+                context.cardViewController.transform.position = Input.mousePosition;
             }
         }
 
         public override void Exit()
         {
-            context.cardController.OnCardPointerUp -= HandleOnPointerUp;            
+            context.cardViewController.OnCardPointerUp -= HandleOnPointerUp;            
         }
     }
 }

@@ -8,20 +8,20 @@ namespace StateMachine.Card {
 
         public override void Enter()
         {
-            context.cardController.OnCardPointerDown += HandleOnpointerDown;
-            context.cardController.SetHiglight(CardViewController.HighlightState.Highlighted);
+            context.cardViewController.OnCardPointerDown += HandleOnpointerDown;
+            context.cardViewController.SetHiglight(CardViewController.HighlightState.Highlighted);
         }
 
         private void HandleOnpointerDown(CardViewController obj)
         {
-            if (obj == context.cardController)
-                context.cardController.Data.CurrentState = CardState.Drag;
+            if (obj == context.cardViewController)
+                context.cardViewController.Data.CurrentState = CardState.Drag;
         }
 
         public override void Exit()
         {
-            context.cardController.OnCardPointerDown -= HandleOnpointerDown;
-            context.cardController.SetHiglight(CardViewController.HighlightState.NoHighlight);
+            context.cardViewController.OnCardPointerDown -= HandleOnpointerDown;
+            context.cardViewController.SetHiglight(CardViewController.HighlightState.NoHighlight);
         }
     }
 }

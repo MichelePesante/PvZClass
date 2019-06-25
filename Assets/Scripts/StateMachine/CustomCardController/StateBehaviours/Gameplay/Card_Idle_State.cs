@@ -9,17 +9,17 @@ namespace StateMachine.Card
         {
             initBoardController();
 
-            context.cardController.SetHiglight(CardViewController.HighlightState.NoHighlight);
+            context.cardViewController.SetHiglight(CardViewController.HighlightState.NoHighlight);
             // TODO : refactoring funzione in controller
-            if (context.cardController.GetPlayerOwner().Data != TurnManager.GetActivePlayer().Data)
+            if (context.cardViewController.GetPlayerOwner().Data != TurnManager.GetActivePlayer().Data)
             {
-                context.cardController.Data.CurrentState = CardState.Inactive;
+                context.cardViewController.Data.CurrentState = CardState.Inactive;
                 return;
             }
-            if (context.boardCtrl.CheckCardPlayability(context.cardController))
-                context.cardController.Data.CurrentState = CardState.Playable;
+            if (context.boardCtrl.CheckCardPlayability(context.cardViewController))
+                context.cardViewController.Data.CurrentState = CardState.Playable;
             else
-                context.cardController.Data.CurrentState = CardState.Unplayable;
+                context.cardViewController.Data.CurrentState = CardState.Unplayable;
         }
 
         private void initBoardController() {

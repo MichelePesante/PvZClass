@@ -6,8 +6,9 @@ namespace StateMachine.Card {
 
         public override void Enter()
         {
+            context.cardViewController.Place();
             if (CardController.OnPlaced != null)
-                CardController.OnPlaced(context.cardController.Data);
+                CardController.OnPlaced(context.cardViewController.Data);
         }
 
     }

@@ -35,11 +35,13 @@ public static class DeckController
     private static void AddCard(ref DeckData _deck, ref CardData _cardToAdd)
     {
         _deck.Cards.Add(_cardToAdd);
+        _cardToAdd.CurrentDeck = _deck;
     }
 
     private static void RemoveCard(ref DeckData _deck, ref CardData cardToRemove)
     {
         _deck.Cards.Remove(cardToRemove);
+        cardToRemove.CurrentDeck = null;
     }
 
     /// <summary>

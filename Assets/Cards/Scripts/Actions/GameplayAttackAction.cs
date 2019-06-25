@@ -43,11 +43,11 @@
     public override string ToString()
     {
         if (defendingCardData != null)
-            return string.Format("{0} attack {1}", attackingCardData.name, defendingCardData.name);
+            return string.Format("{0} attack {1} by {2}", attackingCardData.CardName, defendingCardData.CardName, attackingCardData.Attack.ToString());
         else if (defendingPlayerData != null)
-            return string.Format("{0} attack {1}", attackingCardData.name, defendingPlayerData.ToString());
+            return string.Format("{0} attack {1} by {2}", attackingCardData.CardName, defendingPlayerData.Faction, attackingCardData.Attack.ToString());
         else
-            return string.Format("{0} attack", attackingCardData);
+            return string.Format("{0} attack nothing", attackingCardData.CardName);
     }
 
     //HACK: there was a tostring thing here.
