@@ -15,7 +15,7 @@ public class LogManager : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         oldSize = rectTransform.sizeDelta;
-        currentSize = Size.Minimize;
+        ResizeLog(Size.Close);
         Init();
     }
 
@@ -51,6 +51,27 @@ public class LogManager : MonoBehaviour
         text.text = _gameplayAction.ToString();
     }
 
+    public void ResizeLog(Size _size)
+    {
+        switch (_size)
+        {
+            case Size.Minimize:
+                rectTransform.sizeDelta = oldSize;
+                currentSize = Size.Minimize;
+                break;
+            case Size.Open:
+                rectTransform.sizeDelta = new Vector2(Screen.width / 2, Screen.height);
+                currentSize = Size.Open;
+                break;
+            case Size.Close:
+                rectTransform.sizeDelta = Vector2.zero;
+                currentSize = Size.Close;
+                break;
+            default:
+                break;
+        }
+    }
+
     public void ResizeLog()
     {
         switch (currentSize)
@@ -72,7 +93,7 @@ public class LogManager : MonoBehaviour
         }
     }
 
-    enum Size
+    public enum Size
     {
         Close,
         Minimize,
